@@ -1,3 +1,15 @@
+# 🎮 Arkanoid - Project Game (Lập Trình Hướng Đối Tượng) 
+
+Game được xây dựng và phát triển bằng ngôn ngữ **java**, nhằm mục đích cho sinh viên áp dụng các nguyên tắc cơ bản của OOP
+như đóng gói, kết thừa, đa hình,...Giúp phát triển kỹ năng phân tích, giải quyết vấn đề, rèn luyện kĩ năng làm việc nhóm và 
+quản lý dự án phần mềm.
+
+---
+## 🔎 Thông Tin Nhóm
+...
+
+---
+
 ## 📂 Cấu trúc thư mục
 
 ```bash
@@ -15,8 +27,8 @@ src/
 │   │   ├── MovalbleObject.java    # Lớp cơ sở cho đối tượng di chuyển
 │   │   └── Paddle.java            # Lớp thanh đỡ
 │   │
-    │
-│   ├── view/                      # Hệ thống ghi nhớ hành động
+│   │
+│   ├── view/                      # Hiển thị
 │   │   ├── GamePanel.java         # Vẽ các đối tượng game
 │   │   └── GameView.java          # Cửa sổ chính của game
 │   │
