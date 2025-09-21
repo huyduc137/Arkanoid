@@ -1,5 +1,7 @@
 package game.model;
 
+import java.awt.*;
+
 public abstract class GameObject {
     protected int x;
     protected int y;
@@ -42,5 +44,8 @@ public abstract class GameObject {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, width, height);
     }
 }

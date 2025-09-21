@@ -12,12 +12,12 @@ public class GamePanel extends JPanel {
     private GameModel model;
     public GamePanel(GameModel model) {
         this.model = model;
-        setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));       // LINK với PACK() IN GameView;
         setBackground(Color.BLACK);
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) {                 // LINK với repaintPanel() in GameView;
         super.paintComponent(g);
 
         Paddle paddle = model.getPaddle();

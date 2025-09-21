@@ -30,4 +30,21 @@ public class GameModel {
     public Paddle getPaddle() {return paddle;}
     public Ball getBall() {return ball;}
     public List<Brick> getBricks() {return bricks;}
+
+    public void update() {
+
+        paddle.move();
+        ball.move();
+
+        checkCollisions();
+
+    }
+
+    private void checkCollisions() {
+        // check va chạm bóng và padlle
+        if (ball.getBounds().intersects(paddle.getBounds())) {
+            ball.reverseDy();
+            ball.setY(paddle.getY() - ball.getHeight());
+        }
+    }
 }

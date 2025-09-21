@@ -5,6 +5,7 @@ import game.Constants;
 public class Ball extends MovableObject{
     public Ball(int x, int y , int diameter){
         super(x , y , diameter , diameter);
+        resetBall();
     }
 
     public void reverseDx(){
@@ -22,7 +23,7 @@ public class Ball extends MovableObject{
         if (y <= 0)  reverseDy();
         // check va chạm dưới
         if (y + width >= Constants.SCREEN_HEIGHT) {
-            resetBall();
+            reverseDy();
         }
     }
     public void resetBall(){

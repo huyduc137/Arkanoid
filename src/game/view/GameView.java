@@ -1,17 +1,17 @@
 package game.view;
 
 import game.Constants;
+import game.controller.GameController;
 import game.model.GameModel;
 
 import javax.swing.*;
 
 public class GameView extends JFrame {
     private GamePanel gamePanel;
-    private GameModel gameModel;
-    public GameView() {
-        this.gameModel = new GameModel();
-        gamePanel = new GamePanel(gameModel);
-        add(gamePanel);
+    public GameView(GameModel model, GameController controller) {
+        gamePanel = new GamePanel(model);
+        this.add(gamePanel);
+        this.addKeyListener(controller);
         initViewGame();
     }
     private void initViewGame() {
