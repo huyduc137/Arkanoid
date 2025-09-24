@@ -15,6 +15,7 @@ public class Paddle extends MovableObject {
     public void stop(){
         dx = 0;
     }
+
     @Override
     public void move(){
         super.move();

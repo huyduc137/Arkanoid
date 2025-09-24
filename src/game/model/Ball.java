@@ -8,12 +8,6 @@ public class Ball extends MovableObject{
         resetBall();
     }
 
-    public void reverseDx(){
-        dx = -dx;
-    }
-    public void reverseDy(){
-        dy = -dy;
-    }
     @Override
     public void move(){
         super.move();
