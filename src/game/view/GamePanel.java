@@ -1,18 +1,18 @@
 package game.view;
 
 import game.Constants;
-import game.model.Brick;
-import game.model.GameModel;
-import game.model.Paddle;
-import game.model.Ball;
+import game.model.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
+    private final UI ui;
     private final GameModel model;
+
     public GamePanel(GameModel model) {
         this.model = model;
+        this.ui = new UI(model);
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));       // LINK với PACK() IN GameView;
         setBackground(Color.BLACK);
     }
@@ -21,12 +21,19 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {                 // LINK với repaintPanel() in GameView;
         super.paintComponent(g);
 
+        Graphics2D g2 = (Graphics2D) g;
+
         for(Brick brick: model.getBricks()) {
             if(!brick.isDestroyed()) {
-                switch (brick.getHitPoints()) {
-                    case 1 -> g.setColor(Color.RED);
-                    case 2 -> g.setColor(Color.ORANGE);
-                    case 3 -> g.setColor(Color.CYAN);
+                switch (brick.getBrickType()) {
+                    case NORMAL -> {
+                        switch (brick.getHitPoints()) {
+                            case 1 -> g.setColor(Color.RED);
+                            case 2 -> g.setColor(Color.ORANGE);
+                            case 3 -> g.setColor(Color.CYAN);
+                        }
+                    }
+                    case UNBREAKABLE -> g.setColor(Color.GRAY);
                 }
                 g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
                 g.setColor(Color.BLACK);
@@ -41,5 +48,8 @@ public class GamePanel extends JPanel {
         Ball ball = model.getBall();
         g.setColor(Color.YELLOW);
         g.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+
+        //Vẽ UI
+        ui.render(g2);
     }
 }

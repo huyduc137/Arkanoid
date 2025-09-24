@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {
+    private final TileManager tileManager = new TileManager();
+    private final ScoreSystem scoreSystem = new ScoreSystem();
+
     private Ball ball;
     private Paddle paddle;
     private List<Brick> bricks;
@@ -14,6 +17,9 @@ public class GameModel {
     public Paddle getPaddle() {return paddle;}
     public Ball getBall() {return ball;}
     public List<Brick> getBricks() {return bricks;}
+    public ScoreSystem getScoreSystem() {
+        return scoreSystem;
+    }
 
     public GameModel() {
         initGame();
@@ -31,7 +37,6 @@ public class GameModel {
     }
 
     public void initBrick() {
-        TileManager tileManager = new TileManager();
         bricks = tileManager.loadMap("map/map1.txt");
     }
 
@@ -85,6 +90,12 @@ public class GameModel {
                 }
 
                 brick.hit();
+
+                if(brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
+                    scoreSystem.addScore(brick.getScore() * 100);
+                    System.out.println(scoreSystem.getScore());
+                }
+
                 break;
             }
         }
