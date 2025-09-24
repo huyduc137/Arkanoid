@@ -41,7 +41,6 @@ public class GameModel {
 
         checkCollisions();
     }
-
     private void checkCollisions() {
         // check va chạm bóng và padlle
         if (ball.getBounds().intersects(paddle.getBounds())) {

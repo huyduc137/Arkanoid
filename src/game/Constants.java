@@ -12,9 +12,5 @@ public class Constants {
     public static final int BALL_DIAMETER = 20;
     public static final int BALL_SPEED = 7;
 
-    // Map sẽ có size là 16x24
-    public static final int BRICK_WIDTH = 64;
-    public static final int BRICK_HEIGHT = 32;
-
-    public static final int GAME_DELAY = 15;
+    public static final int GAME_DELAY = 16;
 }
