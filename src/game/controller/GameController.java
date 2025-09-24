@@ -5,13 +5,10 @@ import game.model.GameModel;
 import game.model.Paddle;
 import game.view.GameView;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import javax.swing.Timer;
 
-public class GameController implements ActionListener, KeyListener {
+public class GameController implements ActionListener, KeyListener, MouseMotionListener {
     private GameModel model;
     private Timer timer;
     private GameView view;
@@ -30,6 +27,10 @@ public class GameController implements ActionListener, KeyListener {
             view.repaintPanel(); // yêu cầu View vẽ lại
         }
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
     @Override
     public void keyPressed(KeyEvent e){             // khi nhấn phím
         Paddle paddle = model.getPaddle();
@@ -50,8 +51,16 @@ public class GameController implements ActionListener, KeyListener {
             paddle.stop();
         }
     }
+
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void mouseMoved(MouseEvent e) {
+        Paddle paddle = model.getPaddle();
+        int newX = e.getX() - paddle.getWidth() / 2;     // lấy vị trí chính giữa của paddle theo trục x;
+        paddle.setX(newX);
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        mouseMoved(e);
+    }
 }
