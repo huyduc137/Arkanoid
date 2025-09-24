@@ -9,9 +9,20 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+//0 = empty
+//1,2,3 = normal (HP = number)
+//9 = unbreakable
 public class TileManager {
-    int brickWidth = Constants.BRICK_WIDTH;
-    int brickHeight = Constants.BRICK_HEIGHT;
+    private final int  brickWidth = Constants.BRICK_WIDTH;
+    private final int brickHeight = Constants.BRICK_HEIGHT;
+
+    public int getBrickWidth() {
+        return brickWidth;
+    }
+
+    public int getBrickHeight() {
+        return brickHeight;
+    }
 
     public List<Brick> loadMap(String mapPath) {
         List<Brick> bricks = new ArrayList<>();
@@ -36,8 +47,21 @@ public class TileManager {
                         int x = col * brickWidth;
                         int y = row * brickHeight;
 
-                        //Type của brick hiện tại chỉ theo hit points, khi thêm type khác cần chỉnh cách thêm brick
-                        bricks.add(new Brick(x, y, brickWidth, brickHeight, type));
+                        Brick.BrickType brickType;
+                        int hp;
+
+                        switch (type) {
+                            case 9 -> {
+                                brickType = Brick.BrickType.UNBREAKABLE;
+                                hp = Integer.MAX_VALUE;
+                            }
+                            default -> {
+                                brickType = Brick.BrickType.NORMAL;
+                                hp = type;
+                            }
+                        }
+
+                        bricks.add(new Brick(x, y, brickWidth, brickHeight, hp, brickType));
                     }
                 }
                 row++;

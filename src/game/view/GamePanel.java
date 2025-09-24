@@ -23,10 +23,15 @@ public class GamePanel extends JPanel {
 
         for(Brick brick: model.getBricks()) {
             if(!brick.isDestroyed()) {
-                switch (brick.getHitPoints()) {
-                    case 1 -> g.setColor(Color.RED);
-                    case 2 -> g.setColor(Color.ORANGE);
-                    case 3 -> g.setColor(Color.CYAN);
+                switch (brick.getBrickType()) {
+                    case NORMAL -> {
+                        switch (brick.getHitPoints()) {
+                            case 1 -> g.setColor(Color.RED);
+                            case 2 -> g.setColor(Color.ORANGE);
+                            case 3 -> g.setColor(Color.CYAN);
+                        }
+                    }
+                    case UNBREAKABLE -> g.setColor(Color.GRAY);
                 }
                 g.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
                 g.setColor(Color.BLACK);
