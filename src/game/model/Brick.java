@@ -7,8 +7,8 @@ public class Brick extends  GameObject {
     }
     private int hitPoints;
     private boolean destroyed;
-    private BrickType brickType;
-    private int score;
+    private final BrickType brickType;
+    private final int score;
 
     Brick(int x, int y , int width, int height, int hitPoints, BrickType brickType) {
         super(x, y, width, height);
