@@ -9,8 +9,8 @@ public class Ball extends MovableObject{
     }
 
     @Override
-    public void move(){
-        super.move();
+    public void move(double dt){
+        super.move(dt);
         // check va chạm tường trái, phai
         if (x <= 0 || x + width >= Constants.SCREEN_WIDTH) reverseDx();
         // check va chạm trên

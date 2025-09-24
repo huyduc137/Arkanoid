@@ -35,9 +35,9 @@ public class GameModel {
         bricks = tileManager.loadMap("map/map1.txt");
     }
 
-    public void update() {
-        paddle.move();
-        ball.move();
+    public void update(double dt) {
+        paddle.move(dt);
+        ball.move(dt);
 
         checkCollisions();
     }
