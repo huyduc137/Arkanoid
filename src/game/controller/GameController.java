@@ -11,18 +11,25 @@ import javax.swing.Timer;
 public class GameController implements ActionListener, KeyListener, MouseMotionListener {
     private GameModel model;
     private Timer timer;
+    private long lastTime;
     private GameView view;
+
     public GameController(GameModel model) {
         this.model = model;
         this.timer = new Timer(Constants.GAME_DELAY, this);
     }
     public void setViewGame(GameView view) {
         this.view = view;
+        this.lastTime = System.nanoTime();
         this.timer.start();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        model.update();
+        long now = System.nanoTime();
+        double dt = (now - lastTime) / 1e9;
+        lastTime = now;
+
+        model.update(dt);
         if (view != null) {
             view.repaintPanel(); // yêu cầu View vẽ lại
         }
