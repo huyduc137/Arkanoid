@@ -13,6 +13,8 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     private Timer timer;
     private long lastTime;
     private GameView view;
+    private boolean leftPressed;
+    private boolean rightPressed;
 
     public GameController(GameModel model) {
         this.model = model;
@@ -27,6 +29,16 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Paddle paddle = model.getPaddle();
+        if (leftPressed && !rightPressed) {
+            paddle.moveLeft();
+        }
+        else if (rightPressed && !leftPressed) {
+            paddle.moveRight();
+        }
+        else {
+            paddle.stop();
+        }
         long now = System.nanoTime();
         double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
         lastTime = now;
@@ -46,9 +58,13 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+            rightPressed = false;
             paddle.moveLeft();
         }
         if (key == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+            leftPressed = false;
             paddle.moveRight();
         }
         // THÊM: Xử lý phím Space để phóng ball
@@ -61,9 +77,11 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     public void keyReleased(KeyEvent e) {           // khi thả phím
         Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
-            paddle.stop();
+        if (key == KeyEvent.VK_LEFT) {
+            leftPressed = false;
+        }
+        if (key == KeyEvent.VK_RIGHT) {
+            rightPressed = false;
         }
     }
 
