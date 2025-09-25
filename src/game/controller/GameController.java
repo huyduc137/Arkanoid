@@ -13,31 +13,20 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     private Timer timer;
     private long lastTime;
     private GameView view;
-    private boolean leftPressed = false;                  // trạng thái khi nhấn phím
-    private boolean rightPressed = false;             // trạng thái khi nhấn phím
 
     public GameController(GameModel model) {
         this.model = model;
         this.timer = new Timer(Constants.GAME_DELAY, this);
     }
+
     public void setViewGame(GameView view) {
         this.view = view;
         this.lastTime = System.nanoTime();
         this.timer.start();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        Paddle paddle = model.getPaddle();
-        if (leftPressed && !rightPressed) {
-            paddle.moveLeft();
-        }
-        else if (rightPressed && !leftPressed) {
-            paddle.moveRight();
-        }
-        else {
-            paddle.stop();
-        }
-
         long now = System.nanoTime();
         double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
         lastTime = now;
@@ -52,23 +41,29 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e){             // khi nhấn phím
+    public void keyPressed(KeyEvent e) {             // khi nhấn phím
+        Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
+
         if (key == KeyEvent.VK_LEFT) {
-            leftPressed = true;
+            paddle.moveLeft();
         }
         if (key == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
+            paddle.moveRight();
+        }
+        // THÊM: Xử lý phím Space để phóng ball
+        if (key == KeyEvent.VK_SPACE) {
+            model.launchBall();
         }
     }
+
     @Override
-    public void keyReleased(KeyEvent e){           // khi thả phím
+    public void keyReleased(KeyEvent e) {           // khi thả phím
+        Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_LEFT) {
-            leftPressed = false;
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            rightPressed = false;
+
+        if (key == KeyEvent.VK_LEFT || key == KeyEvent.VK_RIGHT) {
+            paddle.stop();
         }
     }
 

@@ -18,6 +18,11 @@ public class GameModel {
     private Random random;
     private int paddleExtension = 0;
 
+    // THÊM: Biến theo dõi trạng thái game
+    private boolean gameOver = false;
+    // THÊM: Biến theo dõi ball có đang trên paddle không
+    private boolean ballOnPaddle = true;
+
     public Paddle getPaddle() {return paddle;}
     public Ball getBall() {return ball;}
     public List<Brick> getBricks() {return bricks;}
@@ -30,6 +35,11 @@ public class GameModel {
     public void addPaddleExtension(int amount) { paddleExtension += amount; }
     public void removePaddleExtension(int amount) { paddleExtension = Math.max(0, paddleExtension - amount); }
 
+    // THÊM: Getter cho trạng thái game
+    public boolean isGameOver() { return gameOver; }
+    // THÊM: Getter và setter cho ballOnPaddle
+    public boolean isBallOnPaddle() { return ballOnPaddle; }
+    public void setBallOnPaddle(boolean ballOnPaddle) { this.ballOnPaddle = ballOnPaddle; }
 
     public GameModel() {
         initGame();
@@ -37,16 +47,24 @@ public class GameModel {
 
     public void initGame() {
         ball = new Ball(Constants.SCREEN_WIDTH/2 - Constants.BALL_DIAMETER ,
-                        Constants.SCREEN_HEIGHT/2 - Constants.BALL_DIAMETER ,
-                           Constants.BALL_DIAMETER);
+                Constants.SCREEN_HEIGHT/2 - Constants.BALL_DIAMETER ,
+                Constants.BALL_DIAMETER);
         paddle = new Paddle(Constants.SCREEN_WIDTH/2 - Constants.PADDLE_WIDTH/2 ,
-                            Constants.SCREEN_HEIGHT - Constants.PADDLE_Y_OFFSET - Constants.PADDLE_HEIGHT/2 ,
-                               Constants.PADDLE_WIDTH , Constants.PADDLE_HEIGHT);
+                Constants.SCREEN_HEIGHT - Constants.PADDLE_Y_OFFSET - Constants.PADDLE_HEIGHT/2 ,
+                Constants.PADDLE_WIDTH , Constants.PADDLE_HEIGHT);
         bricks = new ArrayList<>();
         powerups = new ArrayList<>();
         random = new Random();
         paddleExtension = 0;
+
+        // THÊM: Reset trạng thái game
+        gameOver = false;
+        ballOnPaddle = true; // Ball bắt đầu trên paddle
+
         initBrick();
+
+        // THÊM: Đặt ball lên paddle
+        attachBallToPaddle();
     }
 
     public void initBrick() {
@@ -54,10 +72,22 @@ public class GameModel {
     }
 
     public void update(double dt) {
+        // THÊM: Kiểm tra nếu game đã kết thúc thì không cập nhật
+        if (gameOver) return;
+
         paddle.move(dt);
-        ball.move(dt);
+
+        // THÊM: Nếu ball đang trên paddle, di chuyển ball cùng paddle
+        if (ballOnPaddle) {
+            attachBallToPaddle();
+        } else {
+            ball.move(dt);
+        }
 
         checkCollisions();
+
+        // THÊM: Kiểm tra ball có rơi xuống không
+        checkBallOutOfBounds();
 
         powerups.removeIf(powerup -> powerup.getIsExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
         for (PowerUp powerup : powerups) {
@@ -66,9 +96,44 @@ public class GameModel {
 
         paddle.setWidth(Constants.PADDLE_WIDTH + paddleExtension);
     }
+
+    // THÊM: Phương thức gắn ball lên paddle
+    private void attachBallToPaddle() {
+        ball.setX(paddle.getX() + paddle.getWidth() / 2 - ball.getWidth() / 2);
+        ball.setY(paddle.getY() - ball.getHeight());
+        ball.setDx(0);
+        ball.setDy(0);
+    }
+
+    // THÊM: Phương thức phóng ball từ paddle
+    public void launchBall() {
+        if (ballOnPaddle) {
+            ballOnPaddle = false;
+            ball.setDx(Constants.BALL_SPEED);
+            ball.setDy(-Constants.BALL_SPEED);
+        }
+    }
+
+    // THÊM: Phương thức kiểm tra ball rơi xuống
+    private void checkBallOutOfBounds() {
+        if (!ballOnPaddle && ball.getY() > Constants.SCREEN_HEIGHT) {
+            // Trừ mạng
+            scoreSystem.loseLife();
+
+            // Kiểm tra nếu hết mạng
+            if (scoreSystem.getLives() <= 0) {
+                gameOver = true;
+            } else {
+                // Đặt ball lại trên paddle nếu còn mạng
+                ballOnPaddle = true;
+                attachBallToPaddle();
+            }
+        }
+    }
+
     private void checkCollisions() {
-        // check va chạm bóng và padlle
-        if (ball.getBounds().intersects(paddle.getBounds())) {
+        // THÊM: Chỉ kiểm tra va chạm với paddle nếu ball không đang trên paddle
+        if (!ballOnPaddle && ball.getBounds().intersects(paddle.getBounds())) {
             ball.reverseDy();
             ball.setY(paddle.getY() - ball.getHeight());
         }
@@ -115,7 +180,6 @@ public class GameModel {
                     scoreSystem.addScore(brick.getScore() * 100);
                     System.out.println(scoreSystem.getScore());
                 }
-
 
                 // Tạo power-up ExtendPaddle ngẫu nhiên khi gạch bị phá
                 if (brick.isDestroyed() && random.nextFloat() < 0.3) { // 30% cơ hội
