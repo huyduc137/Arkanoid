@@ -1,4 +1,4 @@
-package game.model;
+package game.model.entity;
 
 public abstract class MovableObject extends GameObject {
     protected double dx, dy;

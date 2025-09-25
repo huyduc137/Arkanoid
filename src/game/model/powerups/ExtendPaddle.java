@@ -1,6 +1,7 @@
-package game.model;
+package game.model.powerups;
 
 import game.Constants;
+import game.model.GameModel;
 
 public class ExtendPaddle extends PowerUp {
     private static final int EXTENSION_AMOUNT = Constants.PADDLE_WIDTH / 2; // Thêm 50% chiều rộng ban đầu

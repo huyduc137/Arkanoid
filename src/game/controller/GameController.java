@@ -2,7 +2,7 @@ package game.controller;
 
 import game.Constants;
 import game.model.GameModel;
-import game.model.Paddle;
+import game.model.entity.Paddle;
 import game.view.GameView;
 
 import java.awt.event.*;

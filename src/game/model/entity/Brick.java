@@ -1,6 +1,6 @@
-package game.model;
+package game.model.entity;
 
-public class Brick extends  GameObject {
+public class Brick extends GameObject {
     public enum BrickType {
         NORMAL,
         UNBREAKABLE
@@ -10,7 +10,7 @@ public class Brick extends  GameObject {
     private final BrickType brickType;
     private final int score;
 
-    Brick(int x, int y , int width, int height, int hitPoints, BrickType brickType) {
+    public Brick(int x, int y, int width, int height, int hitPoints, BrickType brickType) {
         super(x, y, width, height);
         this.hitPoints = hitPoints;
         this.score = hitPoints;

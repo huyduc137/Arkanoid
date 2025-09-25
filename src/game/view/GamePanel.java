@@ -2,11 +2,11 @@ package game.view;
 
 import game.Constants;
 
-import game.model.Brick;
+import game.model.entity.Brick;
 import game.model.GameModel;
-import game.model.Paddle;
-import game.model.Ball;
-import game.model.PowerUp;
+import game.model.entity.Paddle;
+import game.model.entity.Ball;
+import game.model.powerups.PowerUp;
 
 
 import javax.swing.*;

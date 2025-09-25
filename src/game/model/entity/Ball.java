@@ -1,8 +1,8 @@
-package game.model;
+package game.model.entity;
 
 import game.Constants;
 
-public class Ball extends MovableObject{
+public class Ball extends MovableObject {
     public Ball(int x, int y , int diameter){
         super(x , y , diameter , diameter);
         resetBall();
