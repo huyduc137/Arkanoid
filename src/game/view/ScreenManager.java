@@ -3,6 +3,9 @@ package game.view;
 import game.Constants;
 import game.model.GameModel;
 import game.model.manager.GameStateManager;
+import game.view.screens.GameOverScreen;
+import game.view.screens.GameplayScreen;
+import game.view.screens.PauseScreen;
 
 import java.awt.*;
 
@@ -26,6 +29,7 @@ public class ScreenManager {
 
     private final GameplayScreen gameplayScreen;
     private final GameOverScreen gameOverScreen;
+    private final PauseScreen pauseScreen;
 
     public ScreenManager(GameModel model) {
         this.model = model;
@@ -34,11 +38,8 @@ public class ScreenManager {
         this.overlayScreen = null;
 
         this.gameplayScreen = new GameplayScreen(model);
-        this.gameOverScreen = new GameOverScreen(model);
-    }
-
-    public Screen getCurrentScreen() {
-        return currentScreen;
+        this.gameOverScreen = new GameOverScreen();
+        this.pauseScreen = new PauseScreen();
     }
 
     public void setScreen(Screen screen) {
@@ -53,10 +54,10 @@ public class ScreenManager {
         this.overlayScreen = null;
     }
 
-    private void drawCenteredText(Graphics2D g2, String text) {
+    public static void drawCenteredText(Graphics2D g2, String text) {
         FontMetrics fm = g2.getFontMetrics();
-        int x = (Constants.SCREEN_HEIGHT - fm.stringWidth(text)) / 2;
-        int y = (Constants.SCREEN_WIDTH - fm.getHeight()) / 2 + fm.getAscent();
+        int x = (Constants.SCREEN_WIDTH - fm.stringWidth(text)) / 2;
+        int y = (Constants.SCREEN_HEIGHT - fm.getHeight()) / 2 + fm.getAscent();
         g2.drawString(text, x, y);
     }
 
@@ -101,11 +102,7 @@ public class ScreenManager {
 
             case GAME_OVER -> gameOverScreen.render(g2);
 
-            case PAUSE_MENU -> {
-                g2.setColor(Color.WHITE);
-                g2.setFont(new Font("Arial", Font.BOLD, 40));
-                drawCenteredText(g2, "Paused");
-            }
+            case PAUSE_MENU -> pauseScreen.render(g2);
 
             case SETTINGS -> {
                 g2.setColor(Color.WHITE);
@@ -123,6 +120,12 @@ public class ScreenManager {
                 g2.setColor(Color.WHITE);
                 g2.setFont(new Font("Arial", Font.BOLD, 40));
                 drawCenteredText(g2, "High scores");
+            }
+
+            case LEVEL_SELECT -> {
+                g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Arial", Font.BOLD, 40));
+                drawCenteredText(g2, "Level select");
             }
 
             default -> {}

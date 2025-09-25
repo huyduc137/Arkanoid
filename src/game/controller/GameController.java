@@ -3,6 +3,7 @@ package game.controller;
 import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Paddle;
+import game.model.manager.GameStateManager;
 import game.view.GameView;
 
 import java.awt.event.*;
@@ -60,6 +61,14 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     public void keyPressed(KeyEvent e) {             // khi nhấn phím
         Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
+
+        //DEMO PAUSE GAME ĐỂ TEST SCREEN MANAGER
+        if (key == KeyEvent.VK_P && !model.getGameStateManager().isPaused()) {
+            model.getGameStateManager().setState(GameStateManager.GameState.PAUSED);
+        }
+        else if (key == KeyEvent.VK_P && model.getGameStateManager().isPaused()) {
+            model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+        }
 
         if (key == KeyEvent.VK_LEFT) {
             leftPressed = true;

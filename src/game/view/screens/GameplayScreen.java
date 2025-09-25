@@ -1,10 +1,11 @@
-package game.view;
+package game.view.screens;
 
 import game.model.GameModel;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.powerups.PowerUp;
+import game.view.UI;
 
 import java.awt.*;
 
