@@ -118,7 +118,7 @@ public class GameModel {
 
 
                 // Tạo power-up ExtendPaddle ngẫu nhiên khi gạch bị phá
-                if (random.nextFloat() < 0.3) { // 30% cơ hội
+                if (brick.isDestroyed() && random.nextFloat() < 0.3) { // 30% cơ hội
                     powerups.add(new ExtendPaddle(brick.getX(), brick.getY(), this));
                 }
 

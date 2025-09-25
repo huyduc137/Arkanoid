@@ -61,7 +61,7 @@ public class GamePanel extends JPanel {
         ui.render(g2);
 
         for (PowerUp powerup : model.getPowerups()) {
-            if (!powerup.isActive()) {
+            if (!powerup.isActive() && !powerup.isExpired()) {
                 g.setColor(Color.GREEN); // Màu cho ExtendPaddle
                 g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
             }
