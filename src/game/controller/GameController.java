@@ -9,8 +9,8 @@ import java.awt.event.*;
 import javax.swing.Timer;
 
 public class GameController implements ActionListener, KeyListener, MouseMotionListener {
-    private GameModel model;
-    private Timer timer;
+    private final GameModel model;
+    private final Timer timer;
     private long lastTime;
     private GameView view;
     private boolean leftPressed;
