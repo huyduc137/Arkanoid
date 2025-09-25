@@ -29,6 +29,10 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(model.getGameStateManager().isGameOver()) {
+            return;
+        }
+
         Paddle paddle = model.getPaddle();
         if (leftPressed && !rightPressed) {
             paddle.moveLeft();
