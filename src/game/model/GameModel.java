@@ -5,6 +5,7 @@ import game.Constants;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameModel {
     private final TileManager tileManager = new TileManager();
@@ -13,13 +14,22 @@ public class GameModel {
     private Ball ball;
     private Paddle paddle;
     private List<Brick> bricks;
+    private List<PowerUp> powerups;
+    private Random random;
+    private int paddleExtension = 0;
 
     public Paddle getPaddle() {return paddle;}
     public Ball getBall() {return ball;}
     public List<Brick> getBricks() {return bricks;}
+
     public ScoreSystem getScoreSystem() {
         return scoreSystem;
     }
+
+    public List<PowerUp> getPowerups() {return powerups;}
+    public void addPaddleExtension(int amount) { paddleExtension += amount; }
+    public void removePaddleExtension(int amount) { paddleExtension = Math.max(0, paddleExtension - amount); }
+
 
     public GameModel() {
         initGame();
@@ -33,6 +43,9 @@ public class GameModel {
                             Constants.SCREEN_HEIGHT - Constants.PADDLE_Y_OFFSET - Constants.PADDLE_HEIGHT/2 ,
                                Constants.PADDLE_WIDTH , Constants.PADDLE_HEIGHT);
         bricks = new ArrayList<>();
+        powerups = new ArrayList<>();
+        random = new Random();
+        paddleExtension = 0;
         initBrick();
     }
 
@@ -45,6 +58,13 @@ public class GameModel {
         ball.move(dt);
 
         checkCollisions();
+
+        powerups.removeIf(powerup -> powerup.isExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
+        for (PowerUp powerup : powerups) {
+            powerup.update(dt);
+        }
+
+        paddle.setWidth(Constants.PADDLE_WIDTH + paddleExtension);
     }
     private void checkCollisions() {
         // check va chạm bóng và padlle
@@ -94,6 +114,12 @@ public class GameModel {
                 if(brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
                     scoreSystem.addScore(brick.getScore() * 100);
                     System.out.println(scoreSystem.getScore());
+                }
+
+
+                // Tạo power-up ExtendPaddle ngẫu nhiên khi gạch bị phá
+                if (brick.isDestroyed() && random.nextFloat() < 0.3) { // 30% cơ hội
+                    powerups.add(new ExtendPaddle(brick.getX(), brick.getY(), this));
                 }
 
                 break;

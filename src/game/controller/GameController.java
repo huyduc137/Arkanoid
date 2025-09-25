@@ -26,7 +26,7 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     @Override
     public void actionPerformed(ActionEvent e) {
         long now = System.nanoTime();
-        double dt = (now - lastTime) / 1e9;
+        double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
         lastTime = now;
 
         model.update(dt);

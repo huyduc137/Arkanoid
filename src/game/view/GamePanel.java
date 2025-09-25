@@ -1,7 +1,15 @@
 package game.view;
 
 import game.Constants;
+
 import game.model.*;
+
+import game.model.Brick;
+import game.model.GameModel;
+import game.model.Paddle;
+import game.model.Ball;
+import game.model.PowerUp;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,5 +59,12 @@ public class GamePanel extends JPanel {
 
         //Vẽ UI
         ui.render(g2);
+
+        for (PowerUp powerup : model.getPowerups()) {
+            if (!powerup.isActive() && !powerup.isExpired()) {
+                g.setColor(Color.GREEN); // Màu cho ExtendPaddle
+                g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+            }
+        }
     }
 }
