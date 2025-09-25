@@ -15,6 +15,9 @@ public class Constants {
     public static final int BRICK_WIDTH = 64;
     public static final int BRICK_HEIGHT = 32;
 
+    public static final double POWERUP_SPEED = 100.0;
+    public static final int POWERUP_SIZE = 20;
+
     public static final int TARGET_FPS = 60;
     public static final int GAME_DELAY = 1000 / TARGET_FPS;
 }
