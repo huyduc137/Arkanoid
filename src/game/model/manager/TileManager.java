@@ -14,17 +14,6 @@ import java.util.List;
 //1,2,3 = normal (HP = number)
 //9 = unbreakable
 public class TileManager {
-    private final int  brickWidth = Constants.BRICK_WIDTH;
-    private final int brickHeight = Constants.BRICK_HEIGHT;
-
-    public int getBrickWidth() {
-        return brickWidth;
-    }
-
-    public int getBrickHeight() {
-        return brickHeight;
-    }
-
     public List<Brick> loadMap(String mapPath) {
         List<Brick> bricks = new ArrayList<>();
 
@@ -45,7 +34,10 @@ public class TileManager {
                     int type = Integer.parseInt(loadedLine[col]);
 
                     if(type > 0) {
+                        int brickWidth = Constants.BRICK_WIDTH;
                         int x = col * brickWidth;
+
+                        int brickHeight = Constants.BRICK_HEIGHT;
                         int y = row * brickHeight;
 
                         Brick.BrickType brickType;
