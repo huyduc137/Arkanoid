@@ -24,15 +24,5 @@ public class UI {
         g2.drawString("Lives: " + model.getScoreSystem().getLives(),
                 Constants.SCREEN_WIDTH - 100, Constants.BRICK_HEIGHT);
 
-        // THÊM: Vẽ thông báo game over nếu cần
-        if (model.isGameOver()) {
-            g2.setFont(new Font("Arial", Font.BOLD, 40));
-            g2.setColor(Color.RED);
-            String gameOverText = "GAME OVER";
-            int textWidth = g2.getFontMetrics().stringWidth(gameOverText);
-            g2.drawString(gameOverText,
-                    (Constants.SCREEN_WIDTH - textWidth) / 2,
-                    Constants.SCREEN_HEIGHT / 2);
-        }
     }
 }
