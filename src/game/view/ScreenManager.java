@@ -113,6 +113,18 @@ public class ScreenManager {
                 drawCenteredText(g2, "Settings");
             }
 
+            case HOW_TO_PLAY -> {
+                g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Arial", Font.BOLD, 40));
+                drawCenteredText(g2, "How to play");
+            }
+
+            case HIGH_SCORE -> {
+                g2.setColor(Color.WHITE);
+                g2.setFont(new Font("Arial", Font.BOLD, 40));
+                drawCenteredText(g2, "High scores");
+            }
+
             default -> {}
         }
     }

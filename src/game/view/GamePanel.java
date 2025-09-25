@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    private final GameModel model;
     private final ScreenManager screenManager;
 
     public ScreenManager getScreenManager() {
@@ -16,7 +15,6 @@ public class GamePanel extends JPanel {
     }
 
     public GamePanel(GameModel model) {
-        this.model = model;
         this.screenManager = new ScreenManager(model);
 
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));       // LINK với PACK() IN GameView;
