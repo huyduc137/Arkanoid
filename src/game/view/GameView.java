@@ -6,7 +6,6 @@ import game.model.GameModel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 
 public class GameView extends JFrame {

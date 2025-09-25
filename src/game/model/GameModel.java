@@ -59,7 +59,7 @@ public class GameModel {
 
         checkCollisions();
 
-        powerups.removeIf(powerup -> powerup.isExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
+        powerups.removeIf(powerup -> powerup.getIsExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
         for (PowerUp powerup : powerups) {
             powerup.update(dt);
         }

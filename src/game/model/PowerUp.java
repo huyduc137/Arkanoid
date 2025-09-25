@@ -1,7 +1,6 @@
 package game.model;
 
 import game.Constants;
-import java.awt.Rectangle;
 
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại
@@ -46,11 +45,11 @@ public abstract class PowerUp extends GameObject {
 
     public abstract void remove();
 
-    public boolean isActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public boolean isExpired() {
+    public boolean getIsExpired() {
         return shouldRemove || timeLeft <= 0;
     }
 
