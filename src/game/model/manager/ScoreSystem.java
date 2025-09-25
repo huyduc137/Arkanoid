@@ -1,4 +1,4 @@
-package game.model;
+package game.model.manager;
 
 public class ScoreSystem {
     private int score;

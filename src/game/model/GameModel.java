@@ -1,6 +1,13 @@
 package game.model;
 
 import game.Constants;
+import game.model.entity.Ball;
+import game.model.entity.Brick;
+import game.model.entity.Paddle;
+import game.model.manager.ScoreSystem;
+import game.model.manager.TileManager;
+import game.model.powerups.ExtendPaddle;
+import game.model.powerups.PowerUp;
 
 import java.awt.*;
 import java.util.ArrayList;

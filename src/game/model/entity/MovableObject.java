@@ -1,4 +1,4 @@
-package game.model;
+package game.model.entity;
 
 public abstract class MovableObject extends GameObject {
     protected double dx, dy;
@@ -19,11 +19,11 @@ public abstract class MovableObject extends GameObject {
     }
 
     public void setDx(int dx) {
-        this.dx = (double) dx;
+        this.dx = dx;
     }
 
     public void setDy(int dy) {
-        this.dy = (double) dy;
+        this.dy = dy;
     }
 
     public void reverseDx() {

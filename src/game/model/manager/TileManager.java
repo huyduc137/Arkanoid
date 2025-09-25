@@ -1,6 +1,7 @@
-package game.model;
+package game.model.manager;
 
 import game.Constants;
+import game.model.entity.Brick;
 
 import java.io.BufferedReader;
 import java.io.IOException;

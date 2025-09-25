@@ -1,6 +1,8 @@
-package game.model;
+package game.model.powerups;
 
 import game.Constants;
+import game.model.GameModel;
+import game.model.entity.GameObject;
 
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại
