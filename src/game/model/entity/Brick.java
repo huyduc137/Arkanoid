@@ -18,10 +18,15 @@ public class Brick extends GameObject {
         this.brickType = brickType;
     }
 
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
     public int getHitPoints() {
         return hitPoints;
     }
-
+    public void setDestroyed(boolean destroyed) {
+        this.destroyed = destroyed;
+    }
     public BrickType getBrickType() {
         return brickType;
     }

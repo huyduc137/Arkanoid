@@ -7,6 +7,7 @@ import game.model.entity.Paddle;
 import game.model.manager.ScoreSystem;
 import game.model.manager.TileManager;
 import game.model.powerups.ExtendPaddle;
+import game.model.powerups.FireBall;
 import game.model.powerups.PowerUp;
 
 import java.awt.*;
@@ -165,24 +166,28 @@ public class GameModel {
                 float wy = (brickHitbox.width / 2.0f) * dy;
                 float hx = (brickHitbox.height / 2.0f) * dx;
 
-                if (Math.abs(wy) > Math.abs(hx)) {
-                    if (dy > 0) { // đập ở trên
-                        ball.setY(brickHitbox.y + brickHitbox.height);
-                    } else { // đập ở dưới
-                        ball.setY(brickHitbox.y - ballHitbox.height);
+                if(!ball.isFireBall()) {
+                    if (Math.abs(wy) > Math.abs(hx)) {
+                        if (dy > 0) { // đập ở trên
+                            ball.setY(brickHitbox.y + brickHitbox.height);
+                        } else { // đập ở dưới
+                            ball.setY(brickHitbox.y - ballHitbox.height);
+                        }
+                        ball.reverseDy();
+                    } else {
+                        if (dx > 0) { // đập bên phải
+                            ball.setX(brickHitbox.x + brickHitbox.width);
+                        } else { // đập bên trái
+                            ball.setX(brickHitbox.x - ballHitbox.width);
+                        }
+                        ball.reverseDx();
                     }
-                    ball.reverseDy();
-                } else {
-                    if (dx > 0) { // đập bên phải
-                        ball.setX(brickHitbox.x + brickHitbox.width);
-                    } else { // đập bên trái
-                        ball.setX(brickHitbox.x - ballHitbox.width);
-                    }
-                    ball.reverseDx();
+
+                    brick.hit();
                 }
-
-                brick.hit();
-
+                else {
+                    brick.setDestroyed(true);
+                }
                 if(brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
                     scoreSystem.addScore(brick.getScore() * 100);
                     System.out.println(scoreSystem.getScore());
@@ -190,9 +195,14 @@ public class GameModel {
 
                 // Tạo power-up ExtendPaddle ngẫu nhiên khi gạch bị phá
                 if (brick.isDestroyed() && random.nextFloat() < 0.3) { // 30% cơ hội
-                    powerups.add(new ExtendPaddle(brick.getX(), brick.getY(), this));
+                    int powerupType = random.nextInt(9); // 0: ExtendPaddle, 1: Fireball
+                    PowerUp powerup = switch (powerupType) {
+                        case 1, 2, 3, 4, 5, 6, 7, 8 -> new ExtendPaddle(brick.getX(), brick.getY(), this);
+                        case 0 -> new FireBall(brick.getX(), brick.getY(), this);
+                        default -> new ExtendPaddle(brick.getX(), brick.getY(), this);
+                    };
+                    powerups.add(powerup);
                 }
-
                 break;
             }
         }

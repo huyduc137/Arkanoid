@@ -3,9 +3,12 @@ package game.model.entity;
 import game.Constants;
 
 public class Ball extends MovableObject {
+    private boolean isFireBall;
+
     public Ball(int x, int y , int diameter){
         super(x , y , diameter , diameter);
         resetBall();
+        isFireBall = false;
     }
 
     @Override
@@ -23,5 +26,12 @@ public class Ball extends MovableObject {
         this.y = Constants.SCREEN_HEIGHT / 2 - height / 2;
         this.dx = Constants.BALL_SPEED;
         this.dy = -Constants.BALL_SPEED;
+    }
+
+    public boolean isFireBall() {
+        return isFireBall;
+    }
+    public void setFireBall(boolean fireBall) {
+        isFireBall = fireBall;
     }
 }
