@@ -6,6 +6,7 @@ import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
+import game.model.powerups.MultiBall;
 import game.model.powerups.PowerUp;
 
 import java.awt.*;
@@ -21,12 +22,14 @@ public class CollisionManager {
     }
 
     public void checkCollisions() {
-        Ball ball = model.getBall();
+        List<Ball> balls = model.getBalls();
         Paddle paddle = model.getPaddle();
         List<Brick> bricks = model.getBricks();
 
-        handlePaddleCollision(ball, paddle);
-        handleBrickCollisions(ball, bricks);
+        for (Ball ball : balls) {
+            handlePaddleCollision(ball, paddle);
+            handleBrickCollisions(ball, bricks);
+        }
     }
 
     private void handlePaddleCollision(Ball ball, Paddle paddle) {
@@ -96,10 +99,14 @@ public class CollisionManager {
 
             // Drop powerup
             if (random.nextFloat() < 0.3) { // 30% chance
-                PowerUp powerup = random.nextInt(9) == 0
-                        ? new FireBall(brick.getX(), brick.getY(), model)
-                        : new ExtendPaddle(brick.getX(), brick.getY(), model);
-                model.getPowerups().add(powerup);
+               int powerupType = random.nextInt(3); // 0: ExtendPaddle, 1: Fireball, 2: MultiBall
+               PowerUp powerup = switch (powerupType) {
+                   case 0 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
+                   case 1 -> new FireBall(brick.getX(), brick.getY(), model);
+                   case 2 -> new MultiBall(brick.getX(), brick.getY(), model);
+                   default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
+               };
+               model.getPowerups().add(powerup);
             }
         }
     }

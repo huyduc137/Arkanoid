@@ -23,20 +23,18 @@ public class GameModel {
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
 
-    private Ball ball;
+    private List<Ball> balls;
     private Paddle paddle;
     private List<Brick> bricks;
     private List<PowerUp> powerups;
-    private Random random;
     private int paddleExtension = 0;
 
     public Paddle getPaddle() {
         return paddle;
     }
 
-    public Ball getBall() {
-        return ball;
-    }
+    public List<Ball> getBalls() { return balls; }
+    public Ball getBall() { return balls.isEmpty() ? null : balls.get(0); } // Bóng chính
 
     public List<Brick> getBricks() {
         return bricks;
@@ -62,20 +60,27 @@ public class GameModel {
         paddleExtension = Math.max(0, paddleExtension - amount);
     }
 
+    public void addBall(Ball ball) { balls.add(ball); }
+
     public GameModel() {
         initGame();
     }
 
     public void initGame() {
-        ball = new Ball(Constants.SCREEN_WIDTH / 2 - Constants.BALL_DIAMETER,
+        balls = new ArrayList<>();
+        Ball mainBall = new Ball(Constants.SCREEN_WIDTH / 2 - Constants.BALL_DIAMETER,
                 Constants.SCREEN_HEIGHT / 2 - Constants.BALL_DIAMETER,
                 Constants.BALL_DIAMETER);
+        mainBall.resetBall();
+        balls.add(mainBall);
+
         paddle = new Paddle(Constants.SCREEN_WIDTH / 2 - Constants.PADDLE_WIDTH / 2,
                 Constants.SCREEN_HEIGHT - Constants.PADDLE_Y_OFFSET - Constants.PADDLE_HEIGHT/2,
                 Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT);
+
         bricks = new ArrayList<>();
+
         powerups = new ArrayList<>();
-        random = new Random();
         paddleExtension = 0;
 
         // Reset trạng thái game
@@ -85,7 +90,7 @@ public class GameModel {
         initBrick();
 
         // Đặt ball lên paddle
-        attachBallToPaddle();
+        attachBallToPaddle(mainBall);
     }
 
     public void initBrick() {
@@ -97,9 +102,15 @@ public class GameModel {
 
         // THÊM: Nếu ball đang trên paddle, di chuyển ball cùng paddle
         if (gameStateManager.isBallOnPaddle()) {
-            attachBallToPaddle();
-        } else {
-            ball.move(dt);
+            Ball mainBall = getBall();
+            if (mainBall != null) {
+                attachBallToPaddle(mainBall);
+            }
+        }
+        for (Ball ball : balls) {
+            if (!gameStateManager.isBallOnPaddle() || ball != getBall()) { // Không di chuyển bóng chính nếu bám
+                ball.move(dt);
+            }
         }
 
         collisionManager.checkCollisions();
@@ -113,10 +124,12 @@ public class GameModel {
         }
 
         paddle.setWidth(Constants.PADDLE_WIDTH + paddleExtension);
+
+        balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
     }
 
     // THÊM: Phương thức gắn ball lên paddle
-    private void attachBallToPaddle() {
+    private void attachBallToPaddle(Ball ball) {
         ball.setX(paddle.getX() + paddle.getWidth() / 2 - ball.getWidth() / 2);
         ball.setY(paddle.getY() - ball.getHeight());
         ball.setDx(0);
@@ -127,14 +140,17 @@ public class GameModel {
     public void launchBall() {
         if (gameStateManager.isBallOnPaddle()) {
             gameStateManager.setBallOnPaddle(false);
-            ball.setDx(Constants.BALL_SPEED);
-            ball.setDy(-Constants.BALL_SPEED);
+            Ball mainBall = getBall();
+            if (mainBall != null) {
+                mainBall.setDx(Constants.BALL_SPEED);
+                mainBall.setDy(-Constants.BALL_SPEED);
+            }
         }
     }
 
     // THÊM: Phương thức kiểm tra ball rơi xuống
     private void checkBallOutOfBounds() {
-        if (!gameStateManager.isBallOnPaddle() && ball.getY() > Constants.SCREEN_HEIGHT) {
+        if (!gameStateManager.isBallOnPaddle() && balls.isEmpty()) {
             // Trừ mạng
             scoreSystem.loseLife();
 
@@ -142,9 +158,11 @@ public class GameModel {
             if (scoreSystem.getLives() <= 0) {
                 gameStateManager.setState(GameStateManager.GameState.GAME_OVER);
             } else {
-                // Đặt ball lại trên paddle nếu còn mạng
+                Ball mainBall = new Ball(Constants.BALL_DIAMETER);
+                attachBallToPaddle(mainBall);
+
+                balls.add(mainBall);
                 gameStateManager.setBallOnPaddle(true);
-                attachBallToPaddle();
             }
         }
     }
