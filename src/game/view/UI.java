@@ -25,7 +25,7 @@ public class UI {
                 Constants.SCREEN_WIDTH - 100, Constants.BRICK_HEIGHT);
 
         // THÊM: Vẽ thông báo game over nếu cần
-        if (model.isGameOver()) {
+        if (model.getGameStateManager().isGameOver()) {
             g2.setFont(new Font("Arial", Font.BOLD, 40));
             g2.setColor(Color.RED);
             String gameOverText = "GAME OVER";
