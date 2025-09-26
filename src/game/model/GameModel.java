@@ -4,6 +4,7 @@ import game.Constants;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
+import game.model.manager.CollisionManager;
 import game.model.manager.ScoreSystem;
 import game.model.manager.TileManager;
 import game.model.manager.GameStateManager;
@@ -20,6 +21,7 @@ public class GameModel {
     private final TileManager tileManager = new TileManager();
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
+    private final CollisionManager collisionManager = new CollisionManager(this);
 
     private Ball ball;
     private Paddle paddle;
@@ -78,6 +80,7 @@ public class GameModel {
 
         // Reset trạng thái game
         gameStateManager.reset();
+        scoreSystem.reset();
 
         initBrick();
 
@@ -99,7 +102,7 @@ public class GameModel {
             ball.move(dt);
         }
 
-        checkCollisions();
+        collisionManager.checkCollisions();
 
         // THÊM: Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
@@ -142,75 +145,6 @@ public class GameModel {
                 // Đặt ball lại trên paddle nếu còn mạng
                 gameStateManager.setBallOnPaddle(true);
                 attachBallToPaddle();
-            }
-        }
-    }
-
-    private void checkCollisions() {
-        // THÊM: Chỉ kiểm tra va chạm với paddle nếu ball không đang trên paddle
-        if (!gameStateManager.isGameOver() && ball.getBounds().intersects(paddle.getBounds())) {
-            ball.reverseDy();
-            ball.setY(paddle.getY() - ball.getHeight());
-        }
-
-        //Check va chạm bricks và bóng
-        for(Brick brick: bricks) {
-            if(!brick.isDestroyed() && ball.getBounds().intersects(brick.getBounds())) {
-                Rectangle ballHitbox = ball.getBounds();
-                Rectangle brickHitbox = brick.getBounds();
-
-                int ballCenterX = ballHitbox.x + ballHitbox.width / 2;
-                int ballCenterY = ballHitbox.y + ballHitbox.height / 2;
-
-                int brickCenterX = brickHitbox.x + brickHitbox.width / 2;
-                int brickCenterY = brickHitbox.y + brickHitbox.height / 2;
-
-                int dx = ballCenterX - brickCenterX;
-                int dy = ballCenterY - brickCenterY;
-
-                //Kiểm tra xem hit dọc hay ngang
-                //Tính trọng số của chiều dài/ngang của brick so với khoảng cách
-                float wy = (brickHitbox.width / 2.0f) * dy;
-                float hx = (brickHitbox.height / 2.0f) * dx;
-
-                if(!ball.isFireBall()) {
-                    if (Math.abs(wy) > Math.abs(hx)) {
-                        if (dy > 0) { // đập ở trên
-                            ball.setY(brickHitbox.y + brickHitbox.height);
-                        } else { // đập ở dưới
-                            ball.setY(brickHitbox.y - ballHitbox.height);
-                        }
-                        ball.reverseDy();
-                    } else {
-                        if (dx > 0) { // đập bên phải
-                            ball.setX(brickHitbox.x + brickHitbox.width);
-                        } else { // đập bên trái
-                            ball.setX(brickHitbox.x - ballHitbox.width);
-                        }
-                        ball.reverseDx();
-                    }
-
-                    brick.hit();
-                }
-                else {
-                    brick.setDestroyed(true);
-                }
-                if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
-                    scoreSystem.addScore(brick.getScore() * 100);
-                    System.out.println(scoreSystem.getScore());
-                }
-
-                // Tạo power-up ExtendPaddle ngẫu nhiên khi gạch bị phá
-                if (brick.isDestroyed() && random.nextFloat() < 0.3) { // 30% cơ hội
-                    int powerupType = random.nextInt(9); // 0: ExtendPaddle, 1: Fireball
-                    PowerUp powerup = switch (powerupType) {
-                        case 1, 2, 3, 4, 5, 6, 7, 8 -> new ExtendPaddle(brick.getX(), brick.getY(), this);
-                        case 0 -> new FireBall(brick.getX(), brick.getY(), this);
-                        default -> new ExtendPaddle(brick.getX(), brick.getY(), this);
-                    };
-                    powerups.add(powerup);
-                }
-                break;
             }
         }
     }
