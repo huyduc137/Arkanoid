@@ -19,7 +19,7 @@ public class FireBall extends PowerUp {
     @Override
     public void remove() {
         for (Ball ball : model.getBalls()) {
-            ball.setFireBall(true);
+            ball.setFireBall(false);
         }
     }
 }

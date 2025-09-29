@@ -99,11 +99,11 @@ public class CollisionManager {
 
             // Drop powerup
             if (random.nextFloat() < 0.3) { // 30% chance
-               int powerupType = random.nextInt(3); // 0: ExtendPaddle, 1: Fireball, 2: MultiBall
+               int powerupType = random.nextInt(9);
                PowerUp powerup = switch (powerupType) {
-                   case 0 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
-                   case 1 -> new FireBall(brick.getX(), brick.getY(), model);
-                   case 2 -> new MultiBall(brick.getX(), brick.getY(), model);
+                   case 0, 1, 2, 3 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
+                   case 4, 5 -> new FireBall(brick.getX(), brick.getY(), model);
+                   case 6, 7, 8 -> new MultiBall(brick.getX(), brick.getY(), model);
                    default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                };
                model.getPowerups().add(powerup);
