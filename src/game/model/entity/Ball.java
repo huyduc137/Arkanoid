@@ -7,6 +7,12 @@ public class Ball extends MovableObject {
 
     public Ball(int x, int y , int diameter){
         super(x , y , diameter , diameter);
+        this.dx = Constants.BALL_SPEED;
+        this.dy = -Constants.BALL_SPEED;
+        isFireBall = false;
+    }
+    public Ball(int diameter) {
+        super(Constants.SCREEN_WIDTH / 2 - diameter / 2, Constants.SCREEN_HEIGHT / 2 - diameter / 2, diameter, diameter);
         resetBall();
         isFireBall = false;
     }

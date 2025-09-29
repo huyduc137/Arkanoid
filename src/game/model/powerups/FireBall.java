@@ -2,15 +2,24 @@ package game.model.powerups;
 
 import game.Constants;
 import game.model.GameModel;
+import game.model.entity.Ball;
 
 public class FireBall extends PowerUp {
     public FireBall(int x, int y, GameModel model) {
-        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, 10.0, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, model);
     }
+
+    @Override
     public void apply() {
-        model.getBall().setFireBall(true);
+        for (Ball ball : model.getBalls()) {
+            ball.setFireBall(true);
+        }
     }
+
+    @Override
     public void remove() {
-        model.getBall().setFireBall(false);
+        for (Ball ball : model.getBalls()) {
+            ball.setFireBall(true);
+        }
     }
 }

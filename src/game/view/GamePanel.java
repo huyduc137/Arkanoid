@@ -8,6 +8,7 @@ import game.model.entity.Paddle;
 import game.model.entity.Ball;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
+import game.model.powerups.MultiBall;
 import game.model.powerups.PowerUp;
 
 
@@ -53,14 +54,11 @@ public class GamePanel extends JPanel {
         g.setColor(Color.WHITE);
         g.fillRect(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight());
 
-        Ball ball = model.getBall();
-        if(ball.isFireBall()) {
-            g.setColor(Color.RED);
-            g.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
-        }
-        else {
-            g.setColor(Color.YELLOW);
-            g.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+        if (model.getBalls() != null) {
+            for (Ball ball : model.getBalls()) {
+                g.setColor(ball.isFireBall() ? Color.RED : Color.YELLOW);
+                g.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+            }
         }
         //Vẽ UI
         ui.render(g2);
@@ -77,8 +75,12 @@ public class GamePanel extends JPanel {
                     g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
                     g.setColor(Color.BLACK);
                     g.drawString("F", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
-
-
+                }
+                else if (powerup instanceof MultiBall) {
+                    g.setColor(Color.ORANGE);
+                    g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+                    g.setColor(Color.BLACK);
+                    g.drawString("M", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 }
             }
         }
