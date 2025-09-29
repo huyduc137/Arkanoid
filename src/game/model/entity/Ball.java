@@ -15,10 +15,18 @@ public class Ball extends MovableObject {
     public void move(double dt){
         super.move(dt);
         // check va chạm tường trái, phai
-        if (x <= 0 || x + width >= Constants.SCREEN_WIDTH) reverseDx();
-        // check va chạm trên
-        if (y <= 0)  reverseDy();
-        // BỎ: không xử lý va chạm dưới ở đây nữa, để GameModel xử lý
+        if (this.x <= 0){
+            this.x = 0;
+            this.reverseDx();
+        }
+        else if (this.x + this.width >= Constants.SCREEN_WIDTH){
+            this.x = Constants.SCREEN_WIDTH - this.width;
+            reverseDx();
+        }
+        if (this.y <= 0) {
+            this.y = 0;
+            reverseDy();
+        }
     }
 
     public void resetBall(){

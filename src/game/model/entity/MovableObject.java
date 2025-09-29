@@ -27,11 +27,11 @@ public abstract class MovableObject extends GameObject {
     }
 
     public void reverseDx() {
-        dx = -dx;
+        this.dx = -dx;
     }
 
     public void reverseDy() {
-        dy = -dy;
+        this.dy = -dy;
     }
 
     public void move(double dt) {
