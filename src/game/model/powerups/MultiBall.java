@@ -26,8 +26,12 @@ public class MultiBall extends PowerUp {
 
             // Tạo bóng mới tại đúng vị trí của bóng gốc
             Ball newBall = new Ball(oldBall.getX(), oldBall.getY(), Constants.BALL_DIAMETER);
-            // Đặt hướng ngẫu nhiên để tránh trùng với góc đi của oldBall
-            double angle = Math.PI / 4 + Math.random() * (Math.PI / 2); // 45° đến 135°
+
+            double angle;
+            do {
+                angle = Math.toRadians(30 + Math.random() * 120); // 30° đến 150°
+            } while (Math.abs(Math.toDegrees(angle) - 90) < 10); // bỏ vùng 80°–100°
+
             newBall.setDx(Math.cos(angle) * Constants.BALL_SPEED);
             newBall.setDy(-Math.sin(angle) * Constants.BALL_SPEED);
 
