@@ -33,7 +33,7 @@ public class Ball extends MovableObject {
             this.y = 0;
             if(this.dy < 0) reverseDy();
         }
-        System.out.println(this.dx);
+//        System.out.println(this.dx);
     }
 
     public void resetBall(){

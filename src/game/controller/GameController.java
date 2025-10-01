@@ -3,6 +3,7 @@ package game.controller;
 import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Paddle;
+import game.model.manager.GameStateManager;
 import game.view.GameView;
 
 import java.awt.event.*;
@@ -33,23 +34,27 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
             return;
         }
 
-        Paddle paddle = model.getPaddle();
-        if (leftPressed && !rightPressed) {
-            paddle.moveLeft();
-        }
-        else if (rightPressed && !leftPressed) {
-            paddle.moveRight();
-        }
-        else {
-            paddle.stop();
-        }
-        long now = System.nanoTime();
-        double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
-        lastTime = now;
+        //Game loop chỉ update khi gameActive
+        if (model.getGameStateManager().isGameActive()) {
+            Paddle paddle = model.getPaddle();
+            if (leftPressed && !rightPressed) {
+                paddle.moveLeft();
+            } else if (rightPressed && !leftPressed) {
+                paddle.moveRight();
+            } else {
+                paddle.stop();
+            }
+            long now = System.nanoTime();
+            double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
+            lastTime = now;
 
-        model.update(dt);
+            model.update(dt);
+        }
+
         if (view != null) {
-            view.repaintPanel(); // yêu cầu View vẽ lại
+            //Check state để vẽ màn hình tương ứng
+            view.updateScreen();
+            view.repaintPanel();
         }
     }
 
@@ -74,6 +79,14 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
         // THÊM: Xử lý phím Space để phóng ball
         if (key == KeyEvent.VK_SPACE) {
             model.launchBall();
+        }
+
+        //Test đổi màn hình bằng ESC
+        if (key == KeyEvent.VK_ESCAPE) {
+            if (model.getGameStateManager().isGameActive()) {
+                model.getGameStateManager().setState(GameStateManager.GameState.MENU);
+
+            }
         }
     }
 
