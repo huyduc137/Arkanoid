@@ -19,7 +19,7 @@ public class GameStateManager {
     }
 
     public void reset() {
-        currentState = GameState.PLAYING;
+        currentState = GameState.MENU;
         ballOnPaddle = true;
     }
 
