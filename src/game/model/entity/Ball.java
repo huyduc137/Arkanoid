@@ -23,16 +23,17 @@ public class Ball extends MovableObject {
         // check va chạm tường trái, phai
         if (this.x <= 0){
             this.x = 0;
-            this.reverseDx();
+            if (this.dx < 0) this.reverseDx();
         }
         else if (this.x + this.width >= Constants.SCREEN_WIDTH){
             this.x = Constants.SCREEN_WIDTH - this.width;
-            reverseDx();
+            if (this.dx > 0) reverseDx();
         }
         if (this.y <= 0) {
             this.y = 0;
-            reverseDy();
+            if(this.dy < 0) reverseDy();
         }
+        System.out.println(this.dx);
     }
 
     public void resetBall(){

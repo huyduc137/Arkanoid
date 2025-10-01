@@ -35,6 +35,15 @@ public class CollisionManager {
     private void handlePaddleCollision(Ball ball, Paddle paddle) {
         if (!model.getGameStateManager().isGameOver() && ball.getBounds().intersects(paddle.getBounds())) {
             ball.reverseDy();
+            double ballCenterX = ball.getX() + (ball.getWidth() / 2.0);
+            double paddleCenterX = paddle.getX() + (paddle.getWidth() / 2.0);
+            double checkHandlePosition = ballCenterX - paddleCenterX;        // check va cham trái phải của paddle
+            if (checkHandlePosition < 0) {
+                if (ball.getDx() > 0) ball.reverseDx();
+            }
+            else if (checkHandlePosition > 0){
+                if (ball.getDx() < 0) ball.reverseDx();
+            }
             ball.setY(paddle.getY() - ball.getHeight());
         }
     }
