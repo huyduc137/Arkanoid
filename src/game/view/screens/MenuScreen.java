@@ -1,0 +1,30 @@
+package game.view.screens;
+
+import game.Constants;
+import game.model.GameModel;
+import game.model.manager.GameStateManager;
+import game.view.UI.UIButton;
+
+import java.awt.*;
+
+public class MenuScreen extends Screen {
+    private final GameModel model;
+
+    public MenuScreen(GameModel model) {
+        super(ScreenType.MENU);
+        this.model = model;
+        setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
+        loadBackground("bg/test.jpg");
+    }
+
+    @Override
+    public void initUI() {
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, 120, 40, "Start",
+                new Font("Arial", Font.PLAIN, 20),
+                () -> {
+                    model.initGame();
+                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                }) //action chạy khi click vào nút
+        );
+    }
+}
