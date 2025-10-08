@@ -4,10 +4,7 @@ import game.Constants;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
-import game.model.manager.CollisionManager;
-import game.model.manager.ScoreSystem;
-import game.model.manager.TileManager;
-import game.model.manager.GameStateManager;
+import game.model.manager.*;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
 import game.model.powerups.PowerUp;
@@ -22,6 +19,7 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
+    private final SoundManager soundManager = new SoundManager();
 
     private List<Ball> balls;
     private Paddle paddle;
@@ -48,6 +46,10 @@ public class GameModel {
         return gameStateManager;
     }
 
+    public SoundManager getSoundManager() {
+        return soundManager;
+    }
+
     public List<PowerUp> getPowerups() {
         return powerups;
     }
@@ -64,6 +66,9 @@ public class GameModel {
 
     public GameModel() {
         initGame();
+
+        //Test bg sound
+        soundManager.play("background_test");
     }
 
     public void initGame() {
