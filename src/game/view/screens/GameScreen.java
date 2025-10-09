@@ -79,7 +79,7 @@ public class GameScreen extends Screen {
         // Vẽ súng trên paddle
         if (paddle.hasGuns()) {
             g2.setColor(Color.DARK_GRAY);
-            int gunWidth = 5; g
+            int gunWidth = 5;
             int gunHeight = paddle.getHeight() / 2;
             int gunY = paddle.getY() + paddle.getHeight() / 4;
             // Súng bên trái
