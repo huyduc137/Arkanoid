@@ -118,6 +118,7 @@ public class CollisionManager {
                 ball.reverseDx();
             }
             brick.hit();
+            model.getSoundManager().play("brick_hit");
         } else {
             brick.setDestroyed(true);
         }
@@ -125,6 +126,7 @@ public class CollisionManager {
 
     private void handleBrickHit(Brick brick) {
         if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
+            model.getSoundManager().play("brick_destroy");
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
