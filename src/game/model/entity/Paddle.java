@@ -3,6 +3,8 @@ package game.model.entity;
 import game.Constants;
 
 public class Paddle extends MovableObject {
+    private boolean gunsActive = false; // THÊM DÒNG NÀY
+
     public Paddle(int x , int y , int width , int height) {
         super(x,  y, width, height);
     }
@@ -25,5 +27,14 @@ public class Paddle extends MovableObject {
         if (x + width > Constants.SCREEN_WIDTH){
             x =  Constants.SCREEN_WIDTH - width;
         }
+    }
+
+    // THÊM CÁC PHƯƠNG THỨC DƯỚI ĐÂY
+    public boolean hasGuns() {
+        return gunsActive;
+    }
+
+    public void setGunsActive(boolean active) {
+        this.gunsActive = active;
     }
 }

@@ -21,4 +21,10 @@ public class Constants {
 
     public static final int TARGET_FPS = 60;
     public static final int GAME_DELAY = 1000 / TARGET_FPS;
+
+    public static final int BULLET_SPEED = 400;
+    public static final int BULLET_WIDTH = 5;
+    public static final int BULLET_HEIGHT = 15;
+    public static final int POWERUP_WIDTH = 30;  // Hoặc kích thước bạn muốn
+    public static final int POWERUP_HEIGHT = 30; // Hoặc kích thước bạn muốn
 }

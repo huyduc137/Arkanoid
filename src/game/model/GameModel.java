@@ -4,6 +4,7 @@ import game.Constants;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
+import game.model.entity.Bullet; // THÊM IMPORT NÀY
 import game.model.manager.CollisionManager;
 import game.model.manager.ScoreSystem;
 import game.model.manager.TileManager;
@@ -27,6 +28,7 @@ public class GameModel {
     private Paddle paddle;
     private List<Brick> bricks;
     private List<PowerUp> powerups;
+    private List<Bullet> bullets; // THÊM DANH SÁCH ĐẠN
     private int paddleExtension = 0;
 
     public Paddle getPaddle() {
@@ -50,6 +52,15 @@ public class GameModel {
 
     public List<PowerUp> getPowerups() {
         return powerups;
+    }
+
+    // THÊM CÁC PHƯƠNG THỨC QUẢN LÝ ĐẠN
+    public List<Bullet> getBullets() {
+        return bullets;
+    }
+
+    public void addBullet(Bullet bullet) {
+        bullets.add(bullet);
     }
 
     public void addPaddleExtension(int amount) {
@@ -79,6 +90,7 @@ public class GameModel {
                 Constants.PADDLE_WIDTH, Constants.PADDLE_HEIGHT);
 
         bricks = new ArrayList<>();
+        bullets = new ArrayList<>(); // KHỞI TẠO DANH SÁCH ĐẠN
 
         powerups = new ArrayList<>();
         paddleExtension = 0;
@@ -112,6 +124,14 @@ public class GameModel {
                 ball.move(dt);
             }
         }
+
+        // CẬP NHẬT LOGIC CHO ĐẠN
+        for (Bullet bullet : bullets) {
+            bullet.move(dt);
+        }
+        // Xóa đạn đã bay ra khỏi màn hình
+        bullets.removeIf(bullet -> bullet.getY() < 0);
+
 
         collisionManager.checkCollisions();
 
