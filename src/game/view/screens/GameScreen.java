@@ -5,14 +5,17 @@ import game.model.GameModel;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
+import game.model.entity.Bullet;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
 import game.model.powerups.MultiBall;
 import game.model.powerups.PowerUp;
+import game.model.powerups.PaddleWithGun;
 import game.view.UI.UILabel;
 import game.view.UI.UIManager;
 
 import java.awt.*;
+import java.util.List;
 
 public class GameScreen extends Screen {
 
@@ -73,6 +76,19 @@ public class GameScreen extends Screen {
         g2.setColor(Color.WHITE);
         g2.fillRect(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight());
 
+        // Vẽ súng trên paddle
+        if (paddle.hasGuns()) {
+            g2.setColor(Color.DARK_GRAY);
+            int gunWidth = 5;
+            int gunHeight = paddle.getHeight() / 2;
+            int gunY = paddle.getY() + paddle.getHeight() / 4;
+            // Súng bên trái
+            g2.fillRect(paddle.getX() - gunWidth, gunY, gunWidth, gunHeight);
+            // Súng bên phải
+            g2.fillRect(paddle.getX() + paddle.getWidth(), gunY, gunWidth, gunHeight);
+        }
+
+
         // Vẽ balls
         for (Ball ball : model.getBalls()) {
             g2.setColor(ball.isFireBall() ? Color.RED : Color.YELLOW);
@@ -83,24 +99,39 @@ public class GameScreen extends Screen {
         for (PowerUp powerup : model.getPowerups()) {
             if (!powerup.getIsActive() && !powerup.getIsExpired()) {
                 if (powerup instanceof ExtendPaddle) {
-                    g.setColor(Color.GREEN);
-                    g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g.setColor(Color.BLACK);
-                    g.drawString("E", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
+                    g2.setColor(Color.GREEN);
+                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+                    g2.setColor(Color.BLACK);
+                    g2.drawString("E", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 } else if (powerup instanceof FireBall) {
-                    g.setColor(Color.RED);
-                    g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g.setColor(Color.BLACK);
-                    g.drawString("F", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
+                    g2.setColor(Color.RED);
+                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+                    g2.setColor(Color.BLACK);
+                    g2.drawString("F", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 }
                 else if (powerup instanceof MultiBall) {
-                    g.setColor(Color.ORANGE);
-                    g.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g.setColor(Color.BLACK);
-                    g.drawString("M", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
+                    g2.setColor(Color.ORANGE);
+                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+                    g2.setColor(Color.BLACK);
+                    g2.drawString("M", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
+                }
+                // Vẽ PaddleWithGun powerup
+                else if (powerup instanceof PaddleWithGun) {
+                    g2.setColor(Color.MAGENTA);
+                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
+                    g2.setColor(Color.WHITE);
+                    g2.drawString("G", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 }
             }
         }
+
+        // Vẽ Bullets
+        List<Bullet> bullets = model.getBullets();
+        g2.setColor(Color.YELLOW);
+        for (Bullet bullet : bullets) {
+            g2.fillRect(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+        }
+
 
         // Vẽ UI elements
         if (uiManager != null) {
