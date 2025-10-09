@@ -9,7 +9,7 @@ import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
 import game.model.powerups.MultiBall;
 import game.model.powerups.PowerUp;
-import game.model.powerups.PaddleWithGun; // Import PaddleWithGun
+import game.model.powerups.PaddleWithGun;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -123,22 +123,19 @@ public class CollisionManager {
         }
     }
 
-    // PHẦN ĐÃ CHỈNH SỬA ĐỂ TĂNG TỶ LỆ RƠI CỦA PaddleWithGun
     private void handleBrickHit(Brick brick) {
         if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
-            // Tăng tỷ lệ rơi của PowerUp nói chung lên 50% để dễ thử nghiệm hơn
-            // và tăng cơ hội cho PaddleWithGun
-            if (random.nextFloat() < 0.5) { // 50% chance cho bất kỳ powerup nào
-                int powerupType = random.nextInt(10); // Tăng giới hạn lên 10
+            if (random.nextFloat() < 0.5) {
+                int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
-                    case 0, 1, 2 -> new ExtendPaddle(brick.getX(), brick.getY(), model); // Giảm một chút
-                    case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model); // Giảm một chút
-                    case 5, 6 -> new MultiBall(brick.getX(), brick.getY(), model); // Giảm một chút
-                    case 7, 8, 9 -> new PaddleWithGun(brick.getX(), brick.getY(), model); // TĂNG CƠ HỘI ĐÁNG KỂ
-                    default -> new ExtendPaddle(brick.getX(), brick.getY(), model); // Fallback
+                    case 0, 1, 2 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
+                    case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model);
+                    case 5, 6 -> new MultiBall(brick.getX(), brick.getY(), model);
+                    case 7, 8, 9 -> new PaddleWithGun(brick.getX(), brick.getY(), model);
+                    default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                 };
                 model.getPowerups().add(powerup);
             }

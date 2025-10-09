@@ -5,17 +5,17 @@ import game.model.GameModel;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
-import game.model.entity.Bullet; // Import Bullet
+import game.model.entity.Bullet;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
 import game.model.powerups.MultiBall;
 import game.model.powerups.PowerUp;
-import game.model.powerups.PaddleWithGun; // Import PaddleWithGun
+import game.model.powerups.PaddleWithGun;
 import game.view.UI.UILabel;
 import game.view.UI.UIManager;
 
 import java.awt.*;
-import java.util.List; // Thêm import này cho List
+import java.util.List;
 
 public class GameScreen extends Screen {
 
@@ -76,19 +76,17 @@ public class GameScreen extends Screen {
         g2.setColor(Color.WHITE);
         g2.fillRect(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight());
 
-        // --- BẮT ĐẦU: Vẽ súng trên paddle ---
+        // Vẽ súng trên paddle
         if (paddle.hasGuns()) {
-            g2.setColor(Color.DARK_GRAY); // Màu cho phần súng
-            int gunWidth = 5; // Chiều rộng của súng
-            int gunHeight = paddle.getHeight() / 2; // Chiều cao của súng
-            int gunY = paddle.getY() + paddle.getHeight() / 4; // Vị trí Y của súng (giữa paddle)
-
+            g2.setColor(Color.DARK_GRAY);
+            int gunWidth = 5; g
+            int gunHeight = paddle.getHeight() / 2;
+            int gunY = paddle.getY() + paddle.getHeight() / 4;
             // Súng bên trái
             g2.fillRect(paddle.getX() - gunWidth, gunY, gunWidth, gunHeight);
             // Súng bên phải
             g2.fillRect(paddle.getX() + paddle.getWidth(), gunY, gunWidth, gunHeight);
         }
-        // --- KẾT THÚC: Vẽ súng trên paddle ---
 
 
         // Vẽ balls
@@ -117,24 +115,22 @@ public class GameScreen extends Screen {
                     g2.setColor(Color.BLACK);
                     g2.drawString("M", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 }
-                // --- BẮT ĐẦU: Vẽ PaddleWithGun powerup ---
+                // Vẽ PaddleWithGun powerup
                 else if (powerup instanceof PaddleWithGun) {
-                    g2.setColor(Color.MAGENTA); // Màu cho PaddleWithGun
+                    g2.setColor(Color.MAGENTA);
                     g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g2.setColor(Color.WHITE); // Chữ màu trắng
+                    g2.setColor(Color.WHITE);
                     g2.drawString("G", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 }
-                // --- KẾT THÚC: Vẽ PaddleWithGun powerup ---
             }
         }
 
-        // --- BẮT ĐẦU: Vẽ Bullets ---
+        // Vẽ Bullets
         List<Bullet> bullets = model.getBullets();
-        g2.setColor(Color.YELLOW); // Màu cho đạn
+        g2.setColor(Color.YELLOW);
         for (Bullet bullet : bullets) {
             g2.fillRect(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
         }
-        // --- KẾT THÚC: Vẽ Bullets ---
 
 
         // Vẽ UI elements

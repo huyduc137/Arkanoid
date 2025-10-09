@@ -50,7 +50,7 @@ public class PaddleWithGun extends PowerUp {
         int paddleY = paddle.getY();
         int paddleWidth = paddle.getWidth();
 
-        // Tạo 2 viên đạn ở 2 đầu của paddle (vị trí có thể tinh chỉnh cho đẹp)
+        // Tạo 2 viên đạn ở 2 đầu của paddle
         int bullet1X = paddleX + 5;
         int bullet2X = paddleX + paddleWidth - Constants.BULLET_WIDTH - 5;
 

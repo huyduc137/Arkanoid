@@ -25,6 +25,6 @@ public class Constants {
     public static final int BULLET_SPEED = 400;
     public static final int BULLET_WIDTH = 5;
     public static final int BULLET_HEIGHT = 15;
-    public static final int POWERUP_WIDTH = 30;  // Hoặc kích thước bạn muốn
-    public static final int POWERUP_HEIGHT = 30; // Hoặc kích thước bạn muốn
+    public static final int POWERUP_WIDTH = 30;
+    public static final int POWERUP_HEIGHT = 30;
 }
