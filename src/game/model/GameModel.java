@@ -22,13 +22,14 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
+    private double countdownTimer;
 
     private List<Ball> balls;
     private Paddle paddle;
     private List<Brick> bricks;
     private List<PowerUp> powerups;
-    private int paddleExtension = 0;
 
+    public double getCountdownTimer() {return countdownTimer;}
     public Paddle getPaddle() {
         return paddle;
     }
@@ -52,14 +53,6 @@ public class GameModel {
         return powerups;
     }
 
-    public void addPaddleExtension(int amount) {
-        paddleExtension += amount;
-    }
-
-    public void removePaddleExtension(int amount) {
-        paddleExtension = Math.max(0, paddleExtension - amount);
-    }
-
     public void addBall(Ball ball) { balls.add(ball); }
 
     public GameModel() {
@@ -81,7 +74,6 @@ public class GameModel {
         bricks = new ArrayList<>();
 
         powerups = new ArrayList<>();
-        paddleExtension = 0;
 
         // Reset trạng thái game
         gameStateManager.reset();
@@ -91,6 +83,8 @@ public class GameModel {
 
         // Đặt ball lên paddle
         attachBallToPaddle(mainBall);
+
+        countdownTimer = Constants.COUNTDOWN_DURATION;
     }
 
     public void initBrick() {
@@ -99,7 +93,6 @@ public class GameModel {
 
     public void update(double dt) {
         paddle.move(dt);
-
         // THÊM: Nếu ball đang trên paddle, di chuyển ball cùng paddle
         if (gameStateManager.isBallOnPaddle()) {
             Ball mainBall = getBall();
@@ -123,8 +116,6 @@ public class GameModel {
             powerup.update(dt);
         }
 
-        paddle.setWidth(Constants.PADDLE_WIDTH + paddleExtension);
-
         balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
     }
 
@@ -138,7 +129,7 @@ public class GameModel {
 
     // THÊM: Phương thức phóng ball từ paddle
     public void launchBall() {
-        if (gameStateManager.isBallOnPaddle()) {
+        if (gameStateManager.isGameActive() && gameStateManager.isBallOnPaddle()) {
             gameStateManager.setBallOnPaddle(false);
             Ball mainBall = getBall();
             if (mainBall != null) {

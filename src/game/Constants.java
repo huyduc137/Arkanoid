@@ -21,4 +21,6 @@ public class Constants {
 
     public static final int TARGET_FPS = 60;
     public static final int GAME_DELAY = 1000 / TARGET_FPS;
+
+    public static final double COUNTDOWN_DURATION = 3.0;
 }

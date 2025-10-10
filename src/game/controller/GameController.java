@@ -9,7 +9,7 @@ import game.view.GameView;
 import java.awt.event.*;
 import javax.swing.Timer;
 
-public class GameController implements ActionListener, KeyListener, MouseMotionListener {
+public class GameController implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
     private final GameModel model;
     private final Timer timer;
     private long lastTime;
@@ -112,5 +112,35 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     @Override
     public void mouseDragged(MouseEvent e) {
         mouseMoved(e);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
+            if (model.getGameStateManager().isBallOnPaddle() && model.getGameStateManager().isGameActive()) {
+                System.out.println("mouse");
+                model.launchBall();
+            }
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

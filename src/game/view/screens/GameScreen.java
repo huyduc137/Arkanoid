@@ -101,7 +101,6 @@ public class GameScreen extends Screen {
                 }
             }
         }
-
         // Vẽ UI elements
         if (uiManager != null) {
             uiManager.render(g);
