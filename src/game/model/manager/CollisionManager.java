@@ -130,7 +130,7 @@ public class CollisionManager {
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
-            if (random.nextFloat() < 0.9) {
+            if (random.nextFloat() < 0.3) {
                 int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
                     case 0, 1, 2 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
