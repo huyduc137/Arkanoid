@@ -15,17 +15,17 @@ import java.awt.image.BufferedImage;
 
 public class GameView extends JFrame {
     private final GameModel model;
-    ScreenManager screenManager = new ScreenManager();
+    ScreenManager screenManager;
 
     public GameView(GameModel model, GameController controller) {
         this.model = model;
         this.addKeyListener(controller);
-
+        screenManager = new ScreenManager();
         //Khởi tạo screen trong screenManager r add vào JFrame
         initScreens();
         this.add(screenManager.getContainer());
         screenManager.getContainer().addMouseMotionListener(controller);
-
+        screenManager.getContainer().addMouseListener(controller);
         //Khởi tạo Panel bằng screenManager r mới pack()
         initViewGame();
 
@@ -52,6 +52,9 @@ public class GameView extends JFrame {
             case MENU -> {
                 screenManager.show(Screen.ScreenType.MENU);
                 showMouse();
+            }
+            case WAITING_FOR_START -> {
+
             }
             case PLAYING -> {
                 screenManager.show(Screen.ScreenType.GAME);

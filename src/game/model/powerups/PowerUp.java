@@ -27,7 +27,7 @@ public abstract class PowerUp extends GameObject {
 
         if (!isActive) {
             // Di chuyển xuống dưới
-            y += dy * dt;
+            this.y += dy * dt;
             // Kiểm tra va chạm với paddle
             if (getBounds().intersects(model.getPaddle().getBounds())) {
                 isActive = true;
