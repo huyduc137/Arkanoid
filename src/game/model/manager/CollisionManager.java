@@ -77,7 +77,7 @@ public class CollisionManager {
         while (brickIterator.hasNext()) {
             Brick brick = brickIterator.next();
             if (!brick.isDestroyed() && bullet.getBounds().intersects(brick.getBounds())) {
-                brick.setDestroyed(true);
+                brick.hit();
                 handleBrickHit(brick);
                 return true;
             }
@@ -101,7 +101,7 @@ public class CollisionManager {
         float wy = (brickHitbox.width / 2.0f) * dy;
         float hx = (brickHitbox.height / 2.0f) * dx;
 
-        if (!ball.isFireBall()) {
+        if (!ball.isFireBall() || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.UNBREAKABLE)) {
             if (Math.abs(wy) > Math.abs(hx)) {
                 if (dy > 0) {
                     ball.setY(brickHitbox.y + brickHitbox.height);
@@ -130,7 +130,7 @@ public class CollisionManager {
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
-            if (random.nextFloat() < 0.5) {
+            if (random.nextFloat() < 0.3) {
                 int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
                     case 0, 1, 2 -> new ExtendPaddle(brick.getX(), brick.getY(), model);

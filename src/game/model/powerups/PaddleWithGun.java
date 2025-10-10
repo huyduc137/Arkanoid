@@ -12,7 +12,7 @@ public class PaddleWithGun extends PowerUp {
 
     public PaddleWithGun(int x, int y, GameModel model) {
         // Giả sử powerup có kích thước chuẩn, hiệu lực trong 5 giây
-        super(x, y, Constants.POWERUP_WIDTH, Constants.POWERUP_HEIGHT, 5.0, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, model);
         this.timeSinceLastShot = 0;
     }
 
