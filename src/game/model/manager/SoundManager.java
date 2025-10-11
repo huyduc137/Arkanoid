@@ -14,24 +14,26 @@ import java.util.List;
 import java.util.Map;
 
 public class SoundManager {
-    private final Map<String, Sound> sounds = new HashMap<>();
+    private static final Map<String, Sound> sounds = new HashMap<>();
 
     //Hỗ trợ chơi một vài tiếng sử dụng nhiều lặp đi lặp lại cùng một lúc mà ko bị đứt đoạn
-    private final Map<String, List<Clip>> clipPool = new HashMap<>();
+    private static final Map<String, List<Clip>> clipPool = new HashMap<>();
 
-    private float masterVolume = 1f;
-    private float sfxVolume = 1f;
-    private float musicVolume = 1f;
-    private boolean muted = false;
+    private static float masterVolume = 1f;
+    private static float sfxVolume = 1f;
+    private static float musicVolume = 1f;
+    private static boolean muted = false;
 
-    public SoundManager() {
+    public SoundManager() {}
+
+    public static void loadAll() {
         load("background_test", "sounds/NiagaraFalls.wav", Sound.Type.MUSIC, 0.5f, 1);
         load("brick_destroy", "sounds/brick_destroy.wav", Sound.Type.SFX, 0.5f, 6);
         load("brick_hit", "sounds/brick_hit.wav", Sound.Type.SFX, 0.5f, 6);
     }
 
-    public void load(String id, String filePath, Sound.Type type, float baseVolume, int poolSize) {
-        try (InputStream is = getClass().getResourceAsStream("/" + filePath)) {
+    public static void load(String id, String filePath, Sound.Type type, float baseVolume, int poolSize) {
+        try (InputStream is = SoundManager.class.getResourceAsStream("/" + filePath)) {
             if (is == null) {
                 System.err.println("Sound not found: " + filePath);
                 return;
@@ -50,7 +52,7 @@ public class SoundManager {
                 List<Clip> pool = new ArrayList<>();
 
                 for (int i = 0; i < poolSize; i++) {
-                    try (InputStream pis = getClass().getResourceAsStream("/" + filePath)) {
+                    try (InputStream pis = SoundManager.class.getResourceAsStream("/" + filePath)) {
                         if (pis == null) {
                             System.err.println("Sound not found creating pool: " + filePath);
                             continue;
@@ -72,7 +74,7 @@ public class SoundManager {
         }
     }
 
-    public void play(String id) {
+    public static void play(String id) {
         Sound sound = sounds.get(id);
         if (sound == null || muted) return;
 
@@ -123,7 +125,7 @@ public class SoundManager {
         musicVolume = music;
     }
 
-    private Clip getAvailableClip(String id) {
+    private static Clip getAvailableClip(String id) {
         List<Clip> pool = clipPool.get(id);
         if (pool == null) return null;
 

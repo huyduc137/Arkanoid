@@ -4,7 +4,7 @@ import game.Constants;
 import game.controller.GameController;
 import game.model.GameModel;
 import game.model.manager.GraphicsManager;
-import game.view.UI.UIManager;
+import game.model.manager.SoundManager;
 import game.view.screens.GameScreen;
 import game.view.screens.MenuScreen;
 import game.view.screens.Screen;
@@ -32,6 +32,9 @@ public class GameView extends JFrame {
 
         //Load đồ hoạ game
         GraphicsManager.loadAll();
+        SoundManager.loadAll();
+
+        SoundManager.play("background_test");
 
         //Nối vào controller (game loop)
         controller.setViewGame(this);
