@@ -47,13 +47,14 @@ public class Brick extends GameObject {
             SoundManager.play("brick_hit");
 
             if (hitPoints == 0) {
-                destroyed = true;
+                setDestroyed(true);
             }
         }
     }
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         if (brickType == BrickType.UNBREAKABLE) {
             sprite = GraphicsManager.getSprite("brick_unbreakable");
         } else {

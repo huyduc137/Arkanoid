@@ -58,6 +58,7 @@ public class Ball extends MovableObject {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         sprite = GraphicsManager.getSprite("ball");
         if (sprite != null) {
             g.drawImage(sprite, x, y, width, height, null);

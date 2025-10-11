@@ -26,6 +26,6 @@ public class Constants {
     public static final int BULLET_WIDTH = 5;
     public static final int BULLET_HEIGHT = 15;
 
-    public static final int BUTTON_WIDTH = 170;
-    public static final int BUTTON_HEIGHT = 66;
+    public static final int BUTTON_WIDTH = 154;
+    public static final int BUTTON_HEIGHT = 54;
 }

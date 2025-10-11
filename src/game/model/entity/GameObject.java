@@ -52,5 +52,12 @@ public abstract class GameObject {
         return new Rectangle(x, y, width, height);
     }
 
-    public abstract void draw(Graphics g);
+    public void draw(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Enable smooth rendering
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    };
 }
