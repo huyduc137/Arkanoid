@@ -9,7 +9,7 @@ public class Constants {
     public static final int PADDLE_Y_OFFSET = 40;
     public static final double PADDLE_SPEED = 780.0;
 
-    public static final int BALL_DIAMETER = 20;
+    public static final int BALL_DIAMETER = 32;
     public static final double BALL_SPEED = 400.0;
 
     public static final int BRICK_WIDTH = 64;
@@ -25,6 +25,7 @@ public class Constants {
     public static final int BULLET_SPEED = 400;
     public static final int BULLET_WIDTH = 5;
     public static final int BULLET_HEIGHT = 15;
-    public static final int POWERUP_WIDTH = 30;
-    public static final int POWERUP_HEIGHT = 30;
+
+    public static final int BUTTON_WIDTH = 170;
+    public static final int BUTTON_HEIGHT = 66;
 }

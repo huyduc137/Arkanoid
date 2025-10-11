@@ -3,6 +3,7 @@ package game.view;
 import game.Constants;
 import game.controller.GameController;
 import game.model.GameModel;
+import game.model.manager.GraphicsManager;
 import game.view.UI.UIManager;
 import game.view.screens.GameScreen;
 import game.view.screens.MenuScreen;
@@ -28,6 +29,9 @@ public class GameView extends JFrame {
         screenManager.getContainer().addMouseListener(controller);
         //Khởi tạo Panel bằng screenManager r mới pack()
         initViewGame();
+
+        //Load đồ hoạ game
+        GraphicsManager.loadAll();
 
         //Nối vào controller (game loop)
         controller.setViewGame(this);

@@ -6,6 +6,7 @@ import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.entity.Bullet;
+import game.model.manager.GraphicsManager;
 import game.model.powerups.ExtendPaddle;
 import game.model.powerups.FireBall;
 import game.model.powerups.MultiBall;
@@ -54,27 +55,12 @@ public class GameScreen extends Screen {
 
         //Vẽ bricks
         for (Brick brick : model.getBricks()) {
-            if (!brick.isDestroyed()) {
-                switch (brick.getBrickType()) {
-                    case NORMAL -> {
-                        switch (brick.getHitPoints()) {
-                            case 1 -> g2.setColor(Color.RED);
-                            case 2 -> g2.setColor(Color.ORANGE);
-                            case 3 -> g2.setColor(Color.CYAN);
-                        }
-                    }
-                    case UNBREAKABLE -> g2.setColor(Color.GRAY);
-                }
-                g2.fillRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
-                g2.setColor(Color.BLACK);
-                g2.drawRect(brick.getX(), brick.getY(), brick.getWidth(), brick.getHeight());
-            }
+            brick.draw(g2);
         }
 
         // Vẽ paddle
         Paddle paddle = model.getPaddle();
-        g2.setColor(Color.WHITE);
-        g2.fillRect(paddle.getX(), paddle.getY(), paddle.getWidth(), paddle.getHeight());
+        paddle.draw(g2);
 
         // Vẽ súng trên paddle
         if (paddle.hasGuns()) {
@@ -91,8 +77,7 @@ public class GameScreen extends Screen {
 
         // Vẽ balls
         for (Ball ball : model.getBalls()) {
-            g2.setColor(ball.isFireBall() ? Color.RED : Color.YELLOW);
-            g2.fillOval(ball.getX(), ball.getY(), ball.getWidth(), ball.getHeight());
+            ball.draw(g);
         }
 
         // Vẽ powerups
