@@ -19,7 +19,7 @@ public class UIManager {
 
     public void render(Graphics g) {
         for (UIElement e : elements) {
-            e.render(g);
+            e.draw(g);
         }
     }
 

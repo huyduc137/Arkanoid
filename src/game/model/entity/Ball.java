@@ -1,6 +1,10 @@
 package game.model.entity;
 
 import game.Constants;
+import game.model.manager.GraphicsManager;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Ball extends MovableObject {
     private boolean isFireBall;
@@ -36,6 +40,8 @@ public class Ball extends MovableObject {
 //        System.out.println(this.dx);
     }
 
+
+
     public void resetBall(){
         this.x = Constants.SCREEN_WIDTH / 2 - width / 2;
         this.y = Constants.SCREEN_HEIGHT / 2 - height / 2;
@@ -48,5 +54,16 @@ public class Ball extends MovableObject {
     }
     public void setFireBall(boolean fireBall) {
         isFireBall = fireBall;
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        sprite = GraphicsManager.getSprite("ball");
+        if (sprite != null) {
+            g.drawImage(sprite, x, y, width, height, null);
+        } else {
+            g.setColor(isFireBall ? Color.RED : Color.WHITE);
+            g.fillOval(x, y, width, height);
+        }
     }
 }

@@ -7,6 +7,9 @@ import game.view.UI.UIButton;
 
 import java.awt.*;
 
+import static game.Constants.BUTTON_HEIGHT;
+import static game.Constants.BUTTON_WIDTH;
+
 public class MenuScreen extends Screen {
     private final GameModel model;
 
@@ -19,12 +22,13 @@ public class MenuScreen extends Screen {
 
     @Override
     public void initUI() {
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2, Constants.SCREEN_HEIGHT / 2, 120, 40, "Start",
-                new Font("Arial", Font.PLAIN, 20),
-                () -> {
-                    model.initGame();
-                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
-                }) //action chạy khi click vào nút
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2,
+                BUTTON_WIDTH, BUTTON_HEIGHT,
+                "button_play",
+                    () -> {
+                        model.initGame();
+                        model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                    }) //action chạy khi click vào nút
         );
     }
 }

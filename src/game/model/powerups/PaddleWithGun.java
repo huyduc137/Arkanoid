@@ -5,6 +5,8 @@ import game.model.GameModel;
 import game.model.entity.Bullet;
 import game.model.entity.Paddle;
 
+import java.awt.*;
+
 public class PaddleWithGun extends PowerUp {
 
     private final double SHOOT_COOLDOWN = 0.4; // Giãn cách mỗi lần bắn là 0.4 giây
@@ -60,5 +62,10 @@ public class PaddleWithGun extends PowerUp {
         // Thêm đạn vào GameModel để được xử lý
         model.addBullet(bullet1);
         model.addBullet(bullet2);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
     }
 }

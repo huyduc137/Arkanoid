@@ -3,6 +3,8 @@ package game.model.powerups;
 import game.model.GameModel;
 import game.model.entity.Ball;
 import game.Constants;
+
+import java.awt.*;
 import java.util.List;
 
 public class MultiBall extends PowerUp {
@@ -40,4 +42,9 @@ public class MultiBall extends PowerUp {
     }
         @Override
     public void remove() { }
+
+    @Override
+    public void draw(Graphics g) {
+
+    }
 }

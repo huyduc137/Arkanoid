@@ -3,6 +3,8 @@ package game.model.powerups;
 import game.Constants;
 import game.model.GameModel;
 
+import java.awt.*;
+
 public class ExtendPaddle extends PowerUp {
     private final int EXTENSION_AMOUNT = Constants.PADDLE_WIDTH / 2; // Thêm 50% chiều rộng ban đầu
     private GameModel model;
@@ -27,5 +29,10 @@ public class ExtendPaddle extends PowerUp {
     }
     public void removePaddleExtension(int amount) {
         this.model.getPaddle().setWidth(this.model.getPaddle().getWidth() - amount);
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
     }
 }

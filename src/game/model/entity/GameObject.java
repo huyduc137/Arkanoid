@@ -1,12 +1,14 @@
 package game.model.entity;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject {
     protected int x;
     protected int y;
     protected int width;
     protected int height;
+    protected BufferedImage sprite;
     public GameObject(int x, int y, int width, int height){
         this.x = x;
         this.y = y;
@@ -49,4 +51,6 @@ public abstract class GameObject {
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
+
+    public abstract void draw(Graphics g);
 }

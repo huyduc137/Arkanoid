@@ -1,9 +1,11 @@
 package game.view.UI;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class UIElement {
     protected int x, y, width, height;
+    protected BufferedImage sprite;
 
     public UIElement(int x, int y, int width, int height) {
         this.x = x;
@@ -12,7 +14,7 @@ public abstract class UIElement {
         this.height = height;
     }
 
-    public abstract void render(Graphics g);
+    public abstract void draw(Graphics g);
 
     public abstract void onClick();
 

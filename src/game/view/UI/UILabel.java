@@ -18,7 +18,7 @@ public class UILabel extends UIElement {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void draw(Graphics g) {
         g.setFont(font);
         g.setColor(color);
         g.drawString(textSupplier.get(), x, y);

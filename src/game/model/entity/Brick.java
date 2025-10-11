@@ -1,5 +1,9 @@
 package game.model.entity;
 
+import game.model.manager.GraphicsManager;
+
+import java.awt.*;
+
 public class Brick extends GameObject {
     public enum BrickType {
         NORMAL,
@@ -40,6 +44,23 @@ public class Brick extends GameObject {
             hitPoints--;
             if (hitPoints == 0) {
                 destroyed = true;
+            }
+        }
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        if (brickType == BrickType.UNBREAKABLE) {
+            sprite = GraphicsManager.getSprite("brick_unbreakable");
+        } else {
+            sprite = GraphicsManager.getSprite("brick_" + hitPoints);
+        }
+
+        if (!isDestroyed()) {
+            if(sprite != null) {
+                g.drawImage(sprite, x, y, width, height, null);
+            } else {
+                System.err.println("No brick_" + hitPoints + " image");
             }
         }
     }
