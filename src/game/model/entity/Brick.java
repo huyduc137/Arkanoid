@@ -1,6 +1,7 @@
 package game.model.entity;
 
 import game.model.manager.GraphicsManager;
+import game.model.manager.SoundManager;
 
 import java.awt.*;
 
@@ -30,6 +31,7 @@ public class Brick extends GameObject {
     }
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
+        SoundManager.play("brick_destroy");
     }
     public BrickType getBrickType() {
         return brickType;
@@ -42,6 +44,8 @@ public class Brick extends GameObject {
     public void hit() {
         if (hitPoints > 0) {
             hitPoints--;
+            SoundManager.play("brick_hit");
+
             if (hitPoints == 0) {
                 destroyed = true;
             }

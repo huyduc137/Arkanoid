@@ -4,27 +4,21 @@ import game.Constants;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
-import game.model.manager.*;
 import game.model.entity.Bullet;
 import game.model.manager.CollisionManager;
 import game.model.manager.ScoreSystem;
 import game.model.manager.TileManager;
 import game.model.manager.GameStateManager;
-import game.model.powerups.ExtendPaddle;
-import game.model.powerups.FireBall;
 import game.model.powerups.PowerUp;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class GameModel {
     private final TileManager tileManager = new TileManager();
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
-    private final SoundManager soundManager = new SoundManager();
 
     private List<Ball> balls;
     private Paddle paddle;
@@ -38,7 +32,7 @@ public class GameModel {
     }
 
     public List<Ball> getBalls() { return balls; }
-    public Ball getBall() { return balls.isEmpty() ? null : balls.get(0); } // Bóng chính
+    public Ball getBall() { return balls.isEmpty() ? null : balls.getFirst(); } // Bóng chính
 
     public List<Brick> getBricks() {
         return bricks;
@@ -50,10 +44,6 @@ public class GameModel {
 
     public GameStateManager getGameStateManager () {
         return gameStateManager;
-    }
-
-    public SoundManager getSoundManager() {
-        return soundManager;
     }
 
     public List<PowerUp> getPowerups() {
@@ -69,21 +59,10 @@ public class GameModel {
         bullets.add(bullet);
     }
 
-    public void addPaddleExtension(int amount) {
-        paddleExtension += amount;
-    }
-
-    public void removePaddleExtension(int amount) {
-        paddleExtension = Math.max(0, paddleExtension - amount);
-    }
-
     public void addBall(Ball ball) { balls.add(ball); }
 
     public GameModel() {
         initGame();
-
-        //Test bg sound
-        soundManager.play("background_test");
     }
 
     public void initGame() {
@@ -140,7 +119,6 @@ public class GameModel {
         }
         // Xóa đạn đã bay ra khỏi màn hình
         bullets.removeIf(bullet -> bullet.getY() < 0);
-
 
         collisionManager.checkCollisions();
 

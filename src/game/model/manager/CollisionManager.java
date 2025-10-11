@@ -35,13 +35,7 @@ public class CollisionManager {
             handleBallBrickCollisions(ball, bricks);
         }
 
-        Iterator<Bullet> bulletIterator = bullets.iterator();
-        while (bulletIterator.hasNext()) {
-            Bullet bullet = bulletIterator.next();
-            if (handleBulletBrickCollisions(bullet, bricks)) {
-                bulletIterator.remove();
-            }
-        }
+        bullets.removeIf(bullet -> handleBulletBrickCollisions(bullet, bricks));
     }
 
     private void handlePaddleCollision(Ball ball, Paddle paddle) {
@@ -61,9 +55,7 @@ public class CollisionManager {
     }
 
     private void handleBallBrickCollisions(Ball ball, List<Brick> bricks) {
-        Iterator<Brick> brickIterator = bricks.iterator();
-        while (brickIterator.hasNext()) {
-            Brick brick = brickIterator.next();
+        for (Brick brick : bricks) {
             if (!brick.isDestroyed() && ball.getBounds().intersects(brick.getBounds())) {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
@@ -73,9 +65,7 @@ public class CollisionManager {
     }
 
     private boolean handleBulletBrickCollisions(Bullet bullet, List<Brick> bricks) {
-        Iterator<Brick> brickIterator = bricks.iterator();
-        while (brickIterator.hasNext()) {
-            Brick brick = brickIterator.next();
+        for (Brick brick : bricks) {
             if (!brick.isDestroyed() && bullet.getBounds().intersects(brick.getBounds())) {
                 brick.hit();
                 handleBrickHit(brick);
@@ -118,7 +108,6 @@ public class CollisionManager {
                 ball.reverseDx();
             }
             brick.hit();
-            model.getSoundManager().play("brick_hit");
         } else {
             brick.setDestroyed(true);
         }
@@ -126,7 +115,6 @@ public class CollisionManager {
 
     private void handleBrickHit(Brick brick) {
         if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
-            model.getSoundManager().play("brick_destroy");
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
