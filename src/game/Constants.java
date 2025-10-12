@@ -4,10 +4,12 @@ public class Constants {
     public static final int SCREEN_WIDTH = 1024;
     public static final int SCREEN_HEIGHT = 768;
 
-    public static final int PADDLE_WIDTH = 150;
-    public static final int PADDLE_HEIGHT = 20;
+    public static final int PADDLE_WIDTH = 205;
+    public static final int PADDLE_HEIGHT = 28;
     public static final int PADDLE_Y_OFFSET = 40;
     public static final double PADDLE_SPEED = 780.0;
+    public static final int EXTENSION_AMOUNT = 75;
+    public static final int MAX_PADDLE_WIDTH = 280;
 
     public static final int BALL_DIAMETER = 32;
     public static final double BALL_SPEED = 400.0;

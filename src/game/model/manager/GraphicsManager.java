@@ -23,6 +23,8 @@ public class GraphicsManager {
         loadSprite("button_play", "sprites/buttons/play.png");
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
+        loadSprite("paddle2", "sprites/paddle/paddle2.png");
+        //loadSprite("paddle3", "sprites/paddle/paddle3.png");
     }
 
     public static void loadSprite(String id, String path) {
