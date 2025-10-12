@@ -52,7 +52,7 @@ public class TileManager {
                             }
                         }
 
-                        bricks.add(new Brick(x + 32, y, brickWidth, brickHeight, hp, brickType));
+                        bricks.add(new Brick(x + Constants.EXTRA_DISTANCE, y, brickWidth, brickHeight, hp, brickType));
                     }
                 }
                 row++;

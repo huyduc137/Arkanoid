@@ -106,6 +106,7 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     @Override
     public void mouseMoved(MouseEvent e) {
         Paddle paddle = model.getPaddle();
+        if (e.getX() <= 15 + (Constants.PADDLE_WIDTH / 2) || e.getX() >= Constants.SCREEN_WIDTH - 15 - (Constants.PADDLE_WIDTH/2)) return;
         int newX = e.getX() - paddle.getWidth() / 2;     // lấy vị trí chính giữa của paddle theo trục x;
         paddle.setX(newX);
     }

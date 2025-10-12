@@ -3,6 +3,7 @@ package game;
 public class Constants {
     public static final int SCREEN_WIDTH = 1024;
     public static final int SCREEN_HEIGHT = 768;
+    public static final int EXTRA_DISTANCE = 32;
 
     public static final int PADDLE_WIDTH = 205;
     public static final int PADDLE_HEIGHT = 28;

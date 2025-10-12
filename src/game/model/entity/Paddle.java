@@ -39,11 +39,11 @@ public class Paddle extends MovableObject {
     @Override
     public void move(double dt) {
         super.move(dt);
-        if (this.x <= 32){
-            this.x = 32;
+        if (this.x <= Constants.EXTRA_DISTANCE){
+            this.x = Constants.EXTRA_DISTANCE;
         }
-        if (this.x + width >= Constants.SCREEN_WIDTH - 32){
-            this.x =  Constants.SCREEN_WIDTH - width - 32;
+        if (this.x + width >= Constants.SCREEN_WIDTH - Constants.EXTRA_DISTANCE){
+            this.x =  Constants.SCREEN_WIDTH - width - Constants.EXTRA_DISTANCE;
         }
     }
 

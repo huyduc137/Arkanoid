@@ -25,16 +25,16 @@ public class Ball extends MovableObject {
     public void move(double dt){
         super.move(dt);
         // check va chạm tường trái, phai
-        if (this.x <= 32){
-            this.x = 32;
+        if (this.x <= Constants.EXTRA_DISTANCE){
+            this.x = Constants.EXTRA_DISTANCE;
             if (this.dx < 0) this.reverseDx();
         }
-        else if (this.x + this.width >= Constants.SCREEN_WIDTH - 32){
-            this.x = Constants.SCREEN_WIDTH - this.width-32;
+        else if (this.x + this.width >= Constants.SCREEN_WIDTH - Constants.EXTRA_DISTANCE){
+            this.x = Constants.SCREEN_WIDTH - this.width - Constants.EXTRA_DISTANCE;
             if (this.dx > 0) reverseDx();
         }
-        if (this.y <= 32) {
-            this.y = 32;
+        if (this.y <= Constants.EXTRA_DISTANCE) {
+            this.y = Constants.EXTRA_DISTANCE;
             if(this.dy < 0) reverseDy();
         }
 //        System.out.println(this.dx);
