@@ -44,7 +44,11 @@ public class Brick extends GameObject {
     public void hit() {
         if (hitPoints > 0) {
             hitPoints--;
-            SoundManager.play("brick_hit");
+            if(brickType == BrickType.UNBREAKABLE) {
+                SoundManager.play("brick_hit_unbreakable");
+            } else {
+                SoundManager.play("brick_hit");
+            }
 
             if (hitPoints == 0) {
                 setDestroyed(true);

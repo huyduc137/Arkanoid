@@ -1,6 +1,7 @@
 package game.view.UI;
 
 import game.model.manager.GraphicsManager;
+import game.model.manager.SoundManager;
 
 import java.awt.*;
 
@@ -32,6 +33,9 @@ public class UIButton extends UIElement {
 
     @Override
     public void onClick() {
-        if (action != null) action.run();
+        if (action != null) {
+            SoundManager.play("button_click");
+            action.run();
+        }
     }
 }

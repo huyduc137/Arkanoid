@@ -6,8 +6,9 @@ import game.model.entity.Paddle;
 import game.model.manager.GameStateManager;
 import game.view.GameView;
 
+import java.awt.*;
 import java.awt.event.*;
-import javax.swing.Timer;
+import javax.swing.*;
 
 public class GameController implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
     private final GameModel model;

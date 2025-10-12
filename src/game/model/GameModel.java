@@ -84,7 +84,6 @@ public class GameModel {
         paddleExtension = 0;
 
         // Reset trạng thái game
-        gameStateManager.reset();
         scoreSystem.reset();
 
         initBrick();

@@ -28,8 +28,11 @@ public class SoundManager {
 
     public static void loadAll() {
         load("background_test", "sounds/NiagaraFalls.wav", Sound.Type.MUSIC, 0.5f, 1);
-        load("brick_destroy", "sounds/brick_destroy.wav", Sound.Type.SFX, 0.5f, 6);
+        load("brick_destroy", "sounds/brick_destroy.wav", Sound.Type.SFX, 0.5f, 10);
         load("brick_hit", "sounds/brick_hit.wav", Sound.Type.SFX, 0.5f, 6);
+        load("brick_hit_unbreakable", "sounds/brick_hit_unbreakable.wav", Sound.Type.SFX, 0.5f, 6);
+
+        load("button_click", "sounds/button_click.wav", Sound.Type.SFX, 0.5f, 1);
     }
 
     public static void load(String id, String filePath, Sound.Type type, float baseVolume, int poolSize) {
@@ -82,7 +85,10 @@ public class SoundManager {
 
         if (sound.getType() == Sound.Type.SFX) {
             clip = getAvailableClip(id);
-            if (clip == null) return;
+            if (clip == null) {
+                // fallback to the base clip if no pool
+                clip = sound.getClip();
+            }
         } else {
             clip = sound.getClip();
         }
