@@ -25,7 +25,6 @@ public class GameModel {
     private List<Brick> bricks;
     private List<PowerUp> powerups;
     private List<Bullet> bullets;
-    private int paddleExtension = 0;
 
     public Paddle getPaddle() {
         return paddle;
@@ -81,7 +80,6 @@ public class GameModel {
         bullets = new ArrayList<>();
 
         powerups = new ArrayList<>();
-        paddleExtension = 0;
 
         // Reset trạng thái game
         gameStateManager.reset();
@@ -129,8 +127,6 @@ public class GameModel {
         for (PowerUp powerup : powerups) {
             powerup.update(dt);
         }
-
-        paddle.setWidth(Constants.PADDLE_WIDTH + paddleExtension);
 
         balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
     }

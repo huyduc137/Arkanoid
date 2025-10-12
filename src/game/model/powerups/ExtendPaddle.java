@@ -6,7 +6,6 @@ import game.model.GameModel;
 import java.awt.*;
 
 public class ExtendPaddle extends PowerUp {
-    private final int EXTENSION_AMOUNT = Constants.PADDLE_WIDTH / 2; // Thêm 50% chiều rộng ban đầu
     private GameModel model;
 
     public ExtendPaddle(int x, int y, GameModel model) {
@@ -16,19 +15,25 @@ public class ExtendPaddle extends PowerUp {
 
     @Override
     public void apply() {
-        addPaddleExtension(EXTENSION_AMOUNT);
-    }
+        if (model != null && model.getPaddle() != null) {
+            int currentWidth = model.getPaddle().getWidth();
+            int newWidth = currentWidth + Constants.EXTENSION_AMOUNT;
 
+            if (newWidth <= Constants.MAX_PADDLE_WIDTH) {
+                model.getPaddle().setWidth(newWidth);
+            } else {
+                shouldRemove = true; // Xóa power-up ngay lập tức
+            }
+        }
+    }
     @Override
     public void remove() {
-        removePaddleExtension(EXTENSION_AMOUNT);
-    }
-
-    public void addPaddleExtension(int amount) {
-        this.model.getPaddle().setWidth(this.model.getPaddle().getWidth() + amount);
-    }
-    public void removePaddleExtension(int amount) {
-        this.model.getPaddle().setWidth(this.model.getPaddle().getWidth() - amount);
+        if (model != null && model.getPaddle() != null) {
+            int currentWidth = model.getPaddle().getWidth();
+            int newWidth = currentWidth - Constants.EXTENSION_AMOUNT;
+            model.getPaddle().setWidth(Math.max(Constants.PADDLE_WIDTH, newWidth)); // Đảm bảo không nhỏ hơn chiều rộng ban đầu
+            shouldRemove = true;
+        }
     }
 
     @Override

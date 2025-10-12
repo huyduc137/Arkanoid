@@ -121,7 +121,6 @@ public class CollisionManager {
             if (random.nextFloat() < 0.3) {
                 int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
-                    case 0, 1, 2 -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                     case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model);
                     case 5, 6 -> new MultiBall(brick.getX(), brick.getY(), model);
                     case 7, 8, 9 -> new PaddleWithGun(brick.getX(), brick.getY(), model);
