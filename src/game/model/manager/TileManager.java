@@ -38,7 +38,6 @@ public class TileManager {
                     if(type > 0) {
                         int x = col * brickWidth;
                         int y = row * brickHeight;
-
                         Brick.BrickType brickType;
                         int hp;
 
@@ -53,7 +52,7 @@ public class TileManager {
                             }
                         }
 
-                        bricks.add(new Brick(x, y, brickWidth, brickHeight, hp, brickType));
+                        bricks.add(new Brick(x + 32, y, brickWidth, brickHeight, hp, brickType));
                     }
                 }
                 row++;

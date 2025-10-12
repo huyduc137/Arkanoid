@@ -26,7 +26,7 @@ public class GameScreen extends Screen {
         super(ScreenType.GAME);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/test2.png");
+        loadBackground("bg/BackgroundPlay.png");
     }
 
     @Override
