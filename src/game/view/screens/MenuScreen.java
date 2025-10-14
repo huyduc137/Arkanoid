@@ -17,7 +17,7 @@ public class MenuScreen extends Screen {
         super(ScreenType.MENU);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/test.jpg");
+        loadBackground("bg/Menu.png");
     }
 
     @Override

@@ -118,7 +118,7 @@ public class CollisionManager {
             model.getScoreSystem().addScore(brick.getScore() * 100);
             System.out.println("Score: " + model.getScoreSystem().getScore());
 
-            if (random.nextFloat() < 0.3) {
+            if (random.nextFloat() < 0.9) {
                 int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
                     case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model);
@@ -126,7 +126,7 @@ public class CollisionManager {
                     case 7, 8, 9 -> new PaddleWithGun(brick.getX(), brick.getY(), model);
                     default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                 };
-                model.getPowerups().add(powerup);
+                model.getPowerups().add(new FireBall(brick.getX(), brick.getY(), model));
             }
         }
     }

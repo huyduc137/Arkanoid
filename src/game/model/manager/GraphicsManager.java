@@ -14,6 +14,7 @@ public class GraphicsManager {
 
     public static void loadAll() {
         loadSprite("ball", "sprites/ball/ball.png");
+        loadSprite("fireBall", "sprites/ball/fireBall.png");
 
         loadSprite("brick_1", "sprites/bricks/brick_1.png");
         loadSprite("brick_2", "sprites/bricks/brick_2.png");
@@ -21,10 +22,14 @@ public class GraphicsManager {
         loadSprite("brick_unbreakable", "sprites/bricks/brick_unbreakable.png");
 
         loadSprite("button_play", "sprites/buttons/play.png");
+        loadSprite("button_replay", "sprites/buttons/replay.png");
+        loadSprite("button_home", "sprites/buttons/home.png");
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
         loadSprite("paddle2", "sprites/paddle/paddle2.png");
         //loadSprite("paddle3", "sprites/paddle/paddle3.png");
+
+        loadSprite("fireball", "sprites/powerup/fireball.png");
     }
 
     public static void loadSprite(String id, String path) {

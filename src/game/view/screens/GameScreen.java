@@ -89,10 +89,7 @@ public class GameScreen extends Screen {
                     g2.setColor(Color.BLACK);
                     g2.drawString("E", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
                 } else if (powerup instanceof FireBall) {
-                    g2.setColor(Color.RED);
-                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g2.setColor(Color.BLACK);
-                    g2.drawString("F", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
+                    powerup.draw(g);
                 }
                 else if (powerup instanceof MultiBall) {
                     g2.setColor(Color.ORANGE);

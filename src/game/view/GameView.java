@@ -5,10 +5,7 @@ import game.controller.GameController;
 import game.model.GameModel;
 import game.model.manager.GraphicsManager;
 import game.model.manager.SoundManager;
-import game.view.screens.GameScreen;
-import game.view.screens.MenuScreen;
-import game.view.screens.Screen;
-import game.view.screens.ScreenManager;
+import game.view.screens.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +48,9 @@ public class GameView extends JFrame {
 
         MenuScreen menuScreen = new MenuScreen(model);
         screenManager.addScreen(menuScreen);
+
+        OverScreen overScreen = new OverScreen(model);
+        screenManager.addScreen(overScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -68,7 +68,10 @@ public class GameView extends JFrame {
                 hideMouse();
             }
             case PAUSED -> screenManager.show(Screen.ScreenType.PAUSE);
-            case GAME_OVER -> screenManager.show(Screen.ScreenType.GAME_OVER);
+            case GAME_OVER -> {
+                screenManager.show(Screen.ScreenType.GAME_OVER);
+                showMouse();
+            }
             case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
         }
     }
