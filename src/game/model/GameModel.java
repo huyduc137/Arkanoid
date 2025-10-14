@@ -132,6 +132,8 @@ public class GameModel {
 
     // THÊM: Phương thức gắn ball lên paddle
     private void attachBallToPaddle(Ball ball) {
+        gameStateManager.setBallOnPaddle(true);
+
         ball.setX(paddle.getX() + paddle.getWidth() / 2 - ball.getWidth() / 2);
         ball.setY(paddle.getY() - ball.getHeight());
         ball.setDx(0);
