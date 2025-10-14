@@ -4,6 +4,8 @@ import game.Constants;
 import game.model.GameModel;
 import game.model.entity.GameObject;
 
+import java.awt.*;
+
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại
     protected double timeLeft; //thời gian còn lại
