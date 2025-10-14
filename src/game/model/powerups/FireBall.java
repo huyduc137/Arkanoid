@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class FireBall extends PowerUp {
     public FireBall(int x, int y, GameModel model) {
-        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, PowerUpType.FIREBALL, model);
     }
 
     @Override

@@ -5,10 +5,7 @@ import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.entity.Bullet;
-import game.model.manager.CollisionManager;
-import game.model.manager.ScoreSystem;
-import game.model.manager.TileManager;
-import game.model.manager.GameStateManager;
+import game.model.manager.*;
 import game.model.powerups.PowerUp;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +16,11 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
+    private final PowerUpManager powerUpManager = new PowerUpManager(this);
 
     private List<Ball> balls;
     private Paddle paddle;
     private List<Brick> bricks;
-    private List<PowerUp> powerups;
     private List<Bullet> bullets;
 
     public Paddle getPaddle() {
@@ -45,10 +42,14 @@ public class GameModel {
         return gameStateManager;
     }
 
-    public List<PowerUp> getPowerups() {
-        return powerups;
+    public PowerUpManager getPowerUpManager() {
+        return powerUpManager;
     }
 
+    public List<PowerUp> getPowerups() {
+        // Trả về danh sách power-up đang rơi từ Manager
+        return powerUpManager.getFallingPowerUps();
+    }
     // THÊM CÁC PHƯƠNG THỨC QUẢN LÝ ĐẠN
     public List<Bullet> getBullets() {
         return bullets;
@@ -78,8 +79,6 @@ public class GameModel {
 
         bricks = new ArrayList<>();
         bullets = new ArrayList<>();
-
-        powerups = new ArrayList<>();
 
         // Reset trạng thái game
         scoreSystem.reset();
@@ -122,10 +121,7 @@ public class GameModel {
         // THÊM: Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
 
-        powerups.removeIf(powerup -> powerup.getIsExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
-        for (PowerUp powerup : powerups) {
-            powerup.update(dt);
-        }
+        powerUpManager.update(dt);
 
         balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
     }

@@ -14,7 +14,7 @@ public class PaddleWithGun extends PowerUp {
 
     public PaddleWithGun(int x, int y, GameModel model) {
         // Giả sử powerup có kích thước chuẩn, hiệu lực trong 5 giây
-        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, PowerUpType.PADDLE_WITH_GUN, model);
         this.timeSinceLastShot = 0;
     }
 
@@ -47,6 +47,7 @@ public class PaddleWithGun extends PowerUp {
     }
 
     private void shoot() {
+        System.out.println("ban");
         Paddle paddle = model.getPaddle();
         int paddleX = paddle.getX();
         int paddleY = paddle.getY();
