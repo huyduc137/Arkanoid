@@ -51,6 +51,12 @@ public class GameView extends JFrame {
 
         OverScreen overScreen = new OverScreen(model);
         screenManager.addScreen(overScreen);
+
+        WinnerScreen winnerScreen = new WinnerScreen(model);
+        screenManager.addScreen(winnerScreen);
+
+        HightScoreScreen hightScoreScreen = new HightScoreScreen(model);
+        screenManager.addScreen(hightScoreScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -72,7 +78,14 @@ public class GameView extends JFrame {
                 screenManager.show(Screen.ScreenType.GAME_OVER);
                 showMouse();
             }
-            case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
+            case GAME_WINNER -> {
+                screenManager.show(Screen.ScreenType.GAME_WINNER);
+                showMouse();
+            }
+            case HIGH_SCORE -> {
+                screenManager.show(Screen.ScreenType.HIGH_SCORE);
+                showMouse();
+            }
         }
     }
 

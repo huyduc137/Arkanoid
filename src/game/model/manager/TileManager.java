@@ -1,6 +1,7 @@
 package game.model.manager;
 
 import game.Constants;
+import game.model.GameModel;
 import game.model.entity.Brick;
 
 import java.io.BufferedReader;
@@ -14,7 +15,9 @@ import java.util.List;
 //1,2,3 = normal (HP = number)
 //9 = unbreakable
 public class TileManager {
+    private int countBrick = 0;
     public List<Brick> loadMap(String mapPath) {
+        this.countBrick = 0;
         int brickHeight = Constants.BRICK_HEIGHT;
         int brickWidth = Constants.BRICK_WIDTH;
         List<Brick> bricks = new ArrayList<>();
@@ -49,6 +52,7 @@ public class TileManager {
                             default -> {
                                 brickType = Brick.BrickType.NORMAL;
                                 hp = type;
+                                countBrick++;
                             }
                         }
 
@@ -62,5 +66,13 @@ public class TileManager {
         }
 
         return bricks;
+    }
+
+    public int getCountBrick() {
+        return countBrick;
+    }
+
+    public void setCountBrick(int countBrick) {
+        this.countBrick = countBrick;
     }
 }

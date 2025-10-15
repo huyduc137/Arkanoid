@@ -29,7 +29,6 @@ public class CollisionManager {
         Paddle paddle = model.getPaddle();
         List<Brick> bricks = model.getBricks();
         List<Bullet> bullets = model.getBullets();
-
         for (Ball ball : balls) {
             handlePaddleCollision(ball, paddle);
             handleBallBrickCollisions(ball, bricks);
@@ -59,6 +58,7 @@ public class CollisionManager {
             if (!brick.isDestroyed() && ball.getBounds().intersects(brick.getBounds())) {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
+
                 break;
             }
         }
@@ -67,7 +67,9 @@ public class CollisionManager {
     private boolean handleBulletBrickCollisions(Bullet bullet, List<Brick> bricks) {
         for (Brick brick : bricks) {
             if (!brick.isDestroyed() && bullet.getBounds().intersects(brick.getBounds())) {
-                brick.hit();
+                if (brick.hit()) {
+                    model.brickDestroyed();
+                }
                 handleBrickHit(brick);
                 return true;
             }
@@ -107,8 +109,13 @@ public class CollisionManager {
                 }
                 ball.reverseDx();
             }
-            brick.hit();
+            if (brick.hit()) {
+                model.brickDestroyed();
+            }
         } else {
+            if (!brick.isDestroyed()) {
+                model.brickDestroyed();
+            }
             brick.setDestroyed(true);
         }
     }

@@ -41,7 +41,7 @@ public class Brick extends GameObject {
         return score;
     }
 
-    public void hit() {
+    public boolean hit() {
         if (hitPoints > 0) {
             hitPoints--;
             if(brickType == BrickType.UNBREAKABLE) {
@@ -52,8 +52,10 @@ public class Brick extends GameObject {
 
             if (hitPoints == 0) {
                 setDestroyed(true);
+                return true;
             }
         }
+        return false;
     }
 
     @Override

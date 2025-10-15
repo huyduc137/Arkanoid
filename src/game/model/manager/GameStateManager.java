@@ -7,8 +7,9 @@ public class GameStateManager {
         PLAYING,
         PAUSED,
         GAME_OVER,
+        GAME_WINNER,
         LEVEL_COMPLETE,
-        WIN
+        HIGH_SCORE,
     }
 
     private GameState currentState;
