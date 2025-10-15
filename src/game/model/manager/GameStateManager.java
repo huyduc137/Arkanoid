@@ -8,7 +8,8 @@ public class GameStateManager {
         PAUSED,
         GAME_OVER,
         LEVEL_COMPLETE,
-        WIN
+        WIN,
+        TUTORIAL
     }
 
     private GameState currentState;

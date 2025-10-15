@@ -51,6 +51,9 @@ public class GameView extends JFrame {
 
         OverScreen overScreen = new OverScreen(model);
         screenManager.addScreen(overScreen);
+
+        TutorialScreen tutorialScreen = new TutorialScreen(model);
+        screenManager.addScreen(tutorialScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -73,6 +76,10 @@ public class GameView extends JFrame {
                 showMouse();
             }
             case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
+            case TUTORIAL -> {
+                screenManager.show(Screen.ScreenType.TUTORIAL);
+                showMouse();
+            }
         }
     }
 

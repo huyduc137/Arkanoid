@@ -20,7 +20,8 @@ public abstract class Screen extends JPanel {
         GAME,
         PAUSE,
         GAME_OVER,
-        LEVEL_COMPLETE
+        LEVEL_COMPLETE,
+        TUTORIAL
     }
 
     public Screen(ScreenType type) {
