@@ -3,21 +3,28 @@ package game.model.powerups;
 import game.Constants;
 import game.model.GameModel;
 import game.model.entity.GameObject;
+import game.view.screens.Screen;
 
 import java.awt.*;
 
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại
-    protected double timeLeft; //thời gian còn lại
+    private final PowerUpType type;
     protected boolean isActive;
-    protected boolean shouldRemove;
+    public boolean shouldRemove;
     protected double dy;
     protected GameModel model;
 
-    public PowerUp(int x, int y, int width, int height, double duration, GameModel model) {
+    public enum PowerUpType {
+        FIREBALL,
+        EXTEND_PADDLE,
+        PADDLE_WITH_GUN,
+        MULTIBALL
+    }
+    public PowerUp(int x, int y, int width, int height, double duration, PowerUpType type, GameModel model) {
         super(x, y, width, height);
         this.duration = duration;
-        this.timeLeft = duration;
+        this.type = type;
         this.isActive = false;
         this.dy = Constants.POWERUP_SPEED;
         this.shouldRemove = false;
@@ -35,13 +42,6 @@ public abstract class PowerUp extends GameObject {
                 isActive = true;
                 apply();
             }
-        } else {
-            // Giảm thời gian tồn tại
-            timeLeft -= dt;
-            if (timeLeft <= 0) {
-                remove();
-                shouldRemove = true; // Đánh dấu để xóa trong GameModel
-            }
         }
     }
 
@@ -54,7 +54,11 @@ public abstract class PowerUp extends GameObject {
     }
 
     public boolean getIsExpired() {
-        return shouldRemove || timeLeft <= 0;
+        return shouldRemove || duration <= 0;
     }
+
+    public double getDuration() { return duration; }
+
+    public PowerUpType getType() { return type; }
 
 }

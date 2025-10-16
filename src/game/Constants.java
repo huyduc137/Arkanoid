@@ -31,4 +31,7 @@ public class Constants {
 
     public static final int BUTTON_WIDTH = 154;
     public static final int BUTTON_HEIGHT = 54;
+
+    // Thời gian dừng mất máu sau khi ăn damage
+    public static final double INVULNERABLE_DURATION = 2.0;
 }

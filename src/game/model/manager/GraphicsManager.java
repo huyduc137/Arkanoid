@@ -27,12 +27,18 @@ public class GraphicsManager {
         loadSprite("button_start", "sprites/buttons/start.png");
         loadSprite("button_tutorial", "sprites/buttons/tutorial.png");
         loadSprite("button_close", "sprites/buttons/close.png");
+        loadSprite("button_next_level",  "sprites/buttons/NextLevel.png");
+        loadSprite("button_high_score",  "sprites/buttons/HighScore.png");
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
         loadSprite("paddle2", "sprites/paddle/paddle2.png");
         //loadSprite("paddle3", "sprites/paddle/paddle3.png");
 
         loadSprite("fireball", "sprites/powerup/fireball.png");
+
+        loadSprite("pause_icon", "sprites/buttons/pause_icon.png");
+        loadSprite("button_setting", "sprites/buttons/setting.png");
+        loadSprite("home_setting", "sprites/buttons/home.png");
     }
 
     public static void loadSprite(String id, String path) {

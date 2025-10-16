@@ -37,6 +37,12 @@ public class MenuScreen extends Screen {
                     model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.TUTORIAL);
                 }) //action chạy khi click vào nút
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, (Constants.SCREEN_HEIGHT / 2) +  BUTTON_HEIGHT + 20,
+                BUTTON_WIDTH, BUTTON_HEIGHT,
+                "button_high_score",
+                () -> {
+                    model.getGameStateManager().setState(GameStateManager.GameState.HIGH_SCORE);
+                })
         );
     }
 }

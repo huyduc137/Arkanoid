@@ -10,28 +10,37 @@ import java.awt.*;
 import static game.Constants.BUTTON_HEIGHT;
 import static game.Constants.BUTTON_WIDTH;
 
-public class OverScreen extends Screen {
+public class WinnerScreen extends Screen{
     private final GameModel model;
-
-    public OverScreen(GameModel model) {
-        super(ScreenType.GAME_OVER);
+    public WinnerScreen(GameModel model) {
+        super(ScreenType.GAME_WINNER);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/overScreen.png");
+        loadBackground("bg/WinnerScreen.png");
     }
 
     @Override
-    public void initUI() {
-        uiManager.add(new UIButton(350, 500,
+    public void initUI(){
+        uiManager.add(new UIButton(265, 505,
+                BUTTON_WIDTH, BUTTON_HEIGHT,
+                "button_next_level",
+                () -> {
+                    model.getLevelManager().toNextLevel();
+                    model.initGame();
+                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                })
+        );
+
+        uiManager.add(new UIButton(265 + BUTTON_WIDTH + 20, 505,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_replay",
                 () -> {
                     model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
-                }) //action chạy khi click vào nút
+                })
         );
 
-        uiManager.add(new UIButton(350 + BUTTON_WIDTH + 10, 500,
+        uiManager.add(new UIButton(265 + 2*BUTTON_WIDTH + 20*2, 505,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
                 () -> {
@@ -39,5 +48,6 @@ public class OverScreen extends Screen {
                     model.getGameStateManager().setState(GameStateManager.GameState.MENU);
                 }) //action chạy khi click vào nút
         );
+
     }
 }

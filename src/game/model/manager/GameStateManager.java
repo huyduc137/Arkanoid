@@ -1,15 +1,23 @@
 package game.model.manager;
 
+import static game.Constants.INVULNERABLE_DURATION;
+
 public class GameStateManager {
+    // Check xem paddle có ăn damage ko
+    private boolean invulnerable = false;
+    private double invulnerableTimer = 0.0;
+
     public enum GameState {
         MENU,
         WAITING_FOR_START,
         PLAYING,
         PAUSED,
         GAME_OVER,
+        GAME_WINNER,
         LEVEL_COMPLETE,
         WIN,
         TUTORIAL
+        HIGH_SCORE
     }
 
     private GameState currentState;
@@ -42,7 +50,9 @@ public class GameStateManager {
     }
 
     public boolean isGameActive() {
-        return currentState == GameState.PLAYING;
+        return currentState == GameState.PLAYING ||
+                currentState == GameState.PAUSED ||
+                currentState == GameState.WAITING_FOR_START;
     }
 
     public boolean isGameOver() {
@@ -59,5 +69,23 @@ public class GameStateManager {
 
     public boolean isLevelComplete() {
         return currentState == GameState.LEVEL_COMPLETE;
+    }
+
+    public void setInvulnerable(boolean state) {
+        this.invulnerable = state;
+        this.invulnerableTimer = state ? INVULNERABLE_DURATION : 0.0;
+    }
+
+    public boolean isInvulnerable() {
+        return invulnerable;
+    }
+
+    public void updateInvulnerability(double dt) {
+        if (invulnerable) {
+            invulnerableTimer -= dt;
+            if (invulnerableTimer <= 0) {
+                invulnerable = false;
+            }
+        }
     }
 }
