@@ -12,7 +12,6 @@ import game.model.powerups.PowerUp;
 import game.model.powerups.PaddleWithGun;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -34,7 +33,7 @@ public class CollisionManager {
             handlePaddleCollision(ball, paddle);
             handleBallBrickCollisions(ball, bricks);
         }
-
+        handleBrickPaddleCollisions(paddle, bricks);
         bullets.removeIf(bullet -> handleBulletBrickCollisions(bullet, bricks));
     }
 
@@ -59,6 +58,7 @@ public class CollisionManager {
             if (!brick.isDestroyed() && ball.getBounds().intersects(brick.getBounds())) {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
+
                 break;
             }
         }
@@ -67,7 +67,9 @@ public class CollisionManager {
     private boolean handleBulletBrickCollisions(Bullet bullet, List<Brick> bricks) {
         for (Brick brick : bricks) {
             if (!brick.isDestroyed() && bullet.getBounds().intersects(brick.getBounds())) {
-                brick.hit();
+                if (brick.hit()) {
+                    model.brickDestroyed();
+                }
                 handleBrickHit(brick);
                 return true;
             }
@@ -107,8 +109,13 @@ public class CollisionManager {
                 }
                 ball.reverseDx();
             }
-            brick.hit();
+            if (brick.hit()) {
+                model.brickDestroyed();
+            }
         } else {
+            if (!brick.isDestroyed()) {
+                model.brickDestroyed();
+            }
             brick.setDestroyed(true);
         }
     }
@@ -130,4 +137,25 @@ public class CollisionManager {
             }
         }
     }
+
+    private void handleBrickPaddleCollisions(Paddle paddle, List<Brick> bricks) {
+        if (model.getGameStateManager().isInvulnerable()) return;
+
+        for (Brick brick : bricks) {
+            if (brick.isDestroyed()) continue;
+            if (brick.getBounds().intersects(paddle.getBounds())) {
+                // Brick hit the paddle
+                model.getScoreSystem().loseLife();
+                // Kiểm tra nếu hết mạng
+                if (model.getScoreSystem().getLives() <= 0) {
+                    model.getGameStateManager().setState(GameStateManager.GameState.GAME_OVER);
+                }
+
+                // Bật mode ko ăn dame
+                model.getGameStateManager().setInvulnerable(true);
+                break;
+            }
+        }
+    }
+
 }

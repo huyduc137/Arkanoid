@@ -6,7 +6,6 @@ import game.model.entity.Paddle;
 import game.model.manager.GameStateManager;
 import game.view.GameView;
 
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -31,12 +30,17 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(model.getGameStateManager().isGameOver()) {
+        long now = System.nanoTime();
+        double dt = (now - lastTime) / 1e9;
+        lastTime = now;
+
+        if (model.getGameStateManager().isGameOver()) {
             return;
         }
 
-        //Game loop chỉ update khi gameActive
-        if (model.getGameStateManager().isGameActive()) {
+        // Chỉ update nếu đang PLAYING
+        if (model.getGameStateManager().getCurrentState() == GameStateManager.GameState.PLAYING) {
+            // Logic update paddle, model.update(dt),...
             Paddle paddle = model.getPaddle();
             if (leftPressed && !rightPressed) {
                 paddle.moveLeft();
@@ -45,15 +49,11 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
             } else {
                 paddle.stop();
             }
-            long now = System.nanoTime();
-            double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
-            lastTime = now;
 
             model.update(dt);
         }
 
         if (view != null) {
-            //Check state để vẽ màn hình tương ứng
             view.updateScreen();
             view.repaintPanel();
         }
@@ -63,7 +63,7 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {             // khi nhấn phím
+    public void keyPressed(KeyEvent e) {
         Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
 
@@ -77,16 +77,22 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
             leftPressed = false;
             paddle.moveRight();
         }
-        // THÊM: Xử lý phím Space để phóng ball
         if (key == KeyEvent.VK_SPACE) {
             model.launchBall();
         }
-
-        //Test đổi màn hình bằng ESC
         if (key == KeyEvent.VK_ESCAPE) {
             if (model.getGameStateManager().isGameActive()) {
                 model.getGameStateManager().setState(GameStateManager.GameState.MENU);
-
+            }
+        }
+        if (key == KeyEvent.VK_P) {
+            GameStateManager.GameState current = model.getGameStateManager().getCurrentState();
+            if (current == GameStateManager.GameState.PLAYING) {
+                model.getGameStateManager().setState(GameStateManager.GameState.PAUSED);
+                System.out.println("Game Paused");
+            } else if (current == GameStateManager.GameState.PAUSED) {
+                model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                System.out.println("Game Resumed");
             }
         }
     }

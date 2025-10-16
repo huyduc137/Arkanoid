@@ -51,6 +51,15 @@ public class GameView extends JFrame {
 
         OverScreen overScreen = new OverScreen(model);
         screenManager.addScreen(overScreen);
+
+        PauseScreen pauseScreen = new PauseScreen(model);
+        screenManager.addScreen(pauseScreen);
+
+        WinnerScreen winnerScreen = new WinnerScreen(model);
+        screenManager.addScreen(winnerScreen);
+
+        HightScoreScreen hightScoreScreen = new HightScoreScreen(model);
+        screenManager.addScreen(hightScoreScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -61,18 +70,27 @@ public class GameView extends JFrame {
                 showMouse();
             }
             case WAITING_FOR_START -> {
-
             }
             case PLAYING -> {
                 screenManager.show(Screen.ScreenType.GAME);
                 hideMouse();
             }
-            case PAUSED -> screenManager.show(Screen.ScreenType.PAUSE);
+            case PAUSED -> {
+                screenManager.show(Screen.ScreenType.PAUSE);
+                showMouse();
+            }
             case GAME_OVER -> {
                 screenManager.show(Screen.ScreenType.GAME_OVER);
                 showMouse();
             }
-            case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
+            case GAME_WINNER -> {
+                screenManager.show(Screen.ScreenType.GAME_WINNER);
+                showMouse();
+            }
+            case HIGH_SCORE -> {
+                screenManager.show(Screen.ScreenType.HIGH_SCORE);
+                showMouse();
+            }
         }
     }
 
@@ -84,6 +102,7 @@ public class GameView extends JFrame {
         this.pack();                                               // tự động đặt kích thước cho vừa frame
         this.setLocationRelativeTo(null);
     }
+
     public void repaintPanel() {
         screenManager.getContainer().repaint();
     }
