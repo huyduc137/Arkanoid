@@ -17,14 +17,14 @@ public class TutorialScreen extends Screen {
         super(ScreenType.TUTORIAL);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/TutorialScreen.png");
+        loadBackground("bg/tutorialScreen.png");
     }
 
     @Override
     public void initUI() {
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 200,
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 120,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
-                "button_start",
+                "button_play",
                 () -> {
                     model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
