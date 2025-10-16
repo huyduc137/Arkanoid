@@ -18,24 +18,32 @@ public class PauseScreen extends Screen {
         super(ScreenType.PAUSE);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/pause_background.png"); // Giả sử bạn có file background cho pause (blue overlay). Nếu không, có thể dùng fallback hoặc vẽ custom trong paintComponent.
+        loadBackground("bg/pause_background.png");
+        initUI();
     }
 
     @Override
     public void initUI() {
+        // Nút Resume/Play
         uiManager.add(new UIButton((Constants.SCREEN_WIDTH - 84) / 2, (Constants.SCREEN_HEIGHT - 84) / 2, 84, 84,
                 "pause_icon",
                 () -> model.getGameStateManager().setState(GameStateManager.GameState.PLAYING)));
 
+        int totalButtonsWidth = BUTTON_WIDTH * 2 + 20; // 2 nút + khoảng cách 20px
+        int startX = (Constants.SCREEN_WIDTH - totalButtonsWidth) / 2;
+        int buttonY = Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 50;
 
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH - 10, Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 20,
+        // Nút Setting
+        uiManager.add(new UIButton(startX, buttonY,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_setting",
                 () -> {
+                    // Thêm logic mở setting ở đây
                     System.out.println("Settings opened");
                 }));
 
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 + 10, Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 20,
+        // Nút Home - đảm bảo cùng kích thước với nút Setting
+        uiManager.add(new UIButton(startX + BUTTON_WIDTH + 20, buttonY,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
                 () -> model.getGameStateManager().setState(GameStateManager.GameState.MENU)));

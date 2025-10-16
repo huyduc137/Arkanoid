@@ -35,7 +35,7 @@ public class GraphicsManager {
 
         loadSprite("pause_icon", "sprites/buttons/pause_icon.png");
         loadSprite("button_setting", "sprites/buttons/setting.png");
-        loadSprite("resume_icon", "sprites/buttons/pause_icon.png");
+        loadSprite("home_setting", "sprites/buttons/home.png");
     }
 
     public static void loadSprite(String id, String path) {
