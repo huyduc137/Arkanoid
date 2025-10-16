@@ -14,9 +14,17 @@ public class LevelManager {
         levels.add(new Level(
                 "Level 1",
                 "map/map1.txt",
-                false,
+                true,
                 false,
                 0.0,
+                1
+        ));
+        levels.add(new Level(
+                "Level 2",
+                "map/map2.txt",
+                false,
+                true,
+                200,
                 0.0
         ));
     }
@@ -25,18 +33,14 @@ public class LevelManager {
         return levels.get(currentLevelIndex);
     }
 
-    public void setLevelIndex(int index) {
-        if (index < 0 || index >= levels.size()) throw new ArrayIndexOutOfBoundsException("Invalid level index");
-        currentLevelIndex = index;
-    }
-
     public boolean hasNextLevel() {
         return currentLevelIndex < levels.size() - 1;
     }
 
-    public Level nextLevel() {
-        if(!hasNextLevel()) return getCurrentLevel();
+    public void toNextLevel() {
+        if(!hasNextLevel()) {
+            return;
+        }
         currentLevelIndex++;
-        return getCurrentLevel();
     }
 }

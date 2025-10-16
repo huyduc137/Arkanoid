@@ -10,6 +10,8 @@ public class Level {
     private final double brickFallSpeed;
     private final double brickAttackSpeed;
 
+    private double brickFallTimer = 0.0;
+
     public Level(String name, String mapPath,
                  boolean bricksFall, boolean bricksAttack,
                  double brickAttackSpeed, double brickFallSpeed) {
@@ -21,5 +23,30 @@ public class Level {
         this.brickAttackSpeed = brickAttackSpeed;
     }
 
+    public double getBrickFallTimer() { return brickFallTimer; }
+    public void setBrickFallTimer(double t) { brickFallTimer = t; }
 
+    public double getBrickFallSpeed() {
+        return brickFallSpeed;
+    }
+
+    public double getBrickAttackSpeed() {
+        return brickAttackSpeed;
+    }
+
+    public boolean isBricksAttack() {
+        return bricksAttack;
+    }
+
+    public boolean isBricksFall() {
+        return bricksFall;
+    }
+
+    public String getMapPath() {
+        return mapPath;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
