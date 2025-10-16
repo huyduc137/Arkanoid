@@ -88,6 +88,7 @@ public class GameView extends JFrame {
             case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
             case TUTORIAL -> {
                 screenManager.show(Screen.ScreenType.TUTORIAL);
+            }
             case GAME_WINNER -> {
                 screenManager.show(Screen.ScreenType.GAME_WINNER);
                 showMouse();
