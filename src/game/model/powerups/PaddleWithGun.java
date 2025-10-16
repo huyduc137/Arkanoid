@@ -4,6 +4,7 @@ import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Bullet;
 import game.model.entity.Paddle;
+import game.model.manager.SoundManager;
 
 import java.awt.*;
 
@@ -63,6 +64,8 @@ public class PaddleWithGun extends PowerUp {
         // Thêm đạn vào GameModel để được xử lý
         model.addBullet(bullet1);
         model.addBullet(bullet2);
+
+        SoundManager.play("paddle_shoot");
     }
 
     @Override

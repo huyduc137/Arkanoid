@@ -27,7 +27,7 @@ public class MenuScreen extends Screen {
                 "button_play",
                     () -> {
                         model.initGame();
-                        model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                        model.getGameStateManager().setGameActive();
                     }) //action chạy khi click vào nút
         );
         uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 200,

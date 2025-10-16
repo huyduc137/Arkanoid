@@ -3,9 +3,7 @@ package game.model.powerups;
 import game.Constants;
 import game.model.GameModel;
 import game.model.entity.GameObject;
-import game.view.screens.Screen;
-
-import java.awt.*;
+import game.model.manager.SoundManager;
 
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại
@@ -41,6 +39,8 @@ public abstract class PowerUp extends GameObject {
             if (getBounds().intersects(model.getPaddle().getBounds())) {
                 isActive = true;
                 apply();
+
+                SoundManager.play("power_up");
             }
         }
     }

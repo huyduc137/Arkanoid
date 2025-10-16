@@ -88,4 +88,22 @@ public class GameStateManager {
             }
         }
     }
+
+    public void setGameActive() {
+        currentState = GameState.PLAYING;
+
+        SoundManager.stop("background_test");
+    }
+
+    public void setGamePaused() {
+        currentState = GameState.PAUSED;
+
+        SoundManager.play("pause");
+    }
+
+    public void setGameMenu() {
+        currentState = GameState.MENU;
+
+        SoundManager.play("background_test");
+    }
 }

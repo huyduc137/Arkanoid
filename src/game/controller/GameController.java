@@ -82,16 +82,16 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
         }
         if (key == KeyEvent.VK_ESCAPE) {
             if (model.getGameStateManager().isGameActive()) {
-                model.getGameStateManager().setState(GameStateManager.GameState.MENU);
+                model.getGameStateManager().setGameMenu();
             }
         }
         if (key == KeyEvent.VK_P) {
             GameStateManager.GameState current = model.getGameStateManager().getCurrentState();
             if (current == GameStateManager.GameState.PLAYING) {
-                model.getGameStateManager().setState(GameStateManager.GameState.PAUSED);
+                model.getGameStateManager().setGamePaused();
                 System.out.println("Game Paused");
             } else if (current == GameStateManager.GameState.PAUSED) {
-                model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                model.getGameStateManager().setGameActive();
                 System.out.println("Game Resumed");
             }
         }
