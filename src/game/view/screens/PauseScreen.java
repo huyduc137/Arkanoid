@@ -4,7 +4,6 @@ import game.Constants;
 import game.model.GameModel;
 import game.model.manager.GameStateManager;
 import game.view.UI.UIButton;
-import game.view.UI.UILabel;
 
 import java.awt.*;
 
@@ -19,7 +18,6 @@ public class PauseScreen extends Screen {
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         loadBackground("bg/pause_background.png");
-        initUI();
     }
 
     @Override
