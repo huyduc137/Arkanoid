@@ -24,6 +24,8 @@ public class GraphicsManager {
         loadSprite("button_play", "sprites/buttons/play.png");
         loadSprite("button_replay", "sprites/buttons/replay.png");
         loadSprite("button_home", "sprites/buttons/home.png");
+        loadSprite("button_next_level",  "sprites/buttons/NextLevel.png");
+        loadSprite("button_high_score",  "sprites/buttons/HighScore.png");
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
         loadSprite("paddle2", "sprites/paddle/paddle2.png");

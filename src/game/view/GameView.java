@@ -51,9 +51,6 @@ public class GameView extends JFrame {
 
         OverScreen overScreen = new OverScreen(model);
         screenManager.addScreen(overScreen);
-
-        PauseScreen pauseScreen = new PauseScreen(model);
-        screenManager.addScreen(pauseScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -64,15 +61,13 @@ public class GameView extends JFrame {
                 showMouse();
             }
             case WAITING_FOR_START -> {
+
             }
             case PLAYING -> {
                 screenManager.show(Screen.ScreenType.GAME);
                 hideMouse();
             }
-            case PAUSED -> {
-                screenManager.show(Screen.ScreenType.PAUSE);
-                showMouse();
-            }
+            case PAUSED -> screenManager.show(Screen.ScreenType.PAUSE);
             case GAME_OVER -> {
                 screenManager.show(Screen.ScreenType.GAME_OVER);
                 showMouse();

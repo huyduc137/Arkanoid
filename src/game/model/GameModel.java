@@ -19,6 +19,8 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
+    private int countBrickModel;
+    private String currentMap;
 
     private List<Ball> balls;
     private Paddle paddle;
@@ -88,6 +90,8 @@ public class GameModel {
 
         // Đặt ball lên paddle
         attachBallToPaddle(mainBall);
+        countBrickModel = tileManager.getCountBrick();
+        this.currentMap = "map/map1.txt";
     }
 
     public void initBrick() {
@@ -128,6 +132,8 @@ public class GameModel {
         }
 
         balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
+
+        checkGameWinner();
     }
 
     // THÊM: Phương thức gắn ball lên paddle
@@ -168,6 +174,18 @@ public class GameModel {
                 balls.add(mainBall);
                 gameStateManager.setBallOnPaddle(true);
             }
+        }
+    }
+    private void checkGameWinner(){
+        System.out.println("countBrickModel: " + countBrickModel);
+        if (gameStateManager.isGameActive()
+                && countBrickModel <= 0) {
+            gameStateManager.setState(GameStateManager.GameState.GAME_WINNER);
+        }
+    }
+    public void brickDestroyed() {
+        if (countBrickModel > 0) {
+            countBrickModel--;
         }
     }
 }
