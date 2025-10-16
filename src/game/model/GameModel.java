@@ -288,6 +288,10 @@ public class GameModel {
                 for (Brick brick : bricks) {
                     if (brick.isDestroyed()) continue;
                     brick.setY(brick.getY() + brick.getHeight());
+
+                    if (brick.getY() + brick.getHeight() >= Constants.SCREEN_HEIGHT) {
+                        gameStateManager.setState(GameStateManager.GameState.GAME_OVER);
+                    }
                 }
             }
         }

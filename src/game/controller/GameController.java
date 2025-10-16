@@ -30,6 +30,10 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        long now = System.nanoTime();
+        double dt = (now - lastTime) / 1e9;
+        lastTime = now;
+
         if (model.getGameStateManager().isGameOver()) {
             return;
         }
@@ -45,12 +49,6 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
             } else {
                 paddle.stop();
             }
-            long now = System.nanoTime();
-            double dt = (now - lastTime) / 1e9;
-
-            // Keep dt small to avoid jumps
-            if (dt > 0.1) dt = 0.016;
-            lastTime = now;
 
             model.update(dt);
         }
