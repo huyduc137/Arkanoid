@@ -6,7 +6,6 @@ import game.model.entity.Paddle;
 import game.model.manager.GameStateManager;
 import game.view.GameView;
 
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -46,7 +45,10 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
                 paddle.stop();
             }
             long now = System.nanoTime();
-            double dt = (now - lastTime) / 1e9; // thời gian giữa các frame
+            double dt = (now - lastTime) / 1e9;// thời gian giữa các frame
+
+            // Keep dt small to avoid jumps
+            if (dt > 0.1) dt = 0.016;
             lastTime = now;
 
             model.update(dt);
