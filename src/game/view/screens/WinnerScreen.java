@@ -25,6 +25,7 @@ public class WinnerScreen extends Screen{
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_next_level",
                 () -> {
+                    model.getLevelManager().toNextLevel();
                     model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
                 })

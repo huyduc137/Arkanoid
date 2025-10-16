@@ -38,7 +38,7 @@ public abstract class MovableObject extends GameObject {
     }
 
     public void move(double dt) {
-        x += dx * dt;
-        y += dy * dt;
+        x += (int) (dx * dt);
+        y += (int) (dy * dt);
     }
 }
