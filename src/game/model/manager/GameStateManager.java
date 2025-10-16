@@ -41,7 +41,9 @@ public class GameStateManager {
     }
 
     public boolean isGameActive() {
-        return currentState == GameState.PLAYING;
+        return currentState == GameState.PLAYING ||
+                currentState == GameState.PAUSED ||
+                currentState == GameState.WAITING_FOR_START;
     }
 
     public boolean isGameOver() {
