@@ -24,6 +24,10 @@ public class PowerUpManager {
         return fallingPowerUps;
     }
 
+    public List<ActivePowerUp> getActivePowerUps() {
+        return activePowerUps;
+    }
+
     public void update(double dt) {
         // 1️⃣ Cập nhật power-up đang rơi
         List<PowerUp> fallingToRemove = new ArrayList<>();

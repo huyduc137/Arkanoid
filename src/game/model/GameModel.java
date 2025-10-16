@@ -90,6 +90,9 @@ public class GameModel {
         // Đặt ball lên paddle
         attachBallToPaddle(mainBall);
         countBrickModel = tileManager.getCountBrick();
+
+        powerUpManager.getFallingPowerUps().removeAll(powerUpManager.getFallingPowerUps());
+        powerUpManager.getActivePowerUps().removeAll(powerUpManager.getActivePowerUps());
     }
 
     public void initBrick() {
