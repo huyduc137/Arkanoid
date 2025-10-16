@@ -15,8 +15,8 @@ public class LevelManager {
                 "Level 1",
                 "map/map1.txt",
                 true,
-                false,
-                0.0,
+                true,
+                200,
                 1
         ));
         levels.add(new Level(

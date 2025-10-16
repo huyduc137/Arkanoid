@@ -284,14 +284,14 @@ public class GameModel {
         }
 
         // Brick Fall mode
-        else if (currentLevel.isBricksFall()) {
+        if (currentLevel.isBricksFall()) {
             double interval = 5.0 / currentLevel.getBrickFallSpeed(); // speed cao -> rơi thường xuyên hơn
             currentLevel.setBrickFallTimer(currentLevel.getBrickFallTimer() + dt);
 
             if (currentLevel.getBrickFallTimer() >= interval) {
                 currentLevel.setBrickFallTimer(0.0);
                 for (Brick brick : bricks) {
-                    if (brick.isDestroyed()) continue;
+                    if (brick.isDestroyed() || brick.getBrickType() == Brick.BrickType.UNBREAKABLE) continue;
                     brick.setY(brick.getY() + brick.getHeight());
 
                     if (brick.getY() + brick.getHeight() >= Constants.SCREEN_HEIGHT) {
