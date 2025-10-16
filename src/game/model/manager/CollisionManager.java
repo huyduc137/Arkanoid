@@ -12,7 +12,6 @@ import game.model.powerups.PowerUp;
 import game.model.powerups.PaddleWithGun;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -29,11 +28,12 @@ public class CollisionManager {
         Paddle paddle = model.getPaddle();
         List<Brick> bricks = model.getBricks();
         List<Bullet> bullets = model.getBullets();
+
         for (Ball ball : balls) {
             handlePaddleCollision(ball, paddle);
             handleBallBrickCollisions(ball, bricks);
         }
-
+        handleBrickPaddleCollisions(paddle, bricks);
         bullets.removeIf(bullet -> handleBulletBrickCollisions(bullet, bricks));
     }
 
@@ -137,4 +137,25 @@ public class CollisionManager {
             }
         }
     }
+
+    private void handleBrickPaddleCollisions(Paddle paddle, List<Brick> bricks) {
+        if (model.getGameStateManager().isInvulnerable()) return;
+
+        for (Brick brick : bricks) {
+            if (brick.isDestroyed()) continue;
+            if (brick.getBounds().intersects(paddle.getBounds())) {
+                // Brick hit the paddle
+                model.getScoreSystem().loseLife();
+                // Kiểm tra nếu hết mạng
+                if (model.getScoreSystem().getLives() <= 0) {
+                    model.getGameStateManager().setState(GameStateManager.GameState.GAME_OVER);
+                }
+
+                // Bật mode ko ăn dame
+                model.getGameStateManager().setInvulnerable(true);
+                break;
+            }
+        }
+    }
+
 }

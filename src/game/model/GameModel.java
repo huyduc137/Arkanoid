@@ -144,6 +144,7 @@ public class GameModel {
         updateBricks(dt);
 
         collisionManager.checkCollisions();
+        gameStateManager.updateInvulnerability(dt);
 
         // THÊM: Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
@@ -220,8 +221,7 @@ public class GameModel {
                 brick.setAttackTimer(brick.getAttackTimer() + dt);
 
                 // timer = delay -> attack
-                if (!brick.isAttacking() && !brick.isReturning() &&
-                        brick.getAttackTimer() >= attackDelay) {
+                if (!brick.isAttacking() && !brick.isReturning() && brick.getAttackTimer() >= attackDelay) {
                     brick.setAttacking(true);
                     brick.setAttackTimer(0.0);
                     brick.setTarget(paddleCenterX, paddleCenterY);
