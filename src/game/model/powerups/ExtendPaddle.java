@@ -9,7 +9,7 @@ public class ExtendPaddle extends PowerUp {
     private GameModel model;
 
     public ExtendPaddle(int x, int y, GameModel model) {
-        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Constants.POWERUP_DURATION, PowerUpType.EXTEND_PADDLE, model);
         this.model = model;
     }
 

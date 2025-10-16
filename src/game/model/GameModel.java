@@ -13,6 +13,7 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
+    private final PowerUpManager powerUpManager = new PowerUpManager(this);
     private final LevelManager levelManager = new LevelManager();
 
     private int countBrickModel;
@@ -20,7 +21,6 @@ public class GameModel {
     private List<Ball> balls;
     private Paddle paddle;
     private List<Brick> bricks;
-    private List<PowerUp> powerups;
     private List<Bullet> bullets;
 
     public Paddle getPaddle() {
@@ -42,14 +42,16 @@ public class GameModel {
         return gameStateManager;
     }
 
+    public PowerUpManager getPowerUpManager() {
+        return powerUpManager;
+    }
     public LevelManager getLevelManager() {
         return levelManager;
     }
-
     public List<PowerUp> getPowerups() {
-        return powerups;
+        // Trả về danh sách power-up đang rơi từ Manager
+        return powerUpManager.getFallingPowerUps();
     }
-
     // THÊM CÁC PHƯƠNG THỨC QUẢN LÝ ĐẠN
     public List<Bullet> getBullets() {
         return bullets;
@@ -79,8 +81,6 @@ public class GameModel {
 
         bricks = new ArrayList<>();
         bullets = new ArrayList<>();
-
-        powerups = new ArrayList<>();
 
         // Reset trạng thái game
         scoreSystem.reset();
@@ -134,10 +134,12 @@ public class GameModel {
         // Xóa đạn đã bay ra khỏi màn hình
         bullets.removeIf(bullet -> bullet.getY() < 0);
 
-        powerups.removeIf(powerup -> powerup.getIsExpired() || powerup.getY() > Constants.SCREEN_HEIGHT);
-        for (PowerUp powerup : powerups) {
-            powerup.update(dt);
-        }
+        collisionManager.checkCollisions();
+
+        // THÊM: Kiểm tra ball có rơi xuống không
+        checkBallOutOfBounds();
+
+        powerUpManager.update(dt);
 
         balls.removeIf(ball -> ball.getY() > Constants.SCREEN_HEIGHT);
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MultiBall extends PowerUp {
     public MultiBall(int x, int y, GameModel model) {
-        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Double.POSITIVE_INFINITY, model);
+        super(x, y, Constants.POWERUP_SIZE, Constants.POWERUP_SIZE, Double.POSITIVE_INFINITY, PowerUpType.MULTIBALL, model);
     }
 
     @Override
