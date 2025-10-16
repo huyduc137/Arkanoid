@@ -20,6 +20,7 @@ public class GraphicsManager {
         loadSprite("brick_2", "sprites/bricks/brick_2.png");
         loadSprite("brick_3", "sprites/bricks/brick_3.png");
         loadSprite("brick_unbreakable", "sprites/bricks/brick_unbreakable.png");
+        loadSprite("brick_attack", "sprites/bricks/brick_attack.png");
 
         loadSprite("button_play", "sprites/buttons/play.png");
         loadSprite("button_replay", "sprites/buttons/replay.png");

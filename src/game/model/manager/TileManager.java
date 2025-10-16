@@ -45,6 +45,10 @@ public class TileManager {
                         int hp;
 
                         switch (type) {
+                            case 10 -> {
+                                brickType = Brick.BrickType.ATTACK;
+                                hp = Integer.MAX_VALUE;
+                            }
                             case 9 -> {
                                 brickType = Brick.BrickType.UNBREAKABLE;
                                 hp = Integer.MAX_VALUE;

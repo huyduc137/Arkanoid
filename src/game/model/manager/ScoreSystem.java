@@ -21,6 +21,8 @@ public class ScoreSystem {
         if (lives > 0) {
             lives--;
         }
+
+        SoundManager.play("life_lose");
     }
 
     public int getLives() {

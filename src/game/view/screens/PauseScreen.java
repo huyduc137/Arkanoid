@@ -25,7 +25,7 @@ public class PauseScreen extends Screen {
         // Nút Resume/Play
         uiManager.add(new UIButton((Constants.SCREEN_WIDTH - 84) / 2, (Constants.SCREEN_HEIGHT - 84) / 2, 84, 84,
                 "pause_icon",
-                () -> model.getGameStateManager().setState(GameStateManager.GameState.PLAYING)));
+                () -> model.getGameStateManager().setGameActive()));
 
         int totalButtonsWidth = BUTTON_WIDTH * 2 + 20; // 2 nút + khoảng cách 20px
         int startX = (Constants.SCREEN_WIDTH - totalButtonsWidth) / 2;
@@ -44,6 +44,6 @@ public class PauseScreen extends Screen {
         uiManager.add(new UIButton(startX + BUTTON_WIDTH + 20, buttonY,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
-                () -> model.getGameStateManager().setState(GameStateManager.GameState.MENU)));
+                () -> model.getGameStateManager().setGameMenu()));
     }
 }

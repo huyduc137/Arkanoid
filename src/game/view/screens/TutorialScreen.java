@@ -27,7 +27,7 @@ public class TutorialScreen extends Screen {
                 "button_play",
                 () -> {
                     model.initGame();
-                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                    model.getGameStateManager().setGameActive();
                 }) //action chạy khi click vào nút
         );
         uiManager.add(new UIButton(Constants.SCREEN_WIDTH - 100, 5,

@@ -28,11 +28,20 @@ public class SoundManager {
 
     public static void loadAll() {
         load("background_test", "sounds/NiagaraFalls.wav", Sound.Type.MUSIC, 0.5f, 1);
+        load("pause", "sounds/pause.wav", Sound.Type.SFX, 0.5f, 2);
+
         load("brick_destroy", "sounds/brick_destroy.wav", Sound.Type.SFX, 0.5f, 10);
         load("brick_hit", "sounds/brick_hit.wav", Sound.Type.SFX, 0.5f, 6);
         load("brick_hit_unbreakable", "sounds/brick_hit_unbreakable.wav", Sound.Type.SFX, 0.5f, 6);
 
-        load("button_click", "sounds/button_click.wav", Sound.Type.SFX, 0.5f, 1);
+        load("paddle_shoot", "sounds/paddle_shoot.wav", Sound.Type.SFX, 0.5f, 6);
+        load("paddle_bounce", "sounds/paddle_bounce.wav", Sound.Type.SFX, 0.5f, 2);
+
+        load("power_up", "sounds/power_up.wav", Sound.Type.SFX, 1f, 6);
+
+        load("life_lose", "sounds/life_lose.wav", Sound.Type.SFX, 0.5f, 6);
+
+        load("button_click", "sounds/button_click.wav", Sound.Type.SFX, 0.5f, 2);
     }
 
     public static void load(String id, String filePath, Sound.Type type, float baseVolume, int poolSize) {
@@ -114,11 +123,11 @@ public class SoundManager {
         }
     }
 
-    public void mute(boolean state) {
+    public static void mute(boolean state) {
         muted = state;
     }
 
-    public void stop(String id) {
+    public static void stop(String id) {
         Sound sound = sounds.get(id);
         if (sound != null && sound.getClip().isRunning()) {
             sound.getClip().stop();

@@ -27,7 +27,7 @@ public class WinnerScreen extends Screen{
                 () -> {
                     model.getLevelManager().toNextLevel();
                     model.initGame();
-                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                    model.getGameStateManager().setGameActive();
                 })
         );
 
@@ -36,7 +36,7 @@ public class WinnerScreen extends Screen{
                 "button_replay",
                 () -> {
                     model.initGame();
-                    model.getGameStateManager().setState(GameStateManager.GameState.PLAYING);
+                    model.getGameStateManager().setGameActive();
                 })
         );
 
@@ -45,7 +45,7 @@ public class WinnerScreen extends Screen{
                 "button_home",
                 () -> {
                     model.initGame();
-                    model.getGameStateManager().setState(GameStateManager.GameState.MENU);
+                    model.getGameStateManager().setGameMenu();
                 }) //action chạy khi click vào nút
         );
 
