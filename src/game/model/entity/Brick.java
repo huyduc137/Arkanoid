@@ -8,7 +8,8 @@ import java.awt.*;
 public class Brick extends MovableObject {
     public enum BrickType {
         NORMAL,
-        UNBREAKABLE
+        UNBREAKABLE,
+        ATTACK
     }
     private int hitPoints;
     private boolean destroyed;
@@ -73,7 +74,7 @@ public class Brick extends MovableObject {
     public boolean hit() {
         if (hitPoints > 0) {
             hitPoints--;
-            if(brickType == BrickType.UNBREAKABLE) {
+            if(brickType == BrickType.UNBREAKABLE || brickType == BrickType.ATTACK) {
                 SoundManager.play("brick_hit_unbreakable");
             } else {
                 SoundManager.play("brick_hit");
@@ -92,8 +93,10 @@ public class Brick extends MovableObject {
         super.draw(g);
         if (brickType == BrickType.UNBREAKABLE) {
             sprite = GraphicsManager.getSprite("brick_unbreakable");
-        } else {
+        } else if (brickType == BrickType.NORMAL) {
             sprite = GraphicsManager.getSprite("brick_" + hitPoints);
+        } else {
+            sprite = GraphicsManager.getSprite("brick_attack");
         }
 
         if (!isDestroyed()) {
