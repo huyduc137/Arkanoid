@@ -52,6 +52,8 @@ public class GameView extends JFrame {
         OverScreen overScreen = new OverScreen(model);
         screenManager.addScreen(overScreen);
 
+        TutorialScreen tutorialScreen = new TutorialScreen(model);
+        screenManager.addScreen(tutorialScreen);
         PauseScreen pauseScreen = new PauseScreen(model);
         screenManager.addScreen(pauseScreen);
 
@@ -83,6 +85,9 @@ public class GameView extends JFrame {
                 screenManager.show(Screen.ScreenType.GAME_OVER);
                 showMouse();
             }
+            case LEVEL_COMPLETE, WIN -> screenManager.show(Screen.ScreenType.LEVEL_COMPLETE);
+            case TUTORIAL -> {
+                screenManager.show(Screen.ScreenType.TUTORIAL);
             case GAME_WINNER -> {
                 screenManager.show(Screen.ScreenType.GAME_WINNER);
                 showMouse();
