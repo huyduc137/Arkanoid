@@ -125,7 +125,8 @@ public class GameModel {
             }
         }
         for (Ball ball : balls) {
-            if (!gameStateManager.isBallOnPaddle() || ball != getBall()) { // Không di chuyển bóng chính nếu bám
+            if (!gameStateManager.isBallOnPaddle() || ball != getBall()) {// Không di chuyển bóng chính nếu bám
+                ball.updateCooldown(dt);
                 ball.move(dt);
             }
         }
@@ -221,7 +222,7 @@ public class GameModel {
 
             for (Brick brick : bricks) {
                 if (brick.isDestroyed()) continue;
-                if (brick.getBrickType() != Brick.BrickType.UNBREAKABLE) continue;
+                if (brick.getBrickType() != Brick.BrickType.ATTACK) continue;
 
                 brick.setAttackTimer(brick.getAttackTimer() + dt);
 
@@ -291,7 +292,7 @@ public class GameModel {
             if (currentLevel.getBrickFallTimer() >= interval) {
                 currentLevel.setBrickFallTimer(0.0);
                 for (Brick brick : bricks) {
-                    if (brick.isDestroyed() || brick.getBrickType() == Brick.BrickType.UNBREAKABLE) continue;
+                    if (brick.isDestroyed() || brick.getBrickType() == Brick.BrickType.ATTACK) continue;
                     brick.setY(brick.getY() + brick.getHeight());
 
                     if (brick.getY() + brick.getHeight() >= Constants.SCREEN_HEIGHT) {

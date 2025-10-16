@@ -39,6 +39,8 @@ public class CollisionManager {
 
     private void handlePaddleCollision(Ball ball, Paddle paddle) {
         if (!model.getGameStateManager().isGameOver() && ball.getBounds().intersects(paddle.getBounds())) {
+            SoundManager.play("paddle_bounce");
+
             ball.reverseDy();
             double ballCenterX = ball.getX() + (ball.getWidth() / 2.0);
             double paddleCenterX = paddle.getX() + (paddle.getWidth() / 2.0);
@@ -54,11 +56,15 @@ public class CollisionManager {
     }
 
     private void handleBallBrickCollisions(Ball ball, List<Brick> bricks) {
+        if (ball.getCollisionCooldown() > 0) return;
+
         for (Brick brick : bricks) {
-            if (!brick.isDestroyed() && ball.getBounds().intersects(brick.getBounds())) {
+            if (!brick.isDestroyed()
+                    && ball.getBounds().intersects(brick.getBounds())) {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
 
+                ball.setCollisionCooldown(0.04);
                 break;
             }
         }
@@ -93,7 +99,9 @@ public class CollisionManager {
         float wy = (brickHitbox.width / 2.0f) * dy;
         float hx = (brickHitbox.height / 2.0f) * dx;
 
-        if (!ball.isFireBall() || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.UNBREAKABLE)) {
+        if (!ball.isFireBall()
+                || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.UNBREAKABLE)
+                || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.ATTACK)) {
             if (Math.abs(wy) > Math.abs(hx)) {
                 if (dy > 0) {
                     ball.setY(brickHitbox.y + brickHitbox.height);

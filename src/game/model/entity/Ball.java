@@ -9,6 +9,8 @@ import java.awt.image.BufferedImage;
 public class Ball extends MovableObject {
     private boolean isFireBall;
 
+    private double collisionCooldown = 0.0; // seconds
+
     public Ball(int x, int y , int diameter){
         super(x , y , diameter , diameter);
         this.dx = Constants.BALL_SPEED;
@@ -19,6 +21,22 @@ public class Ball extends MovableObject {
         super(Constants.SCREEN_WIDTH / 2 - diameter / 2, Constants.SCREEN_HEIGHT / 2 - diameter / 2, diameter, diameter);
         resetBall();
         isFireBall = false;
+    }
+
+    public double getCollisionCooldown() {
+        return collisionCooldown;
+    }
+
+    public void setCollisionCooldown(double cooldown) {
+        this.collisionCooldown = cooldown;
+    }
+
+    // Call this every frame (from GameModel or update method)
+    public void updateCooldown(double dt) {
+        if (collisionCooldown > 0) {
+            collisionCooldown -= dt;
+            if (collisionCooldown < 0) collisionCooldown = 0;
+        }
     }
 
     @Override
