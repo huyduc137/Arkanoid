@@ -3,6 +3,7 @@ package game.view;
 import game.Constants;
 import game.controller.GameController;
 import game.model.GameModel;
+import game.model.manager.FontManager;
 import game.model.manager.GraphicsManager;
 import game.model.manager.SoundManager;
 import game.view.screens.*;
@@ -30,7 +31,7 @@ public class GameView extends JFrame {
         //Load đồ hoạ game
         GraphicsManager.loadAll();
         SoundManager.loadAll();
-
+        FontManager.loadAll();
         SoundManager.play("background_test");
 
         //Nối vào controller (game loop)

@@ -187,6 +187,7 @@ public class GameModel {
 
             // Kiểm tra nếu hết mạng
             if (scoreSystem.getLives() <= 0) {
+                HighScoreManager.saveHighScore(levelManager.getCurrentLevel().getName(), scoreSystem.getScore());
                 gameStateManager.setState(GameStateManager.GameState.GAME_OVER);
             } else {
                 Ball mainBall = new Ball(Constants.BALL_DIAMETER);
@@ -202,6 +203,7 @@ public class GameModel {
 //        System.out.println("countBrickModel: " + countBrickModel);
         if (gameStateManager.isGameActive()
                 && countBrickModel <= 0) {
+            HighScoreManager.saveHighScore(levelManager.getCurrentLevel().getName(), scoreSystem.getScore());
             gameStateManager.setState(GameStateManager.GameState.GAME_WINNER);
         }
     }
