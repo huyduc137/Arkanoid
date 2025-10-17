@@ -4,6 +4,7 @@ import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Bullet;
 import game.model.entity.Paddle;
+import game.model.manager.GraphicsManager;
 import game.model.manager.SoundManager;
 
 import java.awt.*;
@@ -70,6 +71,13 @@ public class PaddleWithGun extends PowerUp {
 
     @Override
     public void draw(Graphics g) {
-
+        super.draw(g);
+        sprite = GraphicsManager.getSprite("paddlewithgun");
+        if (sprite != null) {
+            g.drawImage(sprite, x, y, width, height, null);
+        }
+        else {
+            System.err.println("Fireball Sprite is null");
+        }
     }
 }

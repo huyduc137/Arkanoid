@@ -2,6 +2,7 @@ package game.model.powerups;
 
 import game.Constants;
 import game.model.GameModel;
+import game.model.manager.GraphicsManager;
 
 import java.awt.*;
 
@@ -38,6 +39,13 @@ public class ExtendPaddle extends PowerUp {
 
     @Override
     public void draw(Graphics g) {
-
+        super.draw(g);
+        sprite = GraphicsManager.getSprite("extendpaddle");
+        if (sprite != null) {
+            g.drawImage(sprite, x, y, width, height, null);
+        }
+        else {
+            System.err.println("Fireball Sprite is null");
+        }
     }
 }

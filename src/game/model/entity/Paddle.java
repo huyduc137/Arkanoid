@@ -15,9 +15,18 @@ public class Paddle extends MovableObject {
     @Override
     public void draw(Graphics g) {
         String spriteId;
-        if (width == Constants.PADDLE_WIDTH) {spriteId = "paddle";}
-        else {spriteId = "paddle2";}
-        // else spriteId = "paddle3";
+        if (width == Constants.PADDLE_WIDTH) {
+            spriteId = "paddle";
+            if(gunsActive){
+                spriteId = "paddlegun";
+            }
+        }
+        else {
+            spriteId = "paddle2";
+            if(gunsActive){
+                spriteId = "paddle2gun";
+            }
+        }
         sprite = GraphicsManager.getSprite(spriteId);
         if (sprite != null) {
             g.drawImage(sprite, x, y, width, height, null);

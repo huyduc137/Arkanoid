@@ -33,9 +33,14 @@ public class GraphicsManager {
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
         loadSprite("paddle2", "sprites/paddle/paddle2.png");
+        loadSprite("paddlegun", "sprites/paddle/paddlegun.png");
+        loadSprite("paddle2gun", "sprites/paddle/paddle2gun.png");
         //loadSprite("paddle3", "sprites/paddle/paddle3.png");
 
         loadSprite("fireball", "sprites/powerup/fireball.png");
+        loadSprite("multiball", "sprites/powerup/multiball.png");
+        loadSprite("paddlewithgun", "sprites/powerup/paddlewithgun.png");
+        loadSprite("extendpaddle", "sprites/powerup/extendpaddle.png");
 
         loadSprite("pause_icon", "sprites/buttons/pause_icon.png");
         loadSprite("button_setting", "sprites/buttons/setting.png");

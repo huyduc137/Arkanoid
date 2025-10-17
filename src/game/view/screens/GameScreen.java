@@ -62,19 +62,6 @@ public class GameScreen extends Screen {
         Paddle paddle = model.getPaddle();
         paddle.draw(g2);
 
-        // Vẽ súng trên paddle
-        if (paddle.hasGuns()) {
-            g2.setColor(Color.DARK_GRAY);
-            int gunWidth = 5;
-            int gunHeight = paddle.getHeight() / 2;
-            int gunY = paddle.getY() + paddle.getHeight() / 4;
-            // Súng bên trái
-            g2.fillRect(paddle.getX() - gunWidth, gunY, gunWidth, gunHeight);
-            // Súng bên phải
-            g2.fillRect(paddle.getX() + paddle.getWidth(), gunY, gunWidth, gunHeight);
-        }
-
-
         // Vẽ balls
         for (Ball ball : model.getBalls()) {
             ball.draw(g);
@@ -82,29 +69,7 @@ public class GameScreen extends Screen {
 
         // Vẽ powerups
         for (PowerUp powerup : model.getPowerups()) {
-            if (!powerup.getIsActive() && !powerup.getIsExpired()) {
-                if (powerup instanceof ExtendPaddle) {
-                    g2.setColor(Color.GREEN);
-                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g2.setColor(Color.BLACK);
-                    g2.drawString("E", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
-                } else if (powerup instanceof FireBall) {
-                    powerup.draw(g);
-                }
-                else if (powerup instanceof MultiBall) {
-                    g2.setColor(Color.ORANGE);
-                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g2.setColor(Color.BLACK);
-                    g2.drawString("M", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
-                }
-                // Vẽ PaddleWithGun powerup
-                else if (powerup instanceof PaddleWithGun) {
-                    g2.setColor(Color.MAGENTA);
-                    g2.fillRect(powerup.getX(), powerup.getY(), powerup.getWidth(), powerup.getHeight());
-                    g2.setColor(Color.WHITE);
-                    g2.drawString("G", powerup.getX() + powerup.getWidth() / 4, powerup.getY() + powerup.getHeight() * 3 / 4);
-                }
-            }
+            powerup.draw(g);
         }
 
         // Vẽ Bullets

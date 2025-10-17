@@ -3,6 +3,7 @@ package game.model.powerups;
 import game.model.GameModel;
 import game.model.entity.Ball;
 import game.Constants;
+import game.model.manager.GraphicsManager;
 
 import java.awt.*;
 import java.util.List;
@@ -45,6 +46,13 @@ public class MultiBall extends PowerUp {
 
     @Override
     public void draw(Graphics g) {
-
+        super.draw(g);
+        sprite = GraphicsManager.getSprite("multiball");
+        if (sprite != null) {
+            g.drawImage(sprite, x, y, width, height, null);
+        }
+        else {
+            System.err.println("Fireball Sprite is null");
+        }
     }
 }
