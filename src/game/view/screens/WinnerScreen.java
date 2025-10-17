@@ -2,10 +2,14 @@ package game.view.screens;
 
 import game.Constants;
 import game.model.GameModel;
+import game.model.manager.FontManager;
 import game.model.manager.GameStateManager;
+import game.model.manager.HighScoreManager;
 import game.view.UI.UIButton;
+import game.view.UI.UILabel;
 
 import java.awt.*;
+import java.util.function.Supplier;
 
 import static game.Constants.BUTTON_HEIGHT;
 import static game.Constants.BUTTON_WIDTH;
@@ -49,5 +53,26 @@ public class WinnerScreen extends Screen{
                 }) //action chạy khi click vào nút
         );
 
+        String levelName = model.getLevelManager().getCurrentLevel().getName();
+        Font scoreFont = FontManager.getFont("Tektur Bold", 30f);
+        Color textColor = Color.WHITE;
+        Supplier<String> scoreTextSupplier = () -> {
+            int highScore = HighScoreManager.getHighScore(levelName);
+            return "" + (highScore > 0 ? highScore : "0000");
+        };
+        uiManager.add(new UILabel(
+                555,
+                405,
+                scoreTextSupplier,
+                textColor,
+                scoreFont
+        ));
+        uiManager.add(new UILabel(
+                395,
+                405,
+                ()->""+model.getScoreSystem().getScore(),
+                textColor,
+                scoreFont
+        ));
     }
 }
