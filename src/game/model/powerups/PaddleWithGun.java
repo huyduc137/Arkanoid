@@ -49,7 +49,6 @@ public class PaddleWithGun extends PowerUp {
     }
 
     private void shoot() {
-        System.out.println("ban");
         Paddle paddle = model.getPaddle();
         int paddleX = paddle.getX();
         int paddleY = paddle.getY();

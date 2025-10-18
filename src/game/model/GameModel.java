@@ -13,7 +13,7 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
-    private final PowerUpManager powerUpManager = new PowerUpManager(this);
+    private final PowerUpManager powerUpManager = new PowerUpManager();
     private final LevelManager levelManager = new LevelManager();
 
     private int countBrickModel;
@@ -42,9 +42,6 @@ public class GameModel {
         return gameStateManager;
     }
 
-    public PowerUpManager getPowerUpManager() {
-        return powerUpManager;
-    }
     public LevelManager getLevelManager() {
         return levelManager;
     }

@@ -8,17 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PowerUpManager {
-    private GameModel model;
     private List<PowerUp> fallingPowerUps = new ArrayList<>();
     private List<ActivePowerUp> activePowerUps = new ArrayList<>();
-
-    public PowerUpManager(GameModel model) {
-        this.model = model;
-    }
-
-    public void addFallingPowerUp(PowerUp powerUp) {
-        fallingPowerUps.add(powerUp);
-    }
 
     public List<PowerUp> getFallingPowerUps() {
         return fallingPowerUps;
@@ -29,7 +20,7 @@ public class PowerUpManager {
     }
 
     public void update(double dt) {
-        // 1️⃣ Cập nhật power-up đang rơi
+        //Cập nhật power-up đang rơi
         List<PowerUp> fallingToRemove = new ArrayList<>();
         for (PowerUp powerUp : fallingPowerUps) {
             // Cập nhật vị trí và kiểm tra va chạm
@@ -45,7 +36,7 @@ public class PowerUpManager {
         }
         fallingPowerUps.removeAll(fallingToRemove);
 
-        // 2️⃣ Cập nhật power-up đang hoạt động
+        //Cập nhật power-up đang hoạt động
         List<ActivePowerUp> activeToRemove = new ArrayList<>();
         for (ActivePowerUp active : activePowerUps) {
             active.update(dt); // Cập nhật duration của ActivePowerUp
