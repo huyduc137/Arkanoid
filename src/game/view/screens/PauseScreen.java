@@ -2,7 +2,6 @@ package game.view.screens;
 
 import game.Constants;
 import game.model.GameModel;
-import game.model.manager.GameStateManager;
 import game.view.UI.UIButton;
 
 import java.awt.*;
@@ -24,7 +23,7 @@ public class PauseScreen extends Screen {
     public void initUI() {
         // Nút Resume/Play
         uiManager.add(new UIButton((Constants.SCREEN_WIDTH - 84) / 2, (Constants.SCREEN_HEIGHT - 84) / 2, 84, 84,
-                "pause_icon",
+                "resume_icon",
                 () -> model.getGameStateManager().setGameActive()));
 
         int totalButtonsWidth = BUTTON_WIDTH * 2 + 20; // 2 nút + khoảng cách 20px

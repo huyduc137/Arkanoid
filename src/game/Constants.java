@@ -34,4 +34,6 @@ public class Constants {
 
     // Thời gian dừng mất máu sau khi ăn damage
     public static final double INVULNERABLE_DURATION = 2.0;
+    public static final double BRICK_ATTACK_DELAY = 2.0;
+    public static final double BRICK_FALL_DELAY = 5.0;
 }

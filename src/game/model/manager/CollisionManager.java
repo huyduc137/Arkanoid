@@ -64,7 +64,7 @@ public class CollisionManager {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
 
-                ball.setCollisionCooldown(0.04);
+                ball.setCollisionCooldown(0.018);
                 break;
             }
         }

@@ -13,22 +13,26 @@ public class LevelManager {
         // Test levels
         levels.add(new Level(
                 "Level 1",
-                "map/map1.txt",
-                true,
-                true,
-                200,
-                1
-        ));
-        levels.add(new Level(
-                "Level 2",
                 "map/map2.txt",
                 false,
                 true,
                 200,
                 0.0
         ));
+        levels.add(new Level(
+                "Level 2",
+                "map/map1.txt",
+                true,
+                true,
+                200,
+                1
+        ));
+
     }
 
+    public List<Level> getLevels() {
+        return levels;
+    }
     public Level getCurrentLevel() {
         return levels.get(currentLevelIndex);
     }
