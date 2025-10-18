@@ -7,6 +7,9 @@ import game.model.powerups.PowerUp;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.Constants.BRICK_ATTACK_DELAY;
+import static game.Constants.BRICK_FALL_DELAY;
+
 
 public class GameModel {
     private final TileManager tileManager = new TileManager();
@@ -218,7 +221,6 @@ public class GameModel {
         // Brick Attack mode
         if (currentLevel.isBricksAttack()) {
             double attackSpeed = currentLevel.getBrickAttackSpeed();
-            double attackDelay = 2.0;
             double paddleCenterX = paddle.getX() + paddle.getWidth() / 2.0;
             double paddleCenterY = paddle.getY() + paddle.getHeight() / 2.0;
 
@@ -229,7 +231,7 @@ public class GameModel {
                 brick.setAttackTimer(brick.getAttackTimer() + dt);
 
                 // timer = delay -> attack
-                if (!brick.isAttacking() && !brick.isReturning() && brick.getAttackTimer() >= attackDelay) {
+                if (!brick.isAttacking() && !brick.isReturning() && brick.getAttackTimer() >= BRICK_ATTACK_DELAY) {
                     brick.setAttacking(true);
                     brick.setAttackTimer(0.0);
                     brick.setTarget(paddleCenterX, paddleCenterY);
@@ -288,7 +290,7 @@ public class GameModel {
 
         // Brick Fall mode
         if (currentLevel.isBricksFall()) {
-            double interval = 5.0 / currentLevel.getBrickFallSpeed(); // speed cao -> rơi thường xuyên hơn
+            double interval = BRICK_FALL_DELAY / currentLevel.getBrickFallSpeed(); // speed cao -> rơi thường xuyên hơn
             currentLevel.setBrickFallTimer(currentLevel.getBrickFallTimer() + dt);
 
             if (currentLevel.getBrickFallTimer() >= interval) {
