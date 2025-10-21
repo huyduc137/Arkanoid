@@ -30,6 +30,10 @@ public class GraphicsManager {
         loadSprite("button_close", "sprites/buttons/close.png");
         loadSprite("button_next_level",  "sprites/buttons/NextLevel.png");
         loadSprite("button_high_score",  "sprites/buttons/HighScore.png");
+        loadSprite("button_easy",  "sprites/buttons/easy.png");
+        loadSprite("button_normal",  "sprites/buttons/normal.png");
+        loadSprite("button_hard",  "sprites/buttons/hard.png");
+        loadSprite("button_veryhard",  "sprites/buttons/very hard.png");
 
         loadSprite("paddle", "sprites/paddle/paddle.png");
         loadSprite("paddle2", "sprites/paddle/paddle2.png");
