@@ -13,7 +13,7 @@ public class LevelManager {
         // Test levels
         levels.add(new Level(
                 "Level 1",
-                "map/map2.txt",
+                "map/map1.txt",
                 false,
                 true,
                 200,
@@ -21,23 +21,23 @@ public class LevelManager {
         ));
         levels.add(new Level(
                 "Level 2",
-                "map/map1.txt",
+                "map/map2.txt",
                 true,
                 false,
                 200,
-                1
+                0.7
         ));
         levels.add(new Level(
-                "Level 2",
-                "map/map1.txt",
+                "Level 3",
+                "map/map3.txt",
                 true,
                 true,
                 200,
-                1
+                0
         ));
         levels.add(new Level(
                 "Level 2",
-                "map/map1.txt",
+                "map/map4.txt",
                 true,
                 true,
                 200,

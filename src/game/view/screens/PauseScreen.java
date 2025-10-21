@@ -30,13 +30,13 @@ public class PauseScreen extends Screen {
         int startX = (Constants.SCREEN_WIDTH - totalButtonsWidth) / 2;
         int buttonY = Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 50;
 
-        // Nút Setting
+        // Nút Replay
         uiManager.add(new UIButton(startX, buttonY,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
-                "button_setting",
+                "button_replay",
                 () -> {
-                    // Thêm logic mở setting ở đây
-                    System.out.println("Settings opened");
+                    model.initGame();
+                    model.getGameStateManager().setGameActive();
                 }));
 
         // Nút Home - đảm bảo cùng kích thước với nút Setting

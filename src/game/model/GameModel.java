@@ -154,7 +154,7 @@ public class GameModel {
 
         // THÊM: Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
-        checkGameWinState();
+        checkGameWinner();
     }
 
     // THÊM: Phương thức gắn ball lên paddle
@@ -187,13 +187,16 @@ public class GameModel {
 
             // Kiểm tra nếu hết mạng
             if (scoreSystem.getLives() >= 0) {
-                HighScoreManager.saveHighScore(levelManager.getCurrentLevel().getName(), scoreSystem.getScore());
-                gameStateManager.setState(GameStateManager.GameState.GAME_OVER);
+                Ball mainBall = new Ball(Constants.BALL_DIAMETER);
+                attachBallToPaddle(mainBall);
+
+                balls.add(mainBall);
+                gameStateManager.setBallOnPaddle(true);
             }
         }
     }
 
-    private void checkGameWinState(){
+    private void checkGameWinner(){
 //        System.out.println("countBrickModel: " + countBrickModel);
         if (gameStateManager.isGameActive()
                 && countBrickModel <= 0) {
