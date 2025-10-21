@@ -23,11 +23,26 @@ public class LevelManager {
                 "Level 2",
                 "map/map1.txt",
                 true,
+                false,
+                200,
+                1
+        ));
+        levels.add(new Level(
+                "Level 2",
+                "map/map1.txt",
+                true,
                 true,
                 200,
                 1
         ));
-
+        levels.add(new Level(
+                "Level 2",
+                "map/map1.txt",
+                true,
+                true,
+                200,
+                1
+        ));
     }
 
     public List<Level> getLevels() {
@@ -46,5 +61,21 @@ public class LevelManager {
             return;
         }
         currentLevelIndex++;
+    }
+
+    public void setLevelEasy() {
+        currentLevelIndex = 0;
+    }
+
+    public void setLevelMedium() {
+        currentLevelIndex = 1;
+    }
+
+    public void setLevelHard() {
+        currentLevelIndex = 2;
+    }
+
+    public void setLevelAsian() {
+        currentLevelIndex = 3;
     }
 }

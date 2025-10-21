@@ -17,7 +17,8 @@ public class GameStateManager {
         LEVEL_COMPLETE,
         WIN,
         TUTORIAL,
-        HIGH_SCORE
+        HIGH_SCORE,
+        DIFFICULTY
     }
 
     private GameState currentState;

@@ -63,6 +63,9 @@ public class GameView extends JFrame {
 
         HightScoreScreen hightScoreScreen = new HightScoreScreen(model);
         screenManager.addScreen(hightScoreScreen);
+
+        DifficultyScreen difficultyScreen = new DifficultyScreen(model);
+        screenManager.addScreen(difficultyScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -96,6 +99,10 @@ public class GameView extends JFrame {
             }
             case HIGH_SCORE -> {
                 screenManager.show(Screen.ScreenType.HIGH_SCORE);
+                showMouse();
+            }
+            case DIFFICULTY ->  {
+                screenManager.show(Screen.ScreenType.DIFFICULTY);
                 showMouse();
             }
         }
