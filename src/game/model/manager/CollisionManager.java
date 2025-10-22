@@ -99,16 +99,16 @@ public class CollisionManager {
                 || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.UNBREAKABLE)
                 || (ball.isFireBall() && brick.getBrickType() == Brick.BrickType.ATTACK)) {
             if (Math.abs(wy) > Math.abs(hx)) {
-                if (dy > 0) {
+                if (dy > 0) { // Bottom hit
                     ball.setY(brickHitbox.y + brickHitbox.height);
-                } else {
+                } else { //Top hit
                     ball.setY(brickHitbox.y - ballHitbox.height);
                 }
                 ball.reverseDy();
-            } else {
+            } else { //Right hit
                 if (dx > 0) {
                     ball.setX(brickHitbox.x + brickHitbox.width);
-                } else {
+                } else { // Left hit
                     ball.setX(brickHitbox.x - ballHitbox.width);
                 }
                 ball.reverseDx();
@@ -127,7 +127,6 @@ public class CollisionManager {
     private void handleBrickHit(Brick brick) {
         if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
             model.getScoreSystem().addScore(brick.getScore() * 100);
-            System.out.println("Score: " + model.getScoreSystem().getScore());
 
             if (random.nextFloat() < 0.3) {
                 int powerupType = random.nextInt(10);

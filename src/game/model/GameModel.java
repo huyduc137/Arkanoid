@@ -149,8 +149,6 @@ public class GameModel {
         // Xóa đạn đã bay ra khỏi màn hình
         bullets.removeIf(bullet -> bullet.getY() < 0);
 
-        collisionManager.checkCollisions();
-
         // THÊM: Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
 
