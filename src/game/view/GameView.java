@@ -14,10 +14,12 @@ import java.awt.image.BufferedImage;
 
 public class GameView extends JFrame {
     private final GameModel model;
+    private boolean isScreenInverted;
     ScreenManager screenManager;
 
     public GameView(GameModel model, GameController controller) {
         this.model = model;
+        this.isScreenInverted = false;
         this.addKeyListener(controller);
         screenManager = new ScreenManager();
         //Khởi tạo screen trong screenManager r add vào JFrame
@@ -27,6 +29,8 @@ public class GameView extends JFrame {
         screenManager.getContainer().addMouseListener(controller);
         //Khởi tạo Panel bằng screenManager r mới pack()
         initViewGame();
+
+        model.setGameView(this);
 
         //Load đồ hoạ game
         GraphicsManager.loadAll();
@@ -44,7 +48,7 @@ public class GameView extends JFrame {
 
     //Thêm tất cả màn hình vào screenManager
     private void initScreens() {
-        GameScreen gameScreen = new GameScreen(model);
+        GameScreen gameScreen = new GameScreen(model, this);
         screenManager.addScreen(gameScreen);
 
         MenuScreen menuScreen = new MenuScreen(model);
@@ -131,5 +135,15 @@ public class GameView extends JFrame {
 
     public void showMouse() {
         screenManager.getContainer().setCursor(Cursor.getDefaultCursor());
+    }
+
+    // Thêm phương thức để quản lý trạng thái lật màn hình
+    public void setScreenInverted(boolean inverted) {
+        this.isScreenInverted = inverted;
+        repaintPanel(); // Yêu cầu vẽ lại
+    }
+
+    public boolean isScreenInverted() {
+        return isScreenInverted;
     }
 }

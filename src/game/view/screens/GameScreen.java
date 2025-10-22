@@ -14,17 +14,19 @@ import game.model.powerups.PowerUp;
 import game.model.powerups.PaddleWithGun;
 import game.view.UI.UILabel;
 import game.view.UI.UIManager;
+import game.view.GameView;
 
 import java.awt.*;
 import java.util.List;
 
 public class GameScreen extends Screen {
-
     private final GameModel model;
+    private final GameView gameView;
 
-    public GameScreen(GameModel model) {
+    public GameScreen(GameModel model, GameView gameView) {
         super(ScreenType.GAME);
         this.model = model;
+        this.gameView = gameView;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
         loadBackground("bg/BackgroundPlay.png");
     }
@@ -42,6 +44,12 @@ public class GameScreen extends Screen {
 
     @Override
     protected void paintComponent(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+
+        if (gameView.isScreenInverted()) {
+            // Lật ngược màn hình: xoay 180 độ quanh tâm canvas
+            g2.rotate(Math.PI, getWidth() / 2.0, getHeight() / 2.0);
+        }
         // Draw background
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
@@ -51,7 +59,7 @@ public class GameScreen extends Screen {
             g.fillRect(0, 0, getWidth(), getHeight());
         }
 
-        Graphics2D g2 = (Graphics2D) g;
+        //Graphics2D g2 = (Graphics2D) g;
 
         //Vẽ bricks
         for (Brick brick : model.getBricks()) {

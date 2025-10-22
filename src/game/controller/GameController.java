@@ -70,11 +70,17 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
         if (key == KeyEvent.VK_LEFT) {
             leftPressed = true;
             rightPressed = false;
+            if (view != null && view.isScreenInverted()) {
+                paddle.moveRight();
+            }
             paddle.moveLeft();
         }
         if (key == KeyEvent.VK_RIGHT) {
             rightPressed = true;
             leftPressed = false;
+            if (view != null && view.isScreenInverted()) {
+                paddle.moveLeft();
+            }
             paddle.moveRight();
         }
         if (key == KeyEvent.VK_SPACE) {

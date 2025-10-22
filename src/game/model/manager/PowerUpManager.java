@@ -1,6 +1,5 @@
 package game.model.manager;
 
-import game.model.GameModel;
 import game.model.powerups.ActivePowerUp;
 import game.model.powerups.PowerUp;
 
@@ -66,5 +65,14 @@ public class PowerUpManager {
 
     private void deactivatePowerUp(PowerUp powerUp) {
         powerUp.remove();
+    }
+
+    public void clearAll() {
+        for (ActivePowerUp active : activePowerUps) {
+            active.getPowerUp().remove();
+        }
+
+        activePowerUps.clear();
+        fallingPowerUps.clear();
     }
 }

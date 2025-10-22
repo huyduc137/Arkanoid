@@ -5,11 +5,7 @@ import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.entity.Bullet;
-import game.model.powerups.ExtendPaddle;
-import game.model.powerups.FireBall;
-import game.model.powerups.MultiBall;
-import game.model.powerups.PowerUp;
-import game.model.powerups.PaddleWithGun;
+import game.model.powerups.*;
 
 import java.awt.*;
 import java.util.List;
@@ -136,12 +132,13 @@ public class CollisionManager {
             if (random.nextFloat() < 0.3) {
                 int powerupType = random.nextInt(10);
                 PowerUp powerup = switch (powerupType) {
+                    case 9 -> new Invert(brick.getX(), brick.getY(), model);
                     case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model);
                     case 5, 6 -> new MultiBall(brick.getX(), brick.getY(), model);
-                    case 7, 8, 9 -> new PaddleWithGun(brick.getX(), brick.getY(), model);
+                    case 7, 8  -> new PaddleWithGun(brick.getX(), brick.getY(), model);
                     default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                 };
-                model.getPowerups().add(powerup);
+                model.getPowerups().add(new Invert(brick.getX(), brick.getY(), model));
             }
         }
     }

@@ -45,6 +45,7 @@ public class GraphicsManager {
         loadSprite("multiball", "sprites/powerup/multiball.png");
         loadSprite("paddlewithgun", "sprites/powerup/paddlewithgun.png");
         loadSprite("extendpaddle", "sprites/powerup/extendpaddle.png");
+        loadSprite("invert", "sprites/powerup/invert.png");
 
         loadSprite("pause_icon", "sprites/buttons/pause_icon.png");
         loadSprite("resume_icon", "sprites/buttons/resume_icon.png");

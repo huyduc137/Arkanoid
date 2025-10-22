@@ -4,6 +4,8 @@ import game.Constants;
 import game.model.entity.*;
 import game.model.manager.*;
 import game.model.powerups.PowerUp;
+import game.view.GameView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,15 @@ public class GameModel {
     private Paddle paddle;
     private List<Brick> bricks;
     private List<Bullet> bullets;
+    private GameView gameView;
+
+    public void setGameView(GameView gameView) {
+        this.gameView = gameView;
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
 
     public Paddle getPaddle() {
         return paddle;
@@ -91,8 +102,7 @@ public class GameModel {
         attachBallToPaddle(mainBall);
         countBrickModel = tileManager.getCountBrick();
 
-        powerUpManager.getFallingPowerUps().removeAll(powerUpManager.getFallingPowerUps());
-        powerUpManager.getActivePowerUps().removeAll(powerUpManager.getActivePowerUps());
+        powerUpManager.clearAll();
     }
 
     public void initBrick() {

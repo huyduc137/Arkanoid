@@ -17,7 +17,8 @@ public abstract class PowerUp extends GameObject {
         FIREBALL,
         EXTEND_PADDLE,
         PADDLE_WITH_GUN,
-        MULTIBALL
+        MULTIBALL,
+        INVERT
     }
     public PowerUp(int x, int y, int width, int height, double duration, PowerUpType type, GameModel model) {
         super(x, y, width, height);
