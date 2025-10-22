@@ -138,7 +138,7 @@ public class CollisionManager {
                     case 7, 8  -> new PaddleWithGun(brick.getX(), brick.getY(), model);
                     default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
                 };
-                model.getPowerups().add(new Invert(brick.getX(), brick.getY(), model));
+                model.getPowerups().add(powerup);
             }
         }
     }
