@@ -22,7 +22,7 @@ public class PauseScreen extends Screen {
     @Override
     public void initUI() {
         // Nút Resume/Play
-        uiManager.add(new UIButton((Constants.SCREEN_WIDTH - 84) / 2, (Constants.SCREEN_HEIGHT - 84) / 2, 84, 84,
+        uiManager.add(new UIButton((Constants.SCREEN_WIDTH - 84) / 2, (Constants.SCREEN_HEIGHT - 84) / 2 - 30, 84, 84,
                 "resume_icon",
                 () -> model.getGameStateManager().setGameActive()));
 

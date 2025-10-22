@@ -4,7 +4,6 @@ import game.Constants;
 import game.model.manager.GraphicsManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Ball extends MovableObject {
     private boolean isFireBall;
@@ -31,7 +30,7 @@ public class Ball extends MovableObject {
         this.collisionCooldown = cooldown;
     }
 
-    // Call this every frame (from GameModel or update method)
+    // Delay collision, avoid sticking to moving bricks
     public void updateCooldown(double dt) {
         if (collisionCooldown > 0) {
             collisionCooldown -= dt;
