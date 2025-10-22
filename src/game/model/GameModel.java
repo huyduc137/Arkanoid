@@ -95,6 +95,7 @@ public class GameModel {
 
         // Reset trạng thái game
         scoreSystem.reset();
+        levelManager.getCurrentLevel().reset();
 
         initBrick();
 

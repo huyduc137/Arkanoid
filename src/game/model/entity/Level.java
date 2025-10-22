@@ -49,4 +49,8 @@ public class Level {
     public String getName() {
         return name;
     }
+
+    public void reset() {
+        brickFallTimer = 0.0;
+    }
 }
