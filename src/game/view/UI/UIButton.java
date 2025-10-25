@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class UIButton extends UIElement {
     private final Runnable action;
+    private boolean selected = false;
 
     public UIButton(int x, int y, int width, int height, String spriteId, Runnable action) {
         super(x, y, width, height);
@@ -16,6 +17,13 @@ public class UIButton extends UIElement {
         sprite = GraphicsManager.getSprite(spriteId);
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
     @Override
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -29,6 +37,11 @@ public class UIButton extends UIElement {
             g.drawImage(sprite, x, y, width, height, null);
         } else {
             System.err.println("No button sprite");
+        }
+        if (selected) {
+            g2d.setColor(Color.WHITE);
+            g2d.setStroke(new BasicStroke(1));
+            g2d.drawRect(x, y, width, height);
         }
     }
 

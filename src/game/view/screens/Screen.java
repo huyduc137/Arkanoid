@@ -24,7 +24,8 @@ public abstract class Screen extends JPanel {
         TUTORIAL,
         GAME_WINNER,
         HIGH_SCORE,
-        DIFFICULTY
+        DIFFICULTY,
+        SETTING
     }
 
     public Screen(ScreenType type) {

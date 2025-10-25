@@ -4,9 +4,11 @@ import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Paddle;
 import game.model.manager.GameStateManager;
+import game.model.manager.SettingManager;
 import game.view.GameView;
 
 import java.awt.event.*;
+import java.util.Set;
 import javax.swing.*;
 
 public class GameController implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
@@ -67,21 +69,23 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
         Paddle paddle = model.getPaddle();
         int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_LEFT) {
-            leftPressed = true;
-            rightPressed = false;
-            if (view != null && view.isScreenInverted()) {
-                paddle.moveRight();
-            }
-            paddle.moveLeft();
-        }
-        if (key == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
-            leftPressed = false;
-            if (view != null && view.isScreenInverted()) {
+        if (SettingManager.getControlType().equals(SettingManager.ControlType.KEYBOARD)) {
+            if (key == KeyEvent.VK_LEFT) {
+                leftPressed = true;
+                rightPressed = false;
+                if (view != null && view.isScreenInverted()) {
+                    paddle.moveRight();
+                }
                 paddle.moveLeft();
             }
-            paddle.moveRight();
+            if (key == KeyEvent.VK_RIGHT) {
+                rightPressed = true;
+                leftPressed = false;
+                if (view != null && view.isScreenInverted()) {
+                    paddle.moveLeft();
+                }
+                paddle.moveRight();
+            }
         }
         if (key == KeyEvent.VK_SPACE) {
             model.launchBall();
@@ -117,6 +121,11 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        //kiểm tra nếu mà không phải mouse thì không thực thi di chuyển bằng mouse
+        if (SettingManager.getControlType() != SettingManager.ControlType.MOUSE){
+            return;
+        }
+
         Paddle paddle = model.getPaddle();
         if (e.getX() <= 15 + (Constants.PADDLE_WIDTH / 2) || e.getX() >= Constants.SCREEN_WIDTH - 15 - (Constants.PADDLE_WIDTH/2)) return;
         int newX = e.getX() - paddle.getWidth() / 2;     // lấy vị trí chính giữa của paddle theo trục x;

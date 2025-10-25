@@ -30,7 +30,7 @@ public class MenuScreen extends Screen {
                         model.getGameStateManager().setState(GameStateManager.GameState.DIFFICULTY);
                     }) //action chạy khi click vào nút
         );
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 200,
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 20,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_tutorial",
                 () -> {
@@ -38,11 +38,18 @@ public class MenuScreen extends Screen {
                     model.getGameStateManager().setState(GameStateManager.GameState.TUTORIAL);
                 })
         );
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, (Constants.SCREEN_HEIGHT / 2) +  BUTTON_HEIGHT + 20,
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, (Constants.SCREEN_HEIGHT / 2) +  BUTTON_HEIGHT*2 + 20*2,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_high_score",
                 () -> {
                     model.getGameStateManager().setState(GameStateManager.GameState.HIGH_SCORE);
+                })
+        );
+        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, (Constants.SCREEN_HEIGHT / 2) +  BUTTON_HEIGHT*3 + 20*3,
+                BUTTON_WIDTH, BUTTON_HEIGHT,
+                "button_setting",
+                () -> {
+                    model.getGameStateManager().setState(GameStateManager.GameState.SETTING);
                 })
         );
     }
