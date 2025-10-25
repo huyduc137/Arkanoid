@@ -70,6 +70,9 @@ public class GameView extends JFrame {
 
         DifficultyScreen difficultyScreen = new DifficultyScreen(model);
         screenManager.addScreen(difficultyScreen);
+
+        SettingScreen settingScreen = new SettingScreen(model);
+        screenManager.addScreen(settingScreen);
     }
 
     //Gọi trong GameController (game loop), check state r vẽ màn tương ứng
@@ -107,6 +110,10 @@ public class GameView extends JFrame {
             }
             case DIFFICULTY ->  {
                 screenManager.show(Screen.ScreenType.DIFFICULTY);
+                showMouse();
+            }
+            case SETTING -> {
+                screenManager.show(Screen.ScreenType.SETTING);
                 showMouse();
             }
         }
