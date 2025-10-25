@@ -149,5 +149,8 @@ public class SoundManager {
         }
         return null;
     }
+    public static boolean isMuted() {
+        return muted;
+    }
 }
 

@@ -4,6 +4,7 @@ import game.model.manager.GraphicsManager;
 import game.model.manager.SoundManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class UIButton extends UIElement {
     private final Runnable action;

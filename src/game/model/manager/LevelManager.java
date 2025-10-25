@@ -78,4 +78,8 @@ public class LevelManager {
     public void setLevelAsian() {
         currentLevelIndex = 3;
     }
+
+    public int getCurrentLevelIndex() {
+        return currentLevelIndex + 1;
+    }
 }

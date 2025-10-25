@@ -17,6 +17,7 @@ public class FontManager {
         registerFont("Tektur Bold", "/fonts/Tektur-Bold.ttf");
         registerFont("Tektur Regular", "/fonts/Tektur-Regular.ttf");
         registerFont("Tektur Black",  "/fonts/Tektur-Black.ttf");
+        registerFont("Tektur SemiBold",  "/fonts/Tektur-SemiBold.ttf");
     }
 
     private static void registerFont(String fontName, String path) {

@@ -52,6 +52,11 @@ public class GraphicsManager {
 
         loadSprite("button_setting", "sprites/buttons/setting.png");
         loadSprite("home_setting", "sprites/buttons/home.png");
+
+        loadSprite("heart_full", "sprites/buttons/red_heart.png");
+        loadSprite("heart_empty", "sprites/buttons/white_heart.png");
+        loadSprite("sound_icon", "sprites/buttons/unmute.png");
+        loadSprite("mute_icon", "sprites/buttons/mute.png");
     }
 
     public static void loadSprite(String id, String path) {
