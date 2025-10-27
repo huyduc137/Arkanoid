@@ -40,32 +40,27 @@ public class HudElements {
     }
 
     //Score
-    public static class CenteredScoreLabel extends UIElement {
-        private final Supplier<String> scoreSupplier;
-        private final Font font;
+    public static class CenteredScoreLabel extends UILabel {
+        private final int containerWidth;
 
         public CenteredScoreLabel(int y, Supplier<String> scoreSupplier, Font font) {
-            super(0, y, Constants.SCREEN_WIDTH, 40);
-            this.scoreSupplier = scoreSupplier;
-            this.font = font != null ? font : new Font("Arial", Font.BOLD, 28);
+            super(0, y, scoreSupplier, Color.WHITE, font != null ? font : new Font("Arial", Font.BOLD, 28));
+            this.containerWidth = Constants.SCREEN_WIDTH;
         }
 
         @Override
         public void draw(Graphics g) {
-            String text = scoreSupplier.get();
             g.setFont(font);
-            g.setColor(Color.WHITE);
+            g.setColor(color);
 
+            String text = textSupplier.get();
             FontMetrics fm = g.getFontMetrics();
             int textWidth = fm.stringWidth(text);
-            int centerX = (Constants.SCREEN_WIDTH - textWidth) / 2;
-            int textY = this.y + fm.getAscent();
+            int centerX = (containerWidth - textWidth) / 2;
+            int textY = y + fm.getAscent();
 
             g.drawString(text, centerX, textY);
         }
-
-        @Override
-        public void onClick() {}
     }
 
     //LevelLabel
@@ -96,22 +91,22 @@ public class HudElements {
     }
 
     //PauseButton
-    public static class PauseButton extends UIElement {
+    public static class PauseButton extends UIButton {
         private final GameStateManager gameStateManager;
 
         public PauseButton(int x, int y, GameStateManager gsm) {
-            super(x, y, 40, 40);
+            super(x, y, 40, 40, "pause_icon", null);
             this.gameStateManager = gsm;
         }
 
         @Override
         public void draw(Graphics g) {
+            // Update sprite based on game state
             String spriteId = (gameStateManager.getCurrentState() == GameStateManager.GameState.PLAYING)
                     ? "pause_icon" : "resume_icon";
-            BufferedImage icon = GraphicsManager.getSprite(spriteId);
-            if (icon != null) {
-                g.drawImage(icon, x, y, width, height, null);
-            }
+            this.sprite = GraphicsManager.getSprite(spriteId);
+
+            super.draw(g);
         }
 
         @Override
@@ -125,24 +120,23 @@ public class HudElements {
     }
 
     //MuteButton
-    public static class MuteButton extends UIElement {
+    public static class MuteButton extends UIButton {
 
         public MuteButton(int x, int y) {
-            super(x, y, 40, 40);
+            super(x, y, 40, 40, SoundManager.isMuted() ? "mute_icon" : "sound_icon", null);
         }
 
         @Override
         public void draw(Graphics g) {
-            String spriteId = SoundManager.isMuted() ? "mute_icon" : "sound_icon";
-            BufferedImage icon = GraphicsManager.getSprite(spriteId);
-            if (icon != null) {
-                g.drawImage(icon, x, y, width, height, null);
-            }
+            // Update sprite based on mute state
+            this.sprite = GraphicsManager.getSprite(SoundManager.isMuted() ? "mute_icon" : "sound_icon");
+            super.draw(g);
         }
 
         @Override
         public void onClick() {
             SoundManager.mute(!SoundManager.isMuted());
+            SoundManager.play("button_click");
         }
     }
 }

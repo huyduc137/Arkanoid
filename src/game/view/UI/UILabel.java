@@ -6,9 +6,9 @@ import java.util.function.Supplier;
 public class UILabel extends UIElement {
     //Text supplier là functional interface -> cho phép truyền một lamda function để được gói vào thành object
     //gọi get() mỗi khi được render để update text một cách tự động
-    private final Supplier<String> textSupplier;
-    private final Color color;
-    private final Font font;
+    protected final Supplier<String> textSupplier;
+    protected final Color color;
+    protected final Font font;
 
     public UILabel(int x, int y, Supplier<String> textSupplier, Color color, Font font) {
         super(x, y, 0, 0);
