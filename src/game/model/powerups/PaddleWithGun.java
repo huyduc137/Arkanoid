@@ -5,7 +5,7 @@ import game.model.GameModel;
 import game.model.entity.Bullet;
 import game.model.entity.Paddle;
 import game.model.manager.GraphicsManager;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 
 import java.awt.*;
 

@@ -3,7 +3,7 @@ package game.model.powerups;
 import game.Constants;
 import game.model.GameModel;
 import game.model.entity.GameObject;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 
 public abstract class PowerUp extends GameObject {
     protected double duration; //thời gian tồn tại

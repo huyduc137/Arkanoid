@@ -1,6 +1,4 @@
-package game.model.manager;
-
-import game.model.entity.Sound;
+package game.sound;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

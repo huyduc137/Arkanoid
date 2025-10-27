@@ -3,7 +3,7 @@ package game.view.UI;
 import game.Constants;
 import game.model.manager.GraphicsManager;
 import game.model.manager.GameStateManager;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

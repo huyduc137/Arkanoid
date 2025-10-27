@@ -1,5 +1,7 @@
 package game.model.manager;
 
+import game.sound.SoundManager;
+
 import static game.Constants.INVULNERABLE_DURATION;
 
 public class GameStateManager {

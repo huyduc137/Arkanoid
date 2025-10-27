@@ -1,5 +1,7 @@
 package game.model.manager;
 
+import game.sound.SoundManager;
+
 public class ScoreSystem {
     private int score;
     private int lives;

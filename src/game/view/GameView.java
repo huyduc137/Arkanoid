@@ -5,7 +5,7 @@ import game.controller.GameController;
 import game.model.GameModel;
 import game.model.manager.FontManager;
 import game.model.manager.GraphicsManager;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 import game.view.screens.*;
 
 import javax.swing.*;

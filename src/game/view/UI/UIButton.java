@@ -1,10 +1,9 @@
 package game.view.UI;
 
 import game.model.manager.GraphicsManager;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class UIButton extends UIElement {
     private final Runnable action;

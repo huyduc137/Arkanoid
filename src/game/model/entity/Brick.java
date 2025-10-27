@@ -1,7 +1,7 @@
 package game.model.entity;
 
 import game.model.manager.GraphicsManager;
-import game.model.manager.SoundManager;
+import game.sound.SoundManager;
 
 import java.awt.*;
 

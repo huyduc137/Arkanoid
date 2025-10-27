@@ -6,6 +6,7 @@ import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.entity.Bullet;
 import game.model.powerups.*;
+import game.sound.SoundManager;
 
 import java.awt.*;
 import java.util.List;
