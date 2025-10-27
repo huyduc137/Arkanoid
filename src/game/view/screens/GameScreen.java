@@ -8,23 +8,15 @@ import game.model.entity.Paddle;
 import game.model.entity.Bullet;
 import game.model.powerups.PowerUp;
 import game.view.UI.UILabel;
-import game.view.UI.UIManager;
 import game.view.UI.HudElements;
 import game.view.GameView;
 import game.model.manager.FontManager;
 
 import java.awt.*;
-import java.util.List;
 
 public class GameScreen extends Screen {
     private final GameModel model;
     private final GameView gameView;
-
-    // UI Layout constants
-    private static final int TOP_MARGIN = 20;
-    private static final int SIDE_MARGIN = 20;
-    private static final int ELEMENT_SPACING = 10;
-    private static final int ICON_SIZE = 32;
 
     public GameScreen(GameModel model, GameView gameView) {
         super(ScreenType.GAME);
@@ -40,8 +32,6 @@ public class GameScreen extends Screen {
 
         int baselineY = 20;
         int elementHeight = 40;
-        int iconSize = 40;
-        int spacing = 10;
 
         //Lives Display
         int livesX = 30;
@@ -55,19 +45,18 @@ public class GameScreen extends Screen {
         //Level, Pause, Mute
         int rightMargin = 30;
 
-        // Mute button
-        int muteX = Constants.SCREEN_WIDTH - rightMargin - iconSize;
-        uiManager.add(new HudElements.MuteButton(muteX, baselineY));
-
-        // Pause button
-        int pauseX = muteX - iconSize - spacing;
-        uiManager.add(new HudElements.PauseButton(pauseX, baselineY, model.getGameStateManager()));
-
         // Level
-        int levelLabelWidth = 110;
-        int levelX = pauseX - levelLabelWidth - spacing;
         Font levelFont = FontManager.getFont("Tektur SemiBold", 18f);
-        uiManager.add(new HudElements.LevelLabel(levelX, baselineY, () -> "Level " + model.getLevelManager().getCurrentLevelIndex(), levelFont));
+        FontMetrics fm = getFontMetrics(levelFont);
+        int levelLabelWidth = fm.stringWidth("Level " + model.getLevelManager().getCurrentLevelIndex());
+        int levelX = Constants.SCREEN_WIDTH - rightMargin  - levelLabelWidth;
+        uiManager.add(new UILabel(
+                levelX,
+                baselineY + fm.getHeight(),
+                () -> "Level " + model.getLevelManager().getCurrentLevelIndex(),
+                Color.WHITE,
+                levelFont
+        ));
     }
 
     @Override

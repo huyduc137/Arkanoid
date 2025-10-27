@@ -17,10 +17,15 @@ public class SoundManager {
     //Hỗ trợ chơi một vài tiếng sử dụng nhiều lặp đi lặp lại cùng một lúc mà ko bị đứt đoạn
     private static final Map<String, List<Clip>> clipPool = new HashMap<>();
 
+    //Chỉnh volume
     private static float masterVolume = 1f;
     private static float sfxVolume = 1f;
     private static float musicVolume = 1f;
-    private static boolean muted = false;
+
+    //Mute flags
+    private static boolean mutedAll = false;
+    private static boolean mutedSfx = false;
+    private static boolean mutedMusic = false;
 
     public SoundManager() {}
 
@@ -49,6 +54,7 @@ public class SoundManager {
                 return;
             }
 
+            //Wrap in BufferedInputStream to support mark/reset on some audio streams
             BufferedInputStream bis = new BufferedInputStream(is);
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(bis);
 
@@ -86,43 +92,41 @@ public class SoundManager {
 
     public static void play(String id) {
         Sound sound = sounds.get(id);
-        if (sound == null || muted) return;
+        if (sound == null) return;
+
+        boolean isMusic = (sound.getType() == Sound.Type.MUSIC);
+        if (mutedAll || (isMusic && mutedMusic) || (!isMusic && mutedSfx)) return;
 
         Clip clip;
 
+        //SFX chơi nhiều cái trong pool để tránh đè nhau
         if (sound.getType() == Sound.Type.SFX) {
             clip = getAvailableClip(id);
-            if (clip == null) {
-                // fallback to the base clip if no pool
-                clip = sound.getClip();
-            }
+            if (clip == null) clip = sound.getClip();
         } else {
+            //Music thì dùng lại clip
             clip = sound.getClip();
         }
 
         clip.setFramePosition(0);
 
-        //Tuỳ chỉnh âm lượng theo sound Type
-        float globalVol = masterVolume * (sound.getType() == Sound.Type.MUSIC ? musicVolume : sfxVolume);
-
-        //Tuỳ chỉnh âm lượng theo sound object riêng
+        //Set volume based on sound type
+        float globalVol = masterVolume * (isMusic ? musicVolume : sfxVolume);
         float finalVol = sound.getBaseVolume() * globalVol;
 
+        //If clip supports volume control -> change volume
+        // Convert volume to decibels for Java Sound
         if (clip.isControlSupported(FloatControl.Type.MASTER_GAIN)) {
             FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float gain = (float) (Math.log10(Math.max(finalVol, 0.0001)) * 20.0); // dùng decibels
+            float gain = (float) (Math.log10(Math.max(finalVol, 0.0001)) * 20.0);
             volume.setValue(gain);
         }
 
-        if (sound.getType() == Sound.Type.MUSIC) {
+        if (isMusic) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } else {
             clip.start();
         }
-    }
-
-    public static void mute(boolean state) {
-        muted = state;
     }
 
     public static void stop(String id) {
@@ -147,8 +151,84 @@ public class SoundManager {
         }
         return null;
     }
-    public static boolean isMuted() {
-        return muted;
+
+    public static void muteAll(boolean state) {
+        mutedAll = state;
+        if (state) {
+            stopAll();
+        } else {
+            resumeMusic();
+        }
+    }
+
+    public static void muteSfx(boolean state) {
+        mutedSfx = state;
+    }
+
+    public static void muteMusic(boolean state) {
+        mutedMusic = state;
+        if (state) stopAllMusic();
+        else resumeMusic();
+    }
+
+    public static boolean isMutedAll() {
+        return mutedAll;
+    }
+
+    public static boolean isMutedSfx() {
+        return mutedSfx || mutedAll;
+    }
+
+    public static boolean isMutedMusic() {
+        return mutedMusic || mutedAll;
+    }
+
+    private static void stopAllMusic() {
+        for (Sound sound : sounds.values()) {
+            if (sound.getType() == Sound.Type.MUSIC) {
+                Clip clip = sound.getClip();
+                if (clip.isRunning()) clip.stop();
+            }
+        }
+    }
+
+    private static void stopAll() {
+        for (Sound sound : sounds.values()) {
+            Clip clip = sound.getClip();
+            if (clip.isRunning()) clip.stop();
+        }
+    }
+
+    private static void resumeMusic() {
+        for (Sound sound : sounds.values()) {
+            if (sound.getType() == Sound.Type.MUSIC) {
+                play(getKeyByValue(sound));
+            }
+        }
+    }
+
+    //Get key of sound from the sound object
+    private static String getKeyByValue(Sound s) {
+        for (Map.Entry<String, Sound> entry : sounds.entrySet()) {
+            if (entry.getValue() == s) return entry.getKey();
+        }
+        return null;
+    }
+
+    public static void setSfxVolume(float vol) {
+        sfxVolume = Math.max(0f, Math.min(1f, vol));
+    }
+
+    public static void setMusicVolume(float vol) {
+        musicVolume = Math.max(0f, Math.min(1f, vol));
+    }
+
+    public static float getSfxVolume() {
+        return sfxVolume;
+    }
+
+    public static float getMusicVolume() {
+        return musicVolume;
     }
 }
 

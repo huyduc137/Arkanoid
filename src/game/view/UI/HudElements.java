@@ -63,33 +63,6 @@ public class HudElements {
         }
     }
 
-    //LevelLabel
-    public static class LevelLabel extends UIElement {
-        private final Supplier<String> levelSupplier;
-        private final Font font;
-
-        public LevelLabel(int x, int y, Supplier<String> levelSupplier, Font font) {
-            super(x, y, 150, 50);
-            this.levelSupplier = levelSupplier;
-            this.font = font != null ? font : new Font("Arial", Font.BOLD, 20);
-        }
-
-        @Override
-        public void draw(Graphics g) {
-            String text = levelSupplier.get();
-            g.setFont(font);
-            g.setColor(Color.WHITE);
-
-            FontMetrics fm = g.getFontMetrics();
-            int textY = y + (height - fm.getHeight()) / 2 + fm.getAscent();
-
-            g.drawString(text, x, textY);
-        }
-
-        @Override
-        public void onClick() {}
-    }
-
     //PauseButton
     public static class PauseButton extends UIButton {
         private final GameStateManager gameStateManager;
@@ -121,21 +94,19 @@ public class HudElements {
 
     //MuteButton
     public static class MuteButton extends UIButton {
-
         public MuteButton(int x, int y) {
-            super(x, y, 40, 40, SoundManager.isMuted() ? "mute_icon" : "sound_icon", null);
+            super(x, y, 40, 40, SoundManager.isMutedAll() ? "mute_icon" : "sound_icon", null);
         }
 
         @Override
         public void draw(Graphics g) {
-            // Update sprite based on mute state
-            this.sprite = GraphicsManager.getSprite(SoundManager.isMuted() ? "mute_icon" : "sound_icon");
+            this.sprite = GraphicsManager.getSprite(SoundManager.isMutedAll() ? "mute_icon" : "sound_icon");
             super.draw(g);
         }
 
         @Override
         public void onClick() {
-            SoundManager.mute(!SoundManager.isMuted());
+            SoundManager.muteAll(!SoundManager.isMutedAll());
             SoundManager.play("button_click");
         }
     }
