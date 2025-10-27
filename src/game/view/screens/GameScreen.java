@@ -109,10 +109,8 @@ public class GameScreen extends Screen {
         }
 
         // Vẽ Bullets
-        List<Bullet> bullets = model.getBullets();
-        g2.setColor(Color.YELLOW);
-        for (Bullet bullet : bullets) {
-            g2.fillRect(bullet.getX(), bullet.getY(), bullet.getWidth(), bullet.getHeight());
+        for (Bullet bullet : model.getBullets()) {
+            bullet.draw(g);
         }
 
         // Draw UI (always normal, not flipped)

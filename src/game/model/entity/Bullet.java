@@ -1,6 +1,7 @@
 package game.model.entity;
 
 import game.Constants;
+import game.model.manager.GraphicsManager;
 
 import java.awt.*;
 
@@ -14,7 +15,14 @@ public class Bullet extends MovableObject {
 
     @Override
     public void draw(Graphics g) {
-
+        super.draw(g);
+        sprite = GraphicsManager.getSprite("bullet");
+        if (sprite != null) {
+            g.drawImage(sprite, x, y, width, height, null);
+        }
+        else {
+            System.err.println("Bullet Sprite is null");
+        }
     }
 
     @Override

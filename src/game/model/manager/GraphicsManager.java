@@ -42,6 +42,7 @@ public class GraphicsManager {
         loadSprite("paddle2", "sprites/paddle/paddle2.png");
         loadSprite("paddlegun", "sprites/paddle/paddlegun.png");
         loadSprite("paddle2gun", "sprites/paddle/paddle2gun.png");
+        loadSprite("bullet",  "sprites/paddle/bullet.png");
         //loadSprite("paddle3", "sprites/paddle/paddle3.png");
 
         loadSprite("fireball", "sprites/powerup/fireball.png");
