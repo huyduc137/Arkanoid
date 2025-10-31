@@ -17,19 +17,19 @@ public class TutorialScreen extends Screen {
         super(ScreenType.TUTORIAL);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/tutorialScreen.png");
+        loadBackground("bg/TutorialScreen.png");
     }
 
     @Override
     public void initUI() {
-        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 120,
-                BUTTON_WIDTH, BUTTON_HEIGHT,
-                "button_start",
-                () -> {
-                    model.initGame();
-                    model.getGameStateManager().setGameActive();
-                }) //action chạy khi click vào nút
-        );
+//        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 120,
+//                BUTTON_WIDTH, BUTTON_HEIGHT,
+//                "button_start",
+//                () -> {
+//                    model.initGame();
+//                    model.getGameStateManager().setGameActive();
+//                }) //action chạy khi click vào nút
+//        );
         uiManager.add(new UIButton(Constants.SCREEN_WIDTH - 220, Constants.SCREEN_HEIGHT / 2 - 230,
                 42, 42,
                 "button_close",
