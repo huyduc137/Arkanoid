@@ -3,7 +3,6 @@ package game.view.screens;
 import game.Constants;
 import game.model.GameModel;
 import game.model.manager.FontManager;
-import game.model.manager.GameStateManager;
 import game.model.manager.HighScoreManager;
 import game.view.UI.UIButton;
 import game.view.UI.UILabel;
@@ -14,37 +13,28 @@ import java.util.function.Supplier;
 import static game.Constants.BUTTON_HEIGHT;
 import static game.Constants.BUTTON_WIDTH;
 
-public class WinnerScreen extends Screen{
+public class OverScreen extends Screen {
     private final GameModel model;
-    public WinnerScreen(GameModel model) {
-        super(ScreenType.GAME_WINNER);
+
+    public OverScreen(GameModel model) {
+        super(ScreenType.GAME_OVER);
         this.model = model;
         setPreferredSize(new Dimension(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT));
-        loadBackground("bg/WinnerScreen.png");
+        loadBackground("bg/overScreen.png");
     }
 
     @Override
-    public void initUI(){
-        uiManager.add(new UIButton(265, 505,
-                BUTTON_WIDTH, BUTTON_HEIGHT,
-                "button_next_level",
-                () -> {
-                    model.getLevelManager().toNextLevel();
-                    model.initGame();
-                    model.getGameStateManager().setGameActive();
-                })
-        );
-
-        uiManager.add(new UIButton(265 + BUTTON_WIDTH + 20, 505,
+    public void initUI() {
+        uiManager.add(new UIButton(350, 500,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_replay",
                 () -> {
                     model.initGame();
                     model.getGameStateManager().setGameActive();
-                })
+                }) //action chạy khi click vào nút
         );
 
-        uiManager.add(new UIButton(265 + 2*BUTTON_WIDTH + 20*2, 505,
+        uiManager.add(new UIButton(350 + BUTTON_WIDTH + 10, 500,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
                 () -> {
@@ -54,25 +44,26 @@ public class WinnerScreen extends Screen{
         );
 
         String levelName = model.getLevelManager().getCurrentLevel().getName();
-        Font scoreFont = FontManager.getFont("Tektur Bold", 30f);
+        Font scoreFont = FontManager.getFont("Tektur Bold", 32f);
         Color textColor = Color.WHITE;
+        uiManager.add(new UILabel(
+                400,
+                400,
+                ()->""+model.getScoreSystem().getScore(),
+                textColor,
+                scoreFont
+        ));
         Supplier<String> scoreTextSupplier = () -> {
             int highScore = HighScoreManager.getHighScore(levelName);
             return "" + (highScore > 0 ? highScore : "0000");
         };
         uiManager.add(new UILabel(
-                555,
-                405,
+                550,
+                400,
                 scoreTextSupplier,
                 textColor,
                 scoreFont
         ));
-        uiManager.add(new UILabel(
-                395,
-                405,
-                ()->""+model.getScoreSystem().getScore(),
-                textColor,
-                scoreFont
-        ));
+
     }
 }

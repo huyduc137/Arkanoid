@@ -1,8 +1,5 @@
 package game.model.entity;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 public abstract class MovableObject extends GameObject {
     protected double dx, dy;
 

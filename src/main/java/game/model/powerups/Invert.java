@@ -1,10 +1,8 @@
 package game.model.powerups;
 
 import game.Constants;
-import game.controller.GameController;
 import game.model.GameModel;
 import game.model.manager.GraphicsManager;
-import game.view.GameView;
 
 import java.awt.*;
 

@@ -8,7 +8,6 @@ import game.model.manager.SettingManager;
 import game.view.GameView;
 
 import java.awt.event.*;
-import java.util.Set;
 import javax.swing.*;
 
 public class GameController implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
