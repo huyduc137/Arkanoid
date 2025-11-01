@@ -119,7 +119,7 @@ public class CollisionManager {
             }
         } else {
             if (!brick.isDestroyed()) {
-                model.brickDestroyed();
+                model.brickDestroyed(); // đếm số lượng brick trên map (giảm brick đi 1)
             }
             brick.setDestroyed(true);
         }
