@@ -7,7 +7,8 @@ import game.model.manager.FontManager;
 import game.model.manager.GraphicsManager;
 import game.sound.SoundManager;
 import game.view.screens.*;
-
+import javax.swing.ImageIcon;
+import java.net.URL;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,19 @@ public class GameView extends JFrame {
         screenManager.getContainer().addMouseMotionListener(controller);
         screenManager.getContainer().addMouseListener(controller);
         //Khởi tạo Panel bằng screenManager r mới pack()
+
+        // tao icon game
+        try {
+            URL iconURL = getClass().getResource("/sprites/IconGame.jpg");
+            if (iconURL != null) {
+                ImageIcon icon = new ImageIcon(iconURL);
+                this.setIconImage(icon.getImage());
+            } else {
+                System.err.println("Không tìm thấy file icon!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initViewGame();
 
         model.setGameView(this);
