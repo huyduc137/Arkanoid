@@ -61,6 +61,9 @@ public class Brick extends MovableObject {
     }
     public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
+        if (destroyed) {
+            this.hitPoints = 0;
+        }
         SoundManager.play("brick_destroy");
     }
     public BrickType getBrickType() {
