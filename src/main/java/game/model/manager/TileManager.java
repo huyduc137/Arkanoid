@@ -13,6 +13,7 @@ import java.util.List;
 //0 = empty
 //1,2,3 = normal (HP = number)
 //9 = unbreakable
+//10 = attack
 public class TileManager {
     private int countBrick = 0;
     public List<Brick> loadMap(String mapPath) {
@@ -73,9 +74,5 @@ public class TileManager {
 
     public int getCountBrick() {
         return countBrick;
-    }
-
-    public void setCountBrick(int countBrick) {
-        this.countBrick = countBrick;
     }
 }

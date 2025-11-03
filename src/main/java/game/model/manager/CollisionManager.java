@@ -1,20 +1,18 @@
 package game.model.manager;
 
+import game.Constants;
 import game.model.GameModel;
 import game.model.entity.Ball;
 import game.model.entity.Brick;
 import game.model.entity.Paddle;
 import game.model.entity.Bullet;
-import game.model.powerups.*;
 import game.sound.SoundManager;
 
 import java.awt.*;
 import java.util.List;
-import java.util.Random;
 
 public class CollisionManager {
     private final GameModel model;
-    private final Random random = new Random();
 
     public CollisionManager(GameModel model) {
         this.model = model;
@@ -61,7 +59,7 @@ public class CollisionManager {
                 resolveBallBrickCollision(ball, brick);
                 handleBrickHit(brick);
 
-                ball.setCollisionCooldown(0.018);
+                ball.setCollisionCooldown(Constants.COLLISION_COOLDOWN);
                 break;
             }
         }

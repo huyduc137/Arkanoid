@@ -1,4 +1,4 @@
-Level 1=25700
+Level 1=3700
 Level 3=17000
 Level 2=12700
 Level 4=16800
