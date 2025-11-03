@@ -18,7 +18,7 @@ public class GameModel {
     private final ScoreSystem scoreSystem = new ScoreSystem();
     private final GameStateManager gameStateManager = new GameStateManager();
     private final CollisionManager collisionManager = new CollisionManager(this);
-    private final PowerUpManager powerUpManager = new PowerUpManager();
+    private final PowerUpManager powerUpManager = new PowerUpManager(this);
     private final LevelManager levelManager = new LevelManager();
 
     private int countBrickModel;
@@ -58,6 +58,10 @@ public class GameModel {
 
     public LevelManager getLevelManager() {
         return levelManager;
+    }
+
+    public PowerUpManager getPowerUpManager() {
+        return powerUpManager;
     }
     public List<PowerUp> getPowerups() {
         // Trả về danh sách power-up đang rơi từ Manager

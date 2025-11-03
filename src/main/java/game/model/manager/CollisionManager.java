@@ -129,17 +129,7 @@ public class CollisionManager {
         if (brick.isDestroyed() && brick.getBrickType() != Brick.BrickType.UNBREAKABLE) {
             model.getScoreSystem().addScore(brick.getScore() * 100);
 
-            if (random.nextFloat() < 0.3) {
-                int powerupType = random.nextInt(10);
-                PowerUp powerup = switch (powerupType) {
-                    case 9 -> new Invert(brick.getX(), brick.getY(), model);
-                    case 3, 4 -> new FireBall(brick.getX(), brick.getY(), model);
-                    case 5, 6 -> new MultiBall(brick.getX(), brick.getY(), model);
-                    case 7, 8  -> new PaddleWithGun(brick.getX(), brick.getY(), model);
-                    default -> new ExtendPaddle(brick.getX(), brick.getY(), model);
-                };
-                model.getPowerups().add(powerup);
-            }
+            model.getPowerUpManager().spawnRandomPowerUp(brick.getX(), brick.getY());
         }
     }
 
