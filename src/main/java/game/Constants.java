@@ -15,6 +15,8 @@ public class Constants {
     public static final int BALL_DIAMETER = 32;
     public static final double BALL_SPEED = 400.0;
     public static final double COLLISION_COOLDOWN = 0.016;
+    public static final double BALL_PARTICLE_DURATION = 0.3;
+    public static final double BALL_PARTICLE_SPEED = 30;
 
     public static final int BRICK_WIDTH = 64;
     public static final int BRICK_HEIGHT = 32;
