@@ -4,8 +4,12 @@ import game.Constants;
 import game.model.manager.GraphicsManager;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ball extends MovableObject {
+    private final List<Particle> particles = new ArrayList<>();
+
     private boolean isFireBall;
 
     private double collisionCooldown = 0.0; // seconds
@@ -40,7 +44,17 @@ public class Ball extends MovableObject {
 
     @Override
     public void move(double dt){
+        particles.removeIf(p -> {
+            p.update(dt);
+            return p.isDead();
+        });
+
         super.move(dt);
+
+        if (isFireBall) {
+            spawnParticles();
+        }
+
         // check va chạm tường trái, phai
         if (this.x <= Constants.EXTRA_DISTANCE){
             this.x = Constants.EXTRA_DISTANCE;
@@ -76,6 +90,14 @@ public class Ball extends MovableObject {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        // Draw trail (under the ball)
+        for (Particle p : particles) {
+            p.draw(g2d);
+        }
+
         if(isFireBall) {
             sprite = GraphicsManager.getSprite("fireBall");
         }
@@ -90,4 +112,32 @@ public class Ball extends MovableObject {
             g.fillOval(x, y, width, height);
         }
     }
+
+    private void spawnParticles() {
+        // Random góc, chuyển góc thành vận tốc
+        double angle = Math.random() * 2 * Math.PI; // góc từ 0 -> 2pi
+        double speed = Constants.BALL_PARTICLE_SPEED + Math.random() * 50; // tốc độ từ Base -> Base + 50
+        double dx = Math.cos(angle) * speed;
+        double dy = Math.sin(angle) * speed;
+        Color color = Color.RED;
+
+        //Độ rộng dải particle
+        double particleSpread = Constants.BALL_DIAMETER - 10;
+
+        //Spread từ -0.5 đến 0.5 => Xung quanh tâm bóng
+        particles.add(new Particle(
+                x + (double) width / 2 + (Math.random() - 0.5) * particleSpread,
+                y + (double) height / 2 + (Math.random() - 0.5) * particleSpread,
+                dx,
+                dy,
+                Constants.BALL_PARTICLE_DURATION,
+                color
+        ));
+
+        // limit the number of active particles (avoid lag)
+        if (particles.size() > 100) {
+            particles.removeFirst();
+        }
+    }
+
 }
