@@ -34,9 +34,6 @@ public class HudElements {
                 }
             }
         }
-
-        @Override
-        public void onClick() {}
     }
 
     //Score

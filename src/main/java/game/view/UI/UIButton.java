@@ -5,7 +5,7 @@ import game.sound.SoundManager;
 
 import java.awt.*;
 
-public class UIButton extends UIElement {
+public class UIButton extends UIElement implements Clickable {
     private final Runnable action;
     private boolean selected = false;
 
@@ -37,6 +37,8 @@ public class UIButton extends UIElement {
         } else {
             System.err.println("No button sprite");
         }
+
+        // tmp cho select animation nếu cần về sau
         if (selected) {
             g2d.setColor(Color.WHITE);
             g2d.setStroke(new BasicStroke(1));

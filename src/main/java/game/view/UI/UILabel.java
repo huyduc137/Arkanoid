@@ -23,7 +23,4 @@ public class UILabel extends UIElement {
         g.setColor(color);
         g.drawString(textSupplier.get(), x, y);
     }
-
-    @Override
-    public void onClick() {} //text ko cho click
 }

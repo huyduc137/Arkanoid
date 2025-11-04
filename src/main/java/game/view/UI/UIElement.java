@@ -16,8 +16,6 @@ public abstract class UIElement {
 
     public abstract void draw(Graphics g);
 
-    public abstract void onClick();
-
     public boolean contains(int px, int py) {
         return px >= x && px <= x + width && py >= y && py <= y + height;
     }

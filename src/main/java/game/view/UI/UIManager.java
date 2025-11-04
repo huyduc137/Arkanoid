@@ -25,8 +25,8 @@ public class UIManager {
 
     public void handleClick(int x, int y) {
         for (UIElement e : elements) {
-            if (e.contains(x, y)) {
-                e.onClick();
+            if (e.contains(x, y) && e instanceof Clickable clickable) { //cast thành clickable
+                clickable.onClick();
             }
         }
     }
