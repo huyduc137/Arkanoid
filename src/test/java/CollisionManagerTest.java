@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CollisionManagerTest {
     public GameModel gameModel;
@@ -77,8 +78,122 @@ public class CollisionManagerTest {
         assertEquals("Máu của Brick phải giảm đi 1", brickHp - 1, brick.getHitPoints());
 
         // sau khi va chạm Dy của ball phải được đổi chiều
-        assertEquals("sau khi va chạm Dy của ball phải được đổi chiều", -ballDy, ball.getDy(), 0.01);
+        assertEquals("Sau khi va chạm trên Dy của ball phải được đổi chiều", -ballDy, ball.getDy(), 0.01);
     }
+
+    @Test
+    public void testBallHitsBottomOfBrick() {
+        brick.setX(200);
+        brick.setY(200);
+
+        ball.setX(200 + Constants.BRICK_WIDTH / 2 - Constants.BALL_DIAMETER / 2);
+        ball.setY(200 + Constants.BRICK_HEIGHT + 1);
+
+        //Move straight up
+        ball.setDx(0);
+        ball.setDy(-Constants.BALL_SPEED);
+
+        double oldDy = ball.getDy();
+        ball.move(0.016);
+        collisionManager.checkCollisions();
+
+        assertEquals("Sau khi va chạm dưới Dy của ball phải được đổi chiều", -oldDy, ball.getDy(), 0.01);
+    }
+
+    @Test
+    public void testBallHitsLeftSideOfBrick() {
+        brick.setX(300);
+        brick.setY(200);
+
+        //Set on the left
+        ball.setX(300 - Constants.BALL_DIAMETER - 1);
+        ball.setY(200 + Constants.BRICK_HEIGHT / 2 - Constants.BALL_DIAMETER / 2);
+
+        //Go right
+        ball.setDx(Constants.BALL_SPEED);
+        ball.setDy(0);
+
+        double oldDx = ball.getDx();
+        ball.move(0.016);
+        collisionManager.checkCollisions();
+
+        assertEquals("Sau khi va chạm ngang Dx của ball phải được đổi chiều", -oldDx, ball.getDx(), 0.01);
+    }
+
+
+    @Test
+    public void testBallHitsBrickCorner() {
+        brick.setX(100);
+        brick.setY(100);
+
+        // Place ball top-left corner
+        ball.setX(100 - Constants.BALL_DIAMETER);
+        ball.setY(100 - Constants.BALL_DIAMETER);
+
+        //Move diagonal
+        ball.setDx(Constants.BALL_SPEED);
+        ball.setDy(Constants.BALL_SPEED);
+
+        double oldDx = ball.getDx();
+        double oldDy = ball.getDy();
+
+        ball.move(0.016);
+        collisionManager.checkCollisions();
+
+        boolean bounced = ball.getDx() != oldDx || ball.getDy() != oldDy;
+        assertTrue("Ball nảy ngang hoặc dọc khi đập góc", bounced);
+    }
+
+    @Test
+    public void testBallHitsBetweenTwoBricks() {
+        Brick brick2 = new Brick(
+                100 + Constants.BRICK_WIDTH,
+                100,
+                Constants.BRICK_WIDTH,
+                Constants.BRICK_HEIGHT,
+                1,
+                Brick.BrickType.NORMAL);
+
+        brick.setX(100);
+        brick.setY(100);
+        gameModel.getBricks().add(brick2);
+
+        ball.setX((int) (100 + Constants.BRICK_WIDTH - (Constants.BALL_DIAMETER / 2.0)));
+        ball.setY(100 - Constants.BALL_DIAMETER);
+        ball.setDx(0);
+        ball.setDy(Constants.BALL_SPEED);
+
+        int hp1 = brick.getHitPoints();
+        int hp2 = brick2.getHitPoints();
+
+        ball.move(0.016);
+        collisionManager.checkCollisions();
+
+        int destroyedCount = 0;
+        if (brick.getHitPoints() < hp1) destroyedCount++;
+        if (brick2.getHitPoints() < hp2) destroyedCount++;
+
+        assertEquals("Ball chỉ đập một brick, không phải hai", 1, destroyedCount);
+    }
+
+    @Test
+    public void testBallNearMissDoesNotCollide() {
+        brick.setX(400);
+        brick.setY(400);
+
+        ball.setX(400 - Constants.BALL_DIAMETER - 1);
+        ball.setY((int) (400 + Constants.BRICK_HEIGHT / 2.0));
+        ball.setDx(0);
+        ball.setDy(Constants.BALL_SPEED);
+
+        int hpBefore = brick.getHitPoints();
+        ball.move(0.016);
+        collisionManager.checkCollisions();
+
+        assertEquals("Ball suýt trúng thôi thì vẫn không trừ máu brick", hpBefore, brick.getHitPoints());
+    }
+
+
     @Test
     public void testBallCollisionWithPaddle(){
         paddle.setX(Constants.SCREEN_WIDTH / 2 -  (Constants.PADDLE_WIDTH / 2));
@@ -90,7 +205,6 @@ public class CollisionManagerTest {
         ball.setDx(Constants.BALL_SPEED);
         ball.setDy(Constants.BALL_SPEED);
 
-        double ballDx = ball.getDx();
         double ballDy = ball.getDy();
 
         ball.move(0.016);
@@ -110,7 +224,6 @@ public class CollisionManagerTest {
         ball.setDx(Constants.BALL_SPEED);
         ball.setDy(Constants.BALL_SPEED);
         double ballDx = ball.getDx();
-        double ballDy = ball.getDy();
 
         ball.move(0.016);
         collisionManager.checkCollisions();
@@ -120,7 +233,6 @@ public class CollisionManagerTest {
 
     @Test
     public void testFireBallCollisionWithBrick() {
-
         brick.setX(100);
         brick.setY(100);
         brick.setHitPoints(2);
@@ -130,8 +242,6 @@ public class CollisionManagerTest {
         ball.setY(100 - Constants.BALL_DIAMETER);
         ball.setDx(0);
         ball.setDy(Constants.BALL_SPEED);
-        double ballDx = ball.getDx();
-        double ballDy = ball.getDy();
 
         ball.move(0.016);
         collisionManager.checkCollisions();
