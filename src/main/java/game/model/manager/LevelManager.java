@@ -12,7 +12,7 @@ public class LevelManager {
     public LevelManager() {
         // Test levels
         levels.add(new Level(
-                "Level 1",
+                "Smile :)",
                 "map/map1.txt",
                 false,
                 true,
@@ -20,7 +20,7 @@ public class LevelManager {
                 0.0
         ));
         levels.add(new Level(
-                "Level 2",
+                "Raining Bricks",
                 "map/map2.txt",
                 true,
                 false,
@@ -28,7 +28,7 @@ public class LevelManager {
                 0.7
         ));
         levels.add(new Level(
-                "Level 3",
+                "3 Angy Men",
                 "map/map3.txt",
                 true,
                 true,
@@ -36,7 +36,7 @@ public class LevelManager {
                 0
         ));
         levels.add(new Level(
-                "Level 4",
+                "Eye Spy",
                 "map/map4.txt",
                 true,
                 true,

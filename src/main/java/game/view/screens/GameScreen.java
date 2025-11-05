@@ -47,13 +47,16 @@ public class GameScreen extends Screen {
 
         // Level
         Font levelFont = FontManager.getFont("Tektur SemiBold", 18f);
+        String levelName = model.getLevelManager().getCurrentLevel().getName();
+
         FontMetrics fm = getFontMetrics(levelFont);
-        int levelLabelWidth = fm.stringWidth("Level " + model.getLevelManager().getCurrentLevelIndex());
+        int levelLabelWidth = fm.stringWidth(levelName);
+
         int levelX = Constants.SCREEN_WIDTH - rightMargin  - levelLabelWidth;
         uiManager.add(new UILabel(
                 levelX,
                 baselineY + fm.getHeight(),
-                () -> "Level " + model.getLevelManager().getCurrentLevelIndex(),
+                () -> levelName,
                 Color.WHITE,
                 levelFont
         ));
