@@ -47,9 +47,8 @@ public class WinnerScreen extends Screen{
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
                 () -> {
-                    model.initGame();
                     model.getGameStateManager().setGameMenu();
-                }) //action chạy khi click vào nút
+                })
         );
 
         String levelName = model.getLevelManager().getCurrentLevel().getName();

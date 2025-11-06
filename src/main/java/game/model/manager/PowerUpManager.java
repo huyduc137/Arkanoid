@@ -1,5 +1,6 @@
 package game.model.manager;
 
+import game.Constants;
 import game.model.GameModel;
 import game.model.powerups.ActivePowerUp;
 import game.model.powerups.PowerUp;
@@ -38,7 +39,7 @@ public class PowerUpManager {
                 // Log khi power-up được kích hoạt
                 activePowerUps(powerUp);
                 fallingToRemove.add(powerUp);
-            } else if (powerUp.shouldRemove) {
+            } else if (powerUp.getY() > Constants.SCREEN_HEIGHT) {
                 fallingToRemove.add(powerUp);
             }
         }

@@ -19,8 +19,6 @@ public class ExtendPaddle extends PowerUp {
 
             if (newWidth <= Constants.MAX_PADDLE_WIDTH) {
                 model.getPaddle().setWidth(newWidth);
-            } else {
-                shouldRemove = true; // Xóa power-up ngay lập tức
             }
         }
     }
@@ -30,7 +28,6 @@ public class ExtendPaddle extends PowerUp {
             int currentWidth = model.getPaddle().getWidth();
             int newWidth = currentWidth - Constants.EXTENSION_AMOUNT;
             model.getPaddle().setWidth(Math.max(Constants.PADDLE_WIDTH, newWidth)); // Đảm bảo không nhỏ hơn chiều rộng ban đầu
-            shouldRemove = true;
         }
     }
 

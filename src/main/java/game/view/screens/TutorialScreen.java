@@ -22,21 +22,12 @@ public class TutorialScreen extends Screen {
 
     @Override
     public void initUI() {
-//        uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + 120,
-//                BUTTON_WIDTH, BUTTON_HEIGHT,
-//                "button_start",
-//                () -> {
-//                    model.initGame();
-//                    model.getGameStateManager().setGameActive();
-//                }) //action chạy khi click vào nút
-//        );
         uiManager.add(new UIButton(Constants.SCREEN_WIDTH - 220, Constants.SCREEN_HEIGHT / 2 - 230,
                 42, 42,
                 "button_close",
                 () -> {
-                    model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.MENU);
-                }) //action chạy khi click vào nút
+                })
         );
     }
 }

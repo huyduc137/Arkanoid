@@ -38,8 +38,6 @@ public class MultiBall extends PowerUp {
 
             model.addBall(newBall);
         }
-
-        shouldRemove = true;
     }
         @Override
     public void remove() { }

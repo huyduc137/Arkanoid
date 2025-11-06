@@ -26,15 +26,13 @@ public class MenuScreen extends Screen {
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_play",
                     () -> {
-                        model.initGame();
                         model.getGameStateManager().setState(GameStateManager.GameState.DIFFICULTY);
-                    }) //action chạy khi click vào nút
+                    })
         );
         uiManager.add(new UIButton(Constants.SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, Constants.SCREEN_HEIGHT / 2 + BUTTON_HEIGHT + 20*-1,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_tutorial",
                 () -> {
-                    model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.TUTORIAL);
                 })
         );

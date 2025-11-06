@@ -31,16 +31,15 @@ public class OverScreen extends Screen {
                 () -> {
                     model.initGame();
                     model.getGameStateManager().setGameActive();
-                }) //action chạy khi click vào nút
+                })
         );
 
         uiManager.add(new UIButton(350 + BUTTON_WIDTH + 10, 500,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
                 () -> {
-                    model.initGame();
                     model.getGameStateManager().setGameMenu();
-                }) //action chạy khi click vào nút
+                })
         );
 
         String levelName = model.getLevelManager().getCurrentLevel().getName();

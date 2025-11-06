@@ -27,7 +27,6 @@ public class HightScoreScreen extends Screen {
                 42, 42,
                 "button_close",
                 () -> {
-                    model.initGame();
                     model.getGameStateManager().setState(GameStateManager.GameState.MENU);
                 })
         );

@@ -38,7 +38,7 @@ public class PaddleWithGun extends PowerUp {
         super.update(dt);
 
         // Nếu power-up đang được kích hoạt và chưa hết hạn
-        if (isActive && !getIsExpired()) {
+        if (isActive) {
             timeSinceLastShot += dt;
             // Nếu đã đến lúc bắn
             if (timeSinceLastShot >= SHOOT_COOLDOWN) {
