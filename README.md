@@ -23,64 +23,64 @@ src
 │   ├── java
 │   │   └── game
 │   │       ├── controller
-│   │       │   └── GameController
+│   │       │   └── GameController.java
 │   │       ├── model
 │   │       │   ├── entity
-│   │       │   │   ├── Ball
-│   │       │   │   ├── Brick
-│   │       │   │   ├── Bullet
-│   │       │   │   ├── GameObject
-│   │       │   │   ├── Level
-│   │       │   │   ├── MovableObject
-│   │       │   │   ├── Paddle
-│   │       │   │   └── Particle
+│   │       │   │   ├── Ball.java
+│   │       │   │   ├── Brick.java
+│   │       │   │   ├── Bullet.java
+│   │       │   │   ├── GameObject.java
+│   │       │   │   ├── Level.java
+│   │       │   │   ├── MovableObject.java
+│   │       │   │   ├── Paddle.java
+│   │       │   │   └── Particle.java
 │   │       │   ├── manager
-│   │       │   │   ├── CollisionManager
-│   │       │   │   ├── FontManager
-│   │       │   │   ├── GameStateManager
-│   │       │   │   ├── GraphicsManager
-│   │       │   │   ├── HighScoreManager
-│   │       │   │   ├── LevelManager
-│   │       │   │   ├── PowerUpManager
-│   │       │   │   ├── ScoreSystem
-│   │       │   │   ├── SettingManager
-│   │       │   │   └── TileManager
+│   │       │   │   ├── CollisionManager.java
+│   │       │   │   ├── FontManager.java
+│   │       │   │   ├── GameStateManager.java
+│   │       │   │   ├── GraphicsManager.java
+│   │       │   │   ├── HighScoreManager.java
+│   │       │   │   ├── LevelManager.java
+│   │       │   │   ├── PowerUpManager.java
+│   │       │   │   ├── ScoreSystem.java
+│   │       │   │   ├── SettingManager.java
+│   │       │   │   └── TileManager.java
 │   │       │   ├── powerups
-│   │       │   │   ├── ActivePowerUp
-│   │       │   │   ├── ExtendPaddle
-│   │       │   │   ├── FireBall
-│   │       │   │   ├── Invert
-│   │       │   │   ├── MultiBall
-│   │       │   │   ├── PaddleWithGun
-│   │       │   │   ├── PowerUp
-│   │       │   │   └── PowerUpFactory
-│   │       │   └── GameModel
+│   │       │   │   ├── ActivePowerUp.java
+│   │       │   │   ├── ExtendPaddle.java
+│   │       │   │   ├── FireBall.java
+│   │       │   │   ├── Invert.java
+│   │       │   │   ├── MultiBall.java
+│   │       │   │   ├── PaddleWithGun.java
+│   │       │   │   ├── PowerUp.java
+│   │       │   │   └── PowerUpFactory.java
+│   │       │   └── GameModel.java
 │   │       ├── sound
-│   │       │   ├── Sound
-│   │       │   └── SoundManager
+│   │       │   ├── Sound.java
+│   │       │   └── SoundManager.java
 │   │       ├── view
 │   │       │   ├── screens
-│   │       │   │   ├── DifficultyScreen
-│   │       │   │   ├── GameScreen
-│   │       │   │   ├── HightScoreScreen
-│   │       │   │   ├── MenuScreen
-│   │       │   │   ├── OverScreen
-│   │       │   │   ├── PauseScreen
-│   │       │   │   ├── Screen
-│   │       │   │   ├── ScreenManager
-│   │       │   │   ├── SettingScreen
-│   │       │   │   ├── TutorialScreen
-│   │       │   │   └── WinnerScreen
+│   │       │   │   ├── DifficultyScreen.java
+│   │       │   │   ├── GameScreen.java
+│   │       │   │   ├── HightScoreScreen.java
+│   │       │   │   ├── MenuScreen.java
+│   │       │   │   ├── OverScreen.java
+│   │       │   │   ├── PauseScreen.java
+│   │       │   │   ├── Screen.java
+│   │       │   │   ├── ScreenManager.java
+│   │       │   │   ├── SettingScreen.java
+│   │       │   │   ├── TutorialScreen.java
+│   │       │   │   └── WinnerScreen.java
 │   │       │   ├── UI
-│   │       │   │   ├── Clickable
-│   │       │   │   ├── HudElements
-│   │       │   │   ├── UIButton
-│   │       │   │   ├── UIElement
-│   │       │   │   ├── UILabel
-│   │       │   │   └── UIManager
-│   │       │   └── GameView
-│   │       ├── Constants   
-│   │       └── Main
+│   │       │   │   ├── Clickable.java
+│   │       │   │   ├── HudElements.java
+│   │       │   │   ├── UIButton.java
+│   │       │   │   ├── UIElement.java
+│   │       │   │   ├── UILabel.java
+│   │       │   │   └── UIManager.java
+│   │       │   └── GameView.java
+│   │       ├── Constants.java
+│   │       └── Main.java
 │   │ 
 │   └── resources
 │       ├── bg
@@ -90,4 +90,4 @@ src
 │       └── sprites
 └── test
     └── java
-        └── CollisionManagerTest
+        └── CollisionManagerTest.java
