@@ -55,16 +55,11 @@ public class GameStateManager {
 
     public boolean isGameActive() {
         return currentState == GameState.PLAYING ||
-                currentState == GameState.PAUSED ||
-                currentState == GameState.WAITING_FOR_START;
+                currentState == GameState.PAUSED;
     }
 
     public boolean isGameOver() {
         return currentState == GameState.GAME_OVER;
-    }
-
-    public boolean isWaitingToStart() {
-        return currentState == GameState.WAITING_FOR_START;
     }
 
     public boolean isPaused() {
@@ -84,6 +79,7 @@ public class GameStateManager {
         return invulnerable;
     }
 
+    // tránh việc mất máu liên tục sau khi nhận sats thương
     public void updateInvulnerability(double dt) {
         if (invulnerable) {
             invulnerableTimer -= dt;

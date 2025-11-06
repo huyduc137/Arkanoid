@@ -39,9 +39,9 @@ public class GameController implements ActionListener, KeyListener, MouseMotionL
             return;
         }
 
-        // Chỉ update nếu đang PLAYING
+        //Chỉ update nếu đang PLAYING
         if (model.getGameStateManager().getCurrentState() == GameStateManager.GameState.PLAYING) {
-            // Logic update paddle, model.update(dt),...
+            //Logic update paddle, model.update(dt),...
             Paddle paddle = model.getPaddle();
             if (leftPressed && !rightPressed) {
                 paddle.moveLeft();

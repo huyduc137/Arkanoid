@@ -96,8 +96,6 @@ public class GameView extends JFrame {
                 screenManager.show(Screen.ScreenType.MENU);
                 showMouse();
             }
-            case WAITING_FOR_START -> {
-            }
             case PLAYING -> {
                 screenManager.show(Screen.ScreenType.GAME);
                 hideMouse();

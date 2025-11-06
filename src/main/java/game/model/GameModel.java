@@ -132,7 +132,7 @@ public class GameModel {
 
         paddle.move(dt);
 
-        // THÊM: Nếu ball đang trên paddle, di chuyển ball cùng paddle
+        //Nếu ball đang trên paddle, di chuyển ball cùng paddle
         if (gameStateManager.isBallOnPaddle()) {
             Ball mainBall = getBall();
             if (mainBall != null) {
@@ -153,7 +153,7 @@ public class GameModel {
         // Xóa đạn đã bay ra khỏi màn hình
         bullets.removeIf(bullet -> bullet.getY() < 0);
 
-        // THÊM: Kiểm tra ball có rơi xuống không
+        // Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
 
         powerUpManager.update(dt);
@@ -165,12 +165,12 @@ public class GameModel {
         collisionManager.checkCollisions();
         gameStateManager.updateInvulnerability(dt);
 
-        // THÊM: Kiểm tra ball có rơi xuống không
+        // Kiểm tra ball có rơi xuống không
         checkBallOutOfBounds();
         checkGameWinner();
     }
 
-    // THÊM: Phương thức gắn ball lên paddle
+    //Phương thức gắn ball lên paddle
     private void attachBallToPaddle(Ball ball) {
         gameStateManager.setBallOnPaddle(true);
 
@@ -180,7 +180,7 @@ public class GameModel {
         ball.setDy(0);
     }
 
-    // THÊM: Phương thức phóng ball từ paddle
+    //Phương thức phóng ball từ paddle
     public void launchBall() {
         if (gameStateManager.isBallOnPaddle()) {
             gameStateManager.setBallOnPaddle(false);
@@ -192,14 +192,14 @@ public class GameModel {
         }
     }
 
-    // THÊM: Phương thức kiểm tra ball rơi xuống
+    //Phương thức kiểm tra ball rơi xuống
     private void checkBallOutOfBounds() {
         if (!gameStateManager.isBallOnPaddle() && balls.isEmpty()) {
             // Trừ mạng
             scoreSystem.loseLife();
 
             // Kiểm tra nếu hết mạng
-            if (scoreSystem.getLives() >= 0) {
+            if (scoreSystem.getLives() > 0) {
                 Ball mainBall = new Ball(Constants.BALL_DIAMETER);
                 attachBallToPaddle(mainBall);
 
