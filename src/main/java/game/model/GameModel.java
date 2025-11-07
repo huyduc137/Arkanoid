@@ -67,7 +67,7 @@ public class GameModel {
         // Trả về danh sách power-up đang rơi từ Manager
         return powerUpManager.getFallingPowerUps();
     }
-    // THÊM CÁC PHƯƠNG THỨC QUẢN LÝ ĐẠN
+
     public List<Bullet> getBullets() {
         return bullets;
     }
@@ -146,7 +146,7 @@ public class GameModel {
             }
         }
 
-        // CẬP NHẬT LOGIC CHO ĐẠN
+        // Logic đạn
         for (Bullet bullet : bullets) {
             bullet.move(dt);
         }

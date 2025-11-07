@@ -28,19 +28,14 @@ public class PaddleWithGun extends PowerUp {
 
     @Override
     public void remove() {
-        // Khi hết hạn, hủy kích hoạt súng
         model.getPaddle().setGunsActive(false);
     }
 
     @Override
     public void update(double dt) {
-        // Gọi update của lớp cha để xử lý việc rơi, kích hoạt và đếm ngược thời gian
         super.update(dt);
-
-        // Nếu power-up đang được kích hoạt và chưa hết hạn
         if (isActive) {
             timeSinceLastShot += dt;
-            // Nếu đã đến lúc bắn
             if (timeSinceLastShot >= SHOOT_COOLDOWN) {
                 shoot();
                 timeSinceLastShot = 0; // Reset bộ đếm

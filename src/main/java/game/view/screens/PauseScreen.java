@@ -39,7 +39,7 @@ public class PauseScreen extends Screen {
                     model.getGameStateManager().setGameActive();
                 }));
 
-        // Nút Home - đảm bảo cùng kích thước với nút Setting
+        // Nút Home
         uiManager.add(new UIButton(startX + BUTTON_WIDTH + 20, buttonY,
                 BUTTON_WIDTH, BUTTON_HEIGHT,
                 "button_home",
