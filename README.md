@@ -1,3 +1,5 @@
+# Demo Game
+- [Demo ở đây!!!](https://drive.google.com/drive/folders/1v3eJjU0s-r_G_GgHz-F1KymjGxDPtneS?usp=drive_link)
 # 🎮 Arkanoid - Project Game (Lập Trình Hướng Đối Tượng) 
 
 Game được xây dựng và phát triển bằng ngôn ngữ **java**, nhằm mục đích để áp dụng các nguyên tắc cơ bản của OOP
@@ -6,7 +8,8 @@ quản lý dự án phần mềm.
 
 ---
 ## 🔎 Thông Tin Nhóm
-
+### - Nhóm 5
+### -Thành Viên
 - Nguyễn Đức Huy
 - Phạm Tất Đạt
 - Nguyễn Doãn Bảo Long
